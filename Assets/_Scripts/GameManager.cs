@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public static Action OnUpdatingGame;
+    public static Action OnPlayingGame;
     public static Action OnStartingGame;
     public static Action<GameState> OnEnterGameState;
     public static Action<GameState> OnExitGameState;
@@ -14,9 +14,9 @@ public class GameManager : MonoBehaviour
         Playing,
         Paused,
     }
-    public GameState State = GameState.Starting;
+    public static GameState State = GameState.Starting;
     
-    void ChangeGameState(GameState newState)
+    public static void ChangeGameState(GameState newState)
     {
         OnExitGameState?.Invoke(State);
         State = newState;
@@ -31,7 +31,7 @@ public class GameManager : MonoBehaviour
                 OnStartingGame?.Invoke();
                 break;
             case GameState.Playing:
-                OnUpdatingGame?.Invoke();
+                OnPlayingGame?.Invoke();
                 break;
             case GameState.Paused:
                 break;

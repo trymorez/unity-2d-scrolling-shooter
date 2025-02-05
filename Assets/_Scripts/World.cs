@@ -7,12 +7,14 @@ public class World : MonoBehaviour
 
     void Awake()
     {
-        GameManager.OnUpdatingGame += ScrollMap;
+        GameManager.OnStartingGame += ScrollMap;
+        GameManager.OnPlayingGame += ScrollMap;
     }
 
     void OnDestroy()
     {
-        GameManager.OnUpdatingGame -= ScrollMap;
+        GameManager.OnStartingGame -= ScrollMap;
+        GameManager.OnPlayingGame -= ScrollMap;
     }
 
     void Start()
