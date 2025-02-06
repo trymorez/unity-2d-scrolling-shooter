@@ -1,5 +1,5 @@
 
-# Shoot em up V 0.2
+# Shoot em up V 0.3
 
 I started developing a 2D vertical scrolling shooter game similar to 1942. The goal is to implement all the main features by February 10th. Currently, the game is not functioning.
 
@@ -8,6 +8,9 @@ I started developing a 2D vertical scrolling shooter game similar to 1942. The g
 ![screenshot](Assets/Screenshot/screenshot-V0.1.png)
 
 ## Version History
+**V 0.3 - (2025-02-06)**
+- Added basic particle effect for plane launch sequence
+
 **V 0.2 - (2025-02-05)**
 - Added rotation along the Z-axis during horizontal movement
 - Testing background scrolling

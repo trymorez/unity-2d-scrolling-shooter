@@ -6,52 +6,48 @@ public class Player : MonoBehaviour
 {
     Vector2 inputVector;
     [SerializeField] float moveSpeed = 2f;
-
     [SerializeField] float launchDuration = 3f;
     [SerializeField] float landedSize = 0.5f;
     [SerializeField] float shadowStartOffset = -0.05f;
     [SerializeField] float shadowEndOffset = -0.5f;
     [SerializeField] Transform shadow;
+    Vector2 shadowPosition;
     [SerializeField] Transform plane;
-    Vector2 shadowPos;
     float launchElapsed;
-
 
     void Awake()
     {
-        GameManager.OnStartingGame += LaunchingPlane;
+        GameManager.OnStartingGame += LaunchPlane;
         GameManager.OnPlayingGame += ControlPlane;
     }
 
     void OnDestroy()
     {
-        GameManager.OnStartingGame -= LaunchingPlane;
+        GameManager.OnStartingGame -= LaunchPlane;
         GameManager.OnPlayingGame -= ControlPlane;
     }
 
     void Start()
     {
-        shadowPos = shadow.position;
-        
+        shadowPosition = shadow.position;
     }
 
-    Vector2 ls;
-    void LaunchingPlane()
+    void LaunchPlane()
     {
         launchElapsed += Time.deltaTime;
 
-        //plane size
-        var size = Mathf.Lerp(landedSize, 1f, 1f - ((launchDuration - launchElapsed) / launchDuration));
+        //increase plane size (take-off effect)
+        var size = Mathf.Lerp(landedSize, 1f, 
+            1f - ((launchDuration - launchElapsed) / launchDuration));
         transform.localScale = new Vector2 (size, size);
 
-        //plane shadow
-        var offset = Mathf.Lerp(shadowStartOffset, shadowEndOffset, 1f - ((launchDuration - launchElapsed) / launchDuration));
-        
-        shadow.position = new Vector3(shadowPos.x + offset, shadowPos.y + offset, 0);
+        //relocate plane shadow
+        var offset = Mathf.Lerp(shadowStartOffset, shadowEndOffset, 
+            1f - ((launchDuration - launchElapsed) / launchDuration));
+        shadow.position = new Vector2(shadowPosition.x + offset, shadowPosition.y + offset);
 
         if (launchElapsed > launchDuration)
         {
-            ls = transform.localScale;
             GameManager.ChangeGameState(GameManager.GameState.Playing);
         }
     }
@@ -60,10 +56,10 @@ public class Player : MonoBehaviour
     {
         transform.Translate(inputVector * (moveSpeed * Time.deltaTime));
 
-        float rotationAmount = inputVector.x * 10f;
-
-        plane.transform.rotation = Quaternion.Euler(0, 0, -rotationAmount);
-        shadow.transform.rotation = Quaternion.Euler(0, 0, -rotationAmount);
+        //horizontal rotation for plane and shadow
+        float rotateAmount = inputVector.x * 10f;
+        plane.transform.rotation = Quaternion.Euler(0, 0, -rotateAmount);
+        shadow.transform.rotation = Quaternion.Euler(0, 0, -rotateAmount);
     }
 
     public void OnMove(InputAction.CallbackContext context)
