@@ -1,7 +1,6 @@
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
@@ -14,12 +13,7 @@ public class Player : MonoBehaviour
     [SerializeField] Transform shadow;
     Vector2 shadowPosition;
     [SerializeField] Transform plane;
-    [SerializeField] Gun gun;
-    [SerializeField] float fireRate = 0.3f;
-    float nextFireTime;
     float launchElapsed;
-
-    public static Action OnGunFire;
 
     void Awake()
     {
@@ -35,7 +29,6 @@ public class Player : MonoBehaviour
 
     void Start()
     {
-        nextFireTime = Time.time + fireRate;
         shadowPosition = shadow.position;
     }
 
@@ -64,28 +57,13 @@ public class Player : MonoBehaviour
         transform.Translate(inputVector * (moveSpeed * Time.deltaTime));
 
         //horizontal rotation for plane and shadow
-        float rotateAmount = inputVector.x * 10f;
-        plane.transform.rotation = Quaternion.Euler(0, 0, -rotateAmount);
-        shadow.transform.rotation = Quaternion.Euler(0, 0, -rotateAmount);
+        float rotate = inputVector.x * 10f;
+        plane.transform.rotation = Quaternion.Euler(0, 0, -rotate);
+        shadow.transform.rotation = Quaternion.Euler(0, 0, -rotate);
     }
 
     public void OnMove(InputAction.CallbackContext context)
     {
         inputVector = context.ReadValue<Vector2>();
-    }
-
-    public void OnFire(InputAction.CallbackContext context)
-    {
-        if (GameManager.State != GameManager.GameState.Playing)
-        {
-            return;
-        }
-
-
-        if (context.performed && Time.time > nextFireTime)
-        {
-            nextFireTime = Time.time + fireRate;
-            OnGunFire?.Invoke();
-        }
     }
 }

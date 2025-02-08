@@ -20,7 +20,7 @@ public class BulletPoolManager : MonoBehaviour
     {
         Pool = new ObjectPool<Bullet>(() =>
         {
-            return Instantiate(bullet);
+            return Instantiate(bullet, transform);
         }, 
         bullet =>
         {

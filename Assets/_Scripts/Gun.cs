@@ -8,27 +8,17 @@ public class Gun : MonoBehaviour
 
     void OnEnable()
     {
-        Player.OnGunFire += OnFire;
+        PlayerGun.OnGunFire += OnFire;
     }
 
-    void DisEnable()
+    void OnDisable()
     {
-        Player.OnGunFire -= OnFire;
+        PlayerGun.OnGunFire -= OnFire;
     }
 
     void OnFire()
     {
         bullet = bulletPoolManager.Pool.Get();
         bullet.transform.position = transform.position;
-    }
-
-    void Start()
-    {
-
-    }
-
-    void Update()
-    {
-        
     }
 }
