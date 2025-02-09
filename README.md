@@ -4,8 +4,7 @@ I started developing a 2D vertical scrolling shooter game similar to 1942. The g
 
 ## Screenshots
 
-![screenshot](Assets/Screenshot/screenshot-V0.1.png)
-![screenshot](Assets/Screenshot/screenshot-V0.4.png)
+![screenshot](Assets/Screenshot/screenshot-V0.6.png)
 
 ## Version History
 **V 0.6 - (2025-02-09)**
