@@ -1,4 +1,4 @@
-# 2D Scrolling Shooter V 0.6
+# 2D Scrolling Shooter V 0.7
 
 I started developing a 2D vertical scrolling shooter game similar to 1942. The goal is to implement all the main features by February 10th. Currently, the game is not functioning.
 
@@ -7,6 +7,9 @@ I started developing a 2D vertical scrolling shooter game similar to 1942. The g
 ![screenshot](Assets/Screenshot/screenshot-V0.6.png)
 
 ## Version History
+**V 0.7 - (2025-02-10)**
+- Fixed weird artifact issue with scrolling
+
 **V 0.6 - (2025-02-09)**
 - Implemented infinite scrolling using 16x20 timemap sets
 

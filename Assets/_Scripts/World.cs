@@ -5,8 +5,8 @@ public class World : MonoBehaviour
 {
     [SerializeField] float scrollSpeed = 1f;
     [SerializeField] GroundTile[] groundTile;
-    [SerializeField] int tileIndex;
-    float nextCheckPointY = -10f;
+    [SerializeField] int groundTileIndex;
+    float nextCheckPointY = 0f;
     const float TILE_ORIGIN_Y = 10f;
 
     void Awake()
@@ -21,27 +21,27 @@ public class World : MonoBehaviour
         GameManager.OnPlayingGame -= ScrollMap;
     }
 
-    //void Start()
-    //{
-        
-    //}
-
-
     void Update()
+    {
+        WorldProgress();
+    }
+
+    private void WorldProgress()
     {
         var pos = transform.position;
 
         if (pos.y <= nextCheckPointY)
         {
-            //fine-tuning Y position to prevent seam effect
+            Debug.Log("next tile");
+            //fine-tuning Y position of tileset to prevent seam crack
             pos.y = nextCheckPointY;
             transform.position = pos;
 
             nextCheckPointY -= 10f;
 
-            tileIndex = (tileIndex + 1) % groundTile.Length;
-            var nextTile = Instantiate(groundTile[tileIndex], transform);
-            nextTile.transform.position = new Vector3 (0, TILE_ORIGIN_Y, 0);
+            var nextTile = Instantiate(groundTile[groundTileIndex], transform);
+            nextTile.transform.position = new Vector3(0, TILE_ORIGIN_Y, 0);
+            groundTileIndex = (groundTileIndex + 1) % groundTile.Length;
         }
     }
 
