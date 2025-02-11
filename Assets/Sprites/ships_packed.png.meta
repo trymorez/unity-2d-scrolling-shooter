@@ -701,8 +701,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0b5cdf4a509224345a7f6047f8772137
-      internalID: 2140873163
+      spriteID: e1c18866ce365c34685b776c4bbbe117
+      internalID: -529394144
       vertices: []
       indices: 
       edges: []
@@ -723,8 +723,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a6f4b690fdc01074f8d3107869dada89
-      internalID: -1188261880
+      spriteID: ad1bd0b5f65f015458d71d7b18862c4f
+      internalID: -644256723
       vertices: []
       indices: 
       edges: []
@@ -733,7 +733,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 0381efb2d90a7f946ac4a6142cf2b087
+    spriteID: 3d0fa20bb9596304ea123a95c6ffe650
     internalID: 0
     vertices: []
     indices: 
@@ -758,8 +758,8 @@ TextureImporter:
       ships_packed_2: -9201988957493372921
       ships_packed_20: -2130344027050226719
       ships_packed_21: 2573529060817598797
-      ships_packed_22: 2140873163
-      ships_packed_23: -1188261880
+      ships_packed_22: -529394144
+      ships_packed_23: -644256723
       ships_packed_3: 6269672304803960357
       ships_packed_4: 9192040580742784624
       ships_packed_5: 5113036906047799591
