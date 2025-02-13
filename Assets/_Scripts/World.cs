@@ -32,8 +32,7 @@ public class World : MonoBehaviour
 
         if (pos.y <= nextCheckPointY)
         {
-            Debug.Log("next tile");
-            //fine-tuning Y position of tileset to prevent seam crack
+            //fine-tuning Y position of tileset to prevent artifact
             pos.y = nextCheckPointY;
             transform.position = pos;
 

@@ -12,10 +12,10 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
-  - 
-  - 
+  - Player
+  - PlayerBullet
+  - Enemy
+  - EnemyBullet
   - 
   - 
   - 
@@ -45,14 +45,14 @@ TagManager:
   - name: Ground
     uniqueID: 89082359
     locked: 0
-  - name: Player
-    uniqueID: 3785514081
-    locked: 0
   - name: Effects
     uniqueID: 2438534645
     locked: 0
   - name: Enemy
     uniqueID: 1511802617
+    locked: 0
+  - name: Player
+    uniqueID: 3785514081
     locked: 0
   m_RenderingLayers:
   - Default
