@@ -1,12 +1,17 @@
-# 2D Scrolling Shooter V 0.9
+# 2D Scrolling Shooter V 1.0
 
 I started developing a 2D vertical scrolling shooter game similar to 1942. The goal is to implement all the main features by February 10th. Currently, the game is not functioning.
 
 ## Screenshots
 
-![screenshot](Assets/Screenshot/screenshot-V0.6.png)
+![screenshot](Assets/Screenshot/screenshot-V1.0-01.png)
+![screenshot](Assets/Screenshot/screenshot-V1.0-02.png)
 
 ## Version History
+**V 1.0 - (2025-02-14)**
+- Modified the fields of the StateManager's child classes to be accessible from individual state classes
+- Now tank can shoot canon correctly
+
 **V 0.9 - (2025-02-13)**
 - Applied the state pattern to tank enemy
 - Began testing tank's attack routine

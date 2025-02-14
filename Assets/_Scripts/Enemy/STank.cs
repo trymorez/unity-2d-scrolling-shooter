@@ -8,17 +8,24 @@ public enum STankState
 
 public class STank : StateManager<STankState>
 {
-    [SerializeField] Transform turret;
-    [SerializeField] TankShell tankShell;
-    [SerializeField] Transform muzzle;
+    public Transform target;
+    public Transform turret;
+    public TankShell tankShell;
+    public Transform muzzle;
+    public float shootPerBurst = 3f;
+    public float delayPerBurst = 1.0f;
+    public float delayPerShoot = 0.2f;
 
     void Awake()
     {
-        States[STankState.Idle] = new IdleState();
-        States[STankState.Attack] = new AttackState();
-        AttackState.turret = turret;
-        AttackState.tankShell = tankShell;
-        AttackState.muzzle = muzzle;
+        var idle = new IdleState();
+        States[STankState.Idle] = idle;
+        idle.stank = this;
+
+        var attack = new AttackState();
+        States[STankState.Attack] = attack;
+        attack.stank = this;
+
         GameManager.OnPlayingGame += ControlTank;
     }
 

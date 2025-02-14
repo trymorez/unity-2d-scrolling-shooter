@@ -3,19 +3,14 @@ using System;
 
 public class AttackState : BaseState<STankState>
 {
-    float speed = 3f;
-    
-    int shootPerBurst = 3;
-    int currentShoot;
-    float delayPerBurst = 2f;
-    float delayPerShoot = 0.5f;
-    float nextShootTime;
-    bool isBurstOngoing;
+    public STank stank;
 
-    public static TankShell tankShell;
-    public static Transform target;
-    public static Transform turret;
-    public static Transform muzzle;
+    float speed = 3f;
+    int currentShoot;
+    float nextShootTime;
+    bool burstOngoing;
+
+    bool isTimeForNextShoot { get => Time.time > nextShootTime; }
     bool tartgetAcquired;
 
     public AttackState() : base(STankState.Attack) { }
@@ -23,75 +18,18 @@ public class AttackState : BaseState<STankState>
     public override void EnterState()
     {
         tartgetAcquired = true;
-        isBurstOngoing = false;
+        burstOngoing = false;
         currentShoot = 0;
-        CalculateNextShootTime(delayPerShoot);
+        CalculateNextShootTime(stank.delayPerShoot);
     }
 
     public override void ExitState()
     {
     }
 
-    public override void UpdateState()
-    {
-        CheckShouldStartBurst();
-        RotateTurretToPlayer();
-
-        if (isBurstOngoing)
-        {
-            CheckIfBurstCompleted();
-
-            if (Time.time > nextShootTime)
-            {
-                CalculateNextShootTime(delayPerShoot);
-                RotateTurretToPlayer();
-                Debug.Log("shoot!");
-
-                Vector2 dir = target.position - muzzle.position;
-                float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg + 90f;
-                var direction = Quaternion.Euler(new Vector3(0, 0, angle));
-                var shell = UnityEngine.Object.Instantiate(tankShell, muzzle.position, direction);
-                shell.transform.rotation = direction;
-                shell.SetDirection(new Vector3(0, 0, angle));
-            }
-        }
-    }
-
-    private void CheckIfBurstCompleted()
-    {
-        if (++currentShoot >= shootPerBurst)
-        {
-            currentShoot = 0;
-            isBurstOngoing = false;
-            CalculateNextShootTime(delayPerBurst);
-        }
-    }
-
-    void RotateTurretToPlayer()
-    {
-        Vector2 dir = target.position - turret.position;
-
-        float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg + 90f;
-        turret.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
-    }
-
-    void CalculateNextShootTime(float delay)
-    {
-        nextShootTime = Time.time + delay;
-    }
-
-    void CheckShouldStartBurst()
-    {
-        if (!isBurstOngoing && Time.time > nextShootTime)
-        {
-            isBurstOngoing = true;
-        }
-    }
-
-
     public override STankState GetNextState()
     {
-        if (!tartgetAcquired && !isBurstOngoing)
+        if (!tartgetAcquired && !burstOngoing)
         {
             return STankState.Idle;
         }
@@ -99,6 +37,60 @@ public class AttackState : BaseState<STankState>
         {
             return STankState.Attack;
         }
+    }
+
+    public override void UpdateState()
+    {
+        CheckShouldStartBurst();
+        RotateTurretToPlayer();
+
+        if (burstOngoing)
+        {
+            CheckIfBurstCompleted();
+
+            if (isTimeForNextShoot)
+            {
+                CalculateNextShootTime(stank.delayPerShoot);
+                RotateTurretToPlayer();
+
+                var dir = stank.target.position - stank.muzzle.position;
+                var angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg - 90f;
+                var direction = Quaternion.Euler(new Vector3(0, 0, angle));
+                var shell = UnityEngine.Object.Instantiate(stank.tankShell, stank.muzzle.position, direction);
+                shell.SetDirection(dir.normalized);
+                currentShoot++;
+            }
+        }
+    }
+    void CheckShouldStartBurst()
+    {
+        if (!burstOngoing && Time.time > nextShootTime)
+        {
+            burstOngoing = true;
+        }
+    }
+
+    private void CheckIfBurstCompleted()
+    {
+        if (currentShoot >= stank.shootPerBurst)
+        {
+            currentShoot = 0;
+            burstOngoing = false;
+            CalculateNextShootTime(stank.delayPerBurst);
+        }
+    }
+
+    void RotateTurretToPlayer()
+    {
+        Vector2 dir = stank.target.position - stank.turret.position;
+
+        float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg + 90f;
+        stank.turret.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
+    }
+
+    void CalculateNextShootTime(float delay)
+    {
+        nextShootTime = Time.time + delay;
     }
 
     public override void OnTriggerEnter2D(Collider2D other)

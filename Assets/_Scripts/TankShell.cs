@@ -4,12 +4,12 @@ public class TankShell : MonoBehaviour
 {
     [SerializeField] float speed = 5f;
     [SerializeField] float life = 3f;
-    Vector3 direction = Vector3.up;
+    public Vector2 direction;
 
     void Awake()
     {
         GameManager.OnPlayingGame += ProcessProjectile;
-        Destroy(gameObject, life);
+        Destroy(this.gameObject, life);
     }
 
     void OnDestroy()
@@ -17,9 +17,10 @@ public class TankShell : MonoBehaviour
         GameManager.OnPlayingGame -= ProcessProjectile;
     }
 
-    public void SetDirection(Vector3 dir)
+    public void SetDirection(Vector2 dir)
     {
         direction = dir;
+        Debug.Log(dir);
     }    
 
     void Start()
@@ -32,6 +33,11 @@ public class TankShell : MonoBehaviour
 
     void ProcessProjectile()
     {
-        transform.Translate(direction.normalized * (speed * Time.deltaTime));
+        var pos = transform.position;
+        var newX = pos.x + direction.x * speed * Time.deltaTime;
+        var newY = pos.y + direction.y * speed * Time.deltaTime;
+        transform.position = new Vector2 (newX, newY);
+
+        //transform.Translate(direction * (speed * Time.deltaTime));
     }
 }
