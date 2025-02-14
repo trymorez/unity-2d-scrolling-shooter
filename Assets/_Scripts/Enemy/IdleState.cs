@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class IdleState : BaseState<STankState>
 {
-    bool tartgetAcquired;
     public STank stank;
+    bool tartgetAcquired;
 
     public IdleState() : base(STankState.Idle) { }
 
@@ -14,7 +14,6 @@ public class IdleState : BaseState<STankState>
 
     public override void UpdateState()
     {
-        Debug.Log("Idling!");
     }
 
     public override void ExitState()
@@ -29,7 +28,6 @@ public class IdleState : BaseState<STankState>
         }
         else
         {
-            Debug.Log("Changing to Attack!");
             return STankState.Attack;
         }
     }
@@ -38,7 +36,6 @@ public class IdleState : BaseState<STankState>
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            Debug.Log("tartget Acquired");
             stank.target = other.transform;
             tartgetAcquired = true;
         }

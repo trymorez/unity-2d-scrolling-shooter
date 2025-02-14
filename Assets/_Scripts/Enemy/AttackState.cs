@@ -5,20 +5,19 @@ public class AttackState : BaseState<STankState>
 {
     public STank stank;
 
-    float speed = 3f;
     int currentShoot;
     float nextShootTime;
-    bool burstOngoing;
+    bool isBurstOngoing;
+    bool isTartgetAcquired;
 
     bool isTimeForNextShoot { get => Time.time > nextShootTime; }
-    bool tartgetAcquired;
 
     public AttackState() : base(STankState.Attack) { }
 
     public override void EnterState()
     {
-        tartgetAcquired = true;
-        burstOngoing = false;
+        isTartgetAcquired = true;
+        isBurstOngoing = false;
         currentShoot = 0;
         CalculateNextShootTime(stank.delayPerShoot);
     }
@@ -29,7 +28,7 @@ public class AttackState : BaseState<STankState>
 
     public override STankState GetNextState()
     {
-        if (!tartgetAcquired && !burstOngoing)
+        if (!isTartgetAcquired && !isBurstOngoing)
         {
             return STankState.Idle;
         }
@@ -44,7 +43,7 @@ public class AttackState : BaseState<STankState>
         CheckShouldStartBurst();
         RotateTurretToPlayer();
 
-        if (burstOngoing)
+        if (isBurstOngoing)
         {
             CheckIfBurstCompleted();
 
@@ -57,16 +56,16 @@ public class AttackState : BaseState<STankState>
                 var angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg - 90f;
                 var direction = Quaternion.Euler(new Vector3(0, 0, angle));
                 var shell = UnityEngine.Object.Instantiate(stank.tankShell, stank.muzzle.position, direction);
-                shell.SetDirection(dir.normalized);
+                //shell.SetDirection(dir.normalized);
                 currentShoot++;
             }
         }
     }
     void CheckShouldStartBurst()
     {
-        if (!burstOngoing && Time.time > nextShootTime)
+        if (!isBurstOngoing && Time.time > nextShootTime)
         {
-            burstOngoing = true;
+            isBurstOngoing = true;
         }
     }
 
@@ -75,7 +74,7 @@ public class AttackState : BaseState<STankState>
         if (currentShoot >= stank.shootPerBurst)
         {
             currentShoot = 0;
-            burstOngoing = false;
+            isBurstOngoing = false;
             CalculateNextShootTime(stank.delayPerBurst);
         }
     }
@@ -101,7 +100,7 @@ public class AttackState : BaseState<STankState>
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            tartgetAcquired = false;
+            isTartgetAcquired = false;
         }
     }
 
