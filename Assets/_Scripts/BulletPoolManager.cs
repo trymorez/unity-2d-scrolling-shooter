@@ -4,6 +4,8 @@ using UnityEngine.Pool;
 public class BulletPoolManager : MonoBehaviour
 {
     [SerializeField] Bullet bullet;
+    [SerializeField] int defaultSize = 30;
+    [SerializeField] int maxSize = 90;
     public ObjectPool<Bullet> Pool;
 
     void Awake()
@@ -33,16 +35,11 @@ public class BulletPoolManager : MonoBehaviour
         bullet =>
         {
             Destroy(bullet.gameObject);
-        }, false, 30, 90);
+        }, false, defaultSize, maxSize);
     }
 
     void Release(Bullet bullet)
     {
         Pool.Release(bullet);
-    }
-
-    void Update()
-    {
-        
     }
 }

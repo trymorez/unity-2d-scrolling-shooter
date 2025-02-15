@@ -55,8 +55,10 @@ public class AttackState : BaseState<STankState>
                 var dir = stank.target.position - stank.muzzle.position;
                 var angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg - 90f;
                 var direction = Quaternion.Euler(new Vector3(0, 0, angle));
-                var shell = UnityEngine.Object.Instantiate(stank.tankShell, stank.muzzle.position, direction);
-                //shell.SetDirection(dir.normalized);
+                //UnityEngine.Object.Instantiate(stank.tankShell, stank.muzzle.position, direction);
+                //UnityEngine.Object.Instantiate(stank.tankShell, stank.muzzle.position, direction);
+                var shell = ShellPoolManager.Pool.Get();
+                shell.transform.SetPositionAndRotation(stank.muzzle.position, direction);
                 currentShoot++;
             }
         }

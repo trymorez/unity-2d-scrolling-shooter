@@ -74,7 +74,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1856432651
-  m_SortingLayer: 3
+  m_SortingLayer: 2
   m_SortingOrder: 1
   m_Sprite: {fileID: -6614373457484812694, guid: b3d175fba15046d4e96272705200013e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -161,7 +161,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1856432651
-  m_SortingLayer: 3
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 5141102102d8d5c4e90b1d10c66ec563, type: 3}
   m_Color: {r: 0, g: 0, b: 0, a: 0.19607843}
@@ -183,9 +183,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8950574745091759234}
-  - component: {fileID: 6027927129449898376}
   - component: {fileID: 4076636427952055911}
   - component: {fileID: 2183830573340173686}
+  - component: {fileID: 7729664251608048232}
   m_Layer: 0
   m_Name: Bullet
   m_TagString: Untagged
@@ -210,21 +210,6 @@ Transform:
   - {fileID: 355110954704495300}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6027927129449898376
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8159218665925005098}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ad5bb40927c850c45a29030abba0c7d3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  direction: {x: 0, y: 1}
-  speed: 10
-  damage: 1
 --- !u!50 &4076636427952055911
 Rigidbody2D:
   serializedVersion: 5
@@ -298,3 +283,18 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.11, y: 0.17}
   m_EdgeRadius: 0
+--- !u!114 &7729664251608048232
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8159218665925005098}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae8ef10685800f142b7519fe9933d9c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  direction: {x: 0, y: 1}
+  speed: 5
+  damage: 1

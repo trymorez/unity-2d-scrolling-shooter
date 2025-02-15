@@ -135,6 +135,7 @@ GameObject:
   - component: {fileID: 147242472}
   - component: {fileID: 147242471}
   - component: {fileID: 147242473}
+  - component: {fileID: 147242474}
   m_Layer: 0
   m_Name: Activator
   m_TagString: Activator
@@ -216,6 +217,33 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 674034664}
+--- !u!50 &147242474
+Rigidbody2D:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 147242470}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &223489153
 GameObject:
   m_ObjectHideFlags: 0
@@ -225,6 +253,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 223489154}
+  - component: {fileID: 223489156}
   - component: {fileID: 223489155}
   m_Layer: 0
   m_Name: PoolManager
@@ -260,7 +289,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5f7a5cb6eaa97c42a233d9bbe357cc4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bullet: {fileID: 6027927129449898376, guid: 2a4022e70b1c82145b1780130a890596, type: 3}
+  bullet: {fileID: 7729664251608048232, guid: 2a4022e70b1c82145b1780130a890596, type: 3}
+  defaultSize: 30
+  maxSize: 90
+--- !u!114 &223489156
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 223489153}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9913be54b097cb54980e619a573f04d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tankShell: {fileID: 8783994545260008078, guid: f952a66e118cfd0468ef1f7f038ea576, type: 3}
+  defaultSize: 30
+  maxSize: 90
 --- !u!1001 &226319357
 PrefabInstance:
   m_ObjectHideFlags: 0

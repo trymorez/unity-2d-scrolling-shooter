@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Pool;
 
 public enum STankState
 {
@@ -12,6 +13,7 @@ public class STank : StateManager<STankState>
     public Transform turret;
     public TankShell tankShell;
     public Transform muzzle;
+    public ObjectPool<TankShell> Pool;
     public float shootPerBurst = 3f;
     public float delayPerBurst = 1.0f;
     public float delayPerShoot = 0.2f;

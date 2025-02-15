@@ -1,33 +1,20 @@
+using System;
 using UnityEngine;
 
 public class TankShell : MonoBehaviour
 {
     [SerializeField] float speed = 5f;
     [SerializeField] float life = 3f;
-    Vector2 direction;
+    public static Action<TankShell> OnRelease;
 
     void Awake()
     {
         GameManager.OnPlayingGame += ProcessProjectile;
-        Destroy(this.gameObject, life);
     }
 
     void OnDestroy()
     {
         GameManager.OnPlayingGame -= ProcessProjectile;
-    }
-
-    public void SetDirection(Vector2 dir)
-    {
-        direction = dir;
-    }    
-
-    void Start()
-    {
-    }
-
-    void Update()
-    {
     }
 
     void ProcessProjectile()
@@ -39,5 +26,13 @@ public class TankShell : MonoBehaviour
 
         //transform.Translate(direction * (speed * Time.deltaTime), Space.World);
         transform.Translate(Vector3.up * speed * Time.deltaTime, Space.Self);
+    }
+
+    void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.CompareTag("Activator"))
+        {
+            ShellPoolManager.Pool.Release(this);
+        }
     }
 }
