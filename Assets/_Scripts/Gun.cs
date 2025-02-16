@@ -3,9 +3,6 @@ using UnityEngine;
 
 public class Gun : MonoBehaviour
 {
-    [SerializeField] BulletPoolManager bulletPoolManager;
-    Bullet bullet;
-
     void OnEnable()
     {
         PlayerGun.OnGunFire += OnFire;
@@ -18,7 +15,7 @@ public class Gun : MonoBehaviour
 
     void OnFire()
     {
-        bullet = bulletPoolManager.Pool.Get();
+        var bullet = BulletPoolManager.Pool.Get();
         bullet.transform.position = transform.position;
     }
 }

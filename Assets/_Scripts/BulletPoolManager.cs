@@ -6,17 +6,7 @@ public class BulletPoolManager : MonoBehaviour
     [SerializeField] Bullet bullet;
     [SerializeField] int defaultSize = 30;
     [SerializeField] int maxSize = 90;
-    public ObjectPool<Bullet> Pool;
-
-    void Awake()
-    {
-        Bullet.OnRelease += Release;
-    }
-
-    void OnDestroy()
-    {
-        Bullet.OnRelease -= Release;
-    }
+    public static ObjectPool<Bullet> Pool;
 
     void Start()
     {
@@ -36,10 +26,5 @@ public class BulletPoolManager : MonoBehaviour
         {
             Destroy(bullet.gameObject);
         }, false, defaultSize, maxSize);
-    }
-
-    void Release(Bullet bullet)
-    {
-        Pool.Release(bullet);
     }
 }

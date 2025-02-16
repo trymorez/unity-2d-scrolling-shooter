@@ -3,7 +3,7 @@ using System;
 
 public class AttackState : BaseState<STankState>
 {
-    public STank stank;
+    public SmallTank SmallTank;
 
     int currentShoot;
     float nextShootTime;
@@ -19,7 +19,7 @@ public class AttackState : BaseState<STankState>
         isTartgetAcquired = true;
         isBurstOngoing = false;
         currentShoot = 0;
-        CalculateNextShootTime(stank.delayPerShoot);
+        CalculateNextShootTime(SmallTank.delayPerShoot);
     }
 
     public override void ExitState()
@@ -49,16 +49,15 @@ public class AttackState : BaseState<STankState>
 
             if (isTimeForNextShoot)
             {
-                CalculateNextShootTime(stank.delayPerShoot);
+                CalculateNextShootTime(SmallTank.delayPerShoot);
                 RotateTurretToPlayer();
 
-                var dir = stank.target.position - stank.muzzle.position;
+                var dir = SmallTank.Target.position - SmallTank.Muzzle.position;
                 var angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg - 90f;
                 var direction = Quaternion.Euler(new Vector3(0, 0, angle));
-                //UnityEngine.Object.Instantiate(stank.tankShell, stank.muzzle.position, direction);
-                //UnityEngine.Object.Instantiate(stank.tankShell, stank.muzzle.position, direction);
+
                 var shell = ShellPoolManager.Pool.Get();
-                shell.transform.SetPositionAndRotation(stank.muzzle.position, direction);
+                shell.transform.SetPositionAndRotation(SmallTank.Muzzle.position, direction);
                 currentShoot++;
             }
         }
@@ -73,20 +72,20 @@ public class AttackState : BaseState<STankState>
 
     private void CheckIfBurstCompleted()
     {
-        if (currentShoot >= stank.shootPerBurst)
+        if (currentShoot >= SmallTank.shootPerBurst)
         {
             currentShoot = 0;
             isBurstOngoing = false;
-            CalculateNextShootTime(stank.delayPerBurst);
+            CalculateNextShootTime(SmallTank.delayPerBurst);
         }
     }
 
     void RotateTurretToPlayer()
     {
-        Vector2 dir = stank.target.position - stank.turret.position;
+        Vector2 dir = SmallTank.Target.position - SmallTank.Turret.position;
 
         float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg + 90f;
-        stank.turret.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
+        SmallTank.Turret.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
     }
 
     void CalculateNextShootTime(float delay)

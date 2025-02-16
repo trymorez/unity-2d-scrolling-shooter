@@ -6,7 +6,6 @@ public abstract class StateManager<EState> : MonoBehaviour where EState : Enum
 {
     protected Dictionary<EState, BaseState<EState>> States = new();
     protected BaseState<EState> CurrentState;
-
     protected bool IsChangingState = false;
 
     protected virtual void Start()
@@ -19,12 +18,10 @@ public abstract class StateManager<EState> : MonoBehaviour where EState : Enum
 
         if (!IsChangingState && nextStateKey.Equals(CurrentState.StateKey))
         {
-            Debug.Log("Updating State!");
             CurrentState.UpdateState();
         }
         else if (!IsChangingState)
         {
-            Debug.Log("Changing State!");
             ChangeState(nextStateKey);
         }
     }

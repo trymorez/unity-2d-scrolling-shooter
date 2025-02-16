@@ -7,12 +7,12 @@ public enum STankState
     Attack,
 }
 
-public class STank : StateManager<STankState>
+public class SmallTank : StateManager<STankState>
 {
-    public Transform target;
-    public Transform turret;
+    public Transform Target;
+    public Transform Turret;
     public TankShell tankShell;
-    public Transform muzzle;
+    public Transform Muzzle;
     public ObjectPool<TankShell> Pool;
     public float shootPerBurst = 3f;
     public float delayPerBurst = 1.0f;
@@ -22,11 +22,11 @@ public class STank : StateManager<STankState>
     {
         var idle = new IdleState();
         States[STankState.Idle] = idle;
-        idle.stank = this;
+        idle.SmallTank = this;
 
         var attack = new AttackState();
         States[STankState.Attack] = attack;
-        attack.stank = this;
+        attack.SmallTank = this;
 
         GameManager.OnPlayingGame += ControlTank;
     }
