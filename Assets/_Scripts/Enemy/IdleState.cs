@@ -5,7 +5,10 @@ public class IdleState : BaseState<STankState>
     public SmallTank SmallTank;
     bool tartgetAcquired;
 
-    public IdleState() : base(STankState.Idle) { }
+    public IdleState(SmallTank smallTank) : base(STankState.Idle) 
+    { 
+        SmallTank = smallTank;
+    }
 
     public override void EnterState()
     {

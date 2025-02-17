@@ -13,7 +13,10 @@ public class AttackState : BaseState<STankState>
 
     bool isTimeForNextShoot { get => Time.time > nextShootTime; }
 
-    public AttackState() : base(STankState.Attack) { }
+    public AttackState(SmallTank smallTank) : base(STankState.Attack)
+    {
+        SmallTank = smallTank;
+    }
 
     public override void EnterState()
     {

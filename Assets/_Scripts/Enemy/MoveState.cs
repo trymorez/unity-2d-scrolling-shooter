@@ -5,7 +5,10 @@ public class MoveState : BaseState<STankState>
     public SmallTank SmallTank;
     float ellapsedMoveTime;
 
-    public MoveState() : base(STankState.Move) { }
+    public MoveState(SmallTank smallTank) : base(STankState.Move) 
+    { 
+        SmallTank = smallTank; 
+    }
 
     public override void EnterState()
     {

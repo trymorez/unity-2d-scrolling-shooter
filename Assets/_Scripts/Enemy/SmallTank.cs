@@ -22,17 +22,11 @@ public class SmallTank : StateManager<STankState>
 
     void Awake()
     {
-        var idle = new IdleState();
-        States[STankState.Idle] = idle;
-        idle.SmallTank = this;
+        States[STankState.Idle] = new IdleState(this);
 
-        var attack = new AttackState();
-        States[STankState.Attack] = attack;
-        attack.SmallTank = this;
+        States[STankState.Attack] = new AttackState(this);
 
-        var move = new MoveState();
-        States[STankState.Move] = move;
-        move.SmallTank = this;
+        States[STankState.Move] = new MoveState(this);
 
         GameManager.OnPlayingGame += ControlTank;
     }
@@ -50,7 +44,7 @@ public class SmallTank : StateManager<STankState>
 
     protected override void Update()
     {
-
+        //overrides the base Update() method, allowing control over Update() execution
     }
 
     void ControlTank()
