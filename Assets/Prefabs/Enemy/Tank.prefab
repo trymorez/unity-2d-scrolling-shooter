@@ -252,9 +252,10 @@ MonoBehaviour:
   Turret: {fileID: 677003338368698635}
   tankShell: {fileID: 8783994545260008078, guid: f952a66e118cfd0468ef1f7f038ea576, type: 3}
   Muzzle: {fileID: 5392466743348798944}
-  shootPerBurst: 3
-  delayPerBurst: 2.5
-  delayPerShoot: 0.3
+  MoveSpeed: 0.5
+  ShootPerBurst: 3
+  DelayPerBurst: 1.5
+  DelayPerShoot: 0.2
 --- !u!1 &6042065582847368167
 GameObject:
   m_ObjectHideFlags: 0

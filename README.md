@@ -1,4 +1,4 @@
-# 2D Scrolling Shooter V 1.1
+# 2D Scrolling Shooter V 1.3
 
 I started developing a 2D vertical scrolling shooter game similar to 1942. The goal is to implement all the main features by February 10th. Currently, the game is not functioning.
 
@@ -8,6 +8,9 @@ I started developing a 2D vertical scrolling shooter game similar to 1942. The g
 ![screenshot](Assets/Screenshot/screenshot-V1.0-02.png)
 
 ## Version History
+**V 1.3 - (2025-02-17)**
+- Started implementing tank's movement routine
+
 **V 1.1 - (2025-02-15)**
 - Implemented tank canon pool manager
 

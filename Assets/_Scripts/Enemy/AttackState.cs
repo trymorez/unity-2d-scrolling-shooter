@@ -9,6 +9,7 @@ public class AttackState : BaseState<STankState>
     float nextShootTime;
     bool isBurstOngoing;
     bool isTartgetAcquired;
+    bool isBurstCompleted;
 
     bool isTimeForNextShoot { get => Time.time > nextShootTime; }
 
@@ -18,8 +19,9 @@ public class AttackState : BaseState<STankState>
     {
         isTartgetAcquired = true;
         isBurstOngoing = false;
+        isBurstCompleted = false;
         currentShoot = 0;
-        CalculateNextShootTime(SmallTank.delayPerShoot);
+        CalculateNextShootTime(SmallTank.DelayPerShoot);
     }
 
     public override void ExitState()
@@ -28,9 +30,14 @@ public class AttackState : BaseState<STankState>
 
     public override STankState GetNextState()
     {
+            Debug.Log(isBurstCompleted);
         if (!isTartgetAcquired && !isBurstOngoing)
         {
             return STankState.Idle;
+        }
+        if (isTartgetAcquired && isBurstCompleted)
+        {
+            return STankState.Move;
         }
         else
         {
@@ -49,7 +56,7 @@ public class AttackState : BaseState<STankState>
 
             if (isTimeForNextShoot)
             {
-                CalculateNextShootTime(SmallTank.delayPerShoot);
+                CalculateNextShootTime(SmallTank.DelayPerShoot);
                 RotateTurretToPlayer();
 
                 var dir = SmallTank.Target.position - SmallTank.Muzzle.position;
@@ -67,16 +74,18 @@ public class AttackState : BaseState<STankState>
         if (!isBurstOngoing && Time.time > nextShootTime)
         {
             isBurstOngoing = true;
+            isBurstCompleted = false;
         }
     }
 
     private void CheckIfBurstCompleted()
     {
-        if (currentShoot >= SmallTank.shootPerBurst)
+        if (currentShoot >= SmallTank.ShootPerBurst)
         {
             currentShoot = 0;
+            isBurstCompleted = true;
             isBurstOngoing = false;
-            CalculateNextShootTime(SmallTank.delayPerBurst);
+            CalculateNextShootTime(SmallTank.DelayPerBurst);
         }
     }
 

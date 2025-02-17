@@ -5,6 +5,7 @@ public enum STankState
 {
     Idle,
     Attack,
+    Move,
 }
 
 public class SmallTank : StateManager<STankState>
@@ -14,9 +15,10 @@ public class SmallTank : StateManager<STankState>
     public TankShell tankShell;
     public Transform Muzzle;
     public ObjectPool<TankShell> Pool;
-    public float shootPerBurst = 3f;
-    public float delayPerBurst = 1.0f;
-    public float delayPerShoot = 0.2f;
+    public float MoveSpeed = 2f;
+    public float ShootPerBurst = 3f;
+    public float DelayPerBurst = 2.0f;
+    public float DelayPerShoot = 0.2f;
 
     void Awake()
     {
@@ -27,6 +29,10 @@ public class SmallTank : StateManager<STankState>
         var attack = new AttackState();
         States[STankState.Attack] = attack;
         attack.SmallTank = this;
+
+        var move = new MoveState();
+        States[STankState.Move] = move;
+        move.SmallTank = this;
 
         GameManager.OnPlayingGame += ControlTank;
     }
@@ -44,6 +50,7 @@ public class SmallTank : StateManager<STankState>
 
     protected override void Update()
     {
+
     }
 
     void ControlTank()
