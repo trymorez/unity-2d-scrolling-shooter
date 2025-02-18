@@ -35,7 +35,7 @@ public abstract class StateManager<EState> : MonoBehaviour where EState : Enum
         IsChangingState = false;
     }
 
-    public virtual void OnTriggerEnter2D(Collider2D other)
+    protected virtual void OnTriggerEnter2D(Collider2D other)
     {
         CurrentState.OnTriggerEnter2D(other);
     }

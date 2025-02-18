@@ -39,10 +39,6 @@ public class MoveState : BaseState<STankState>
 
     public override void OnTriggerEnter2D(Collider2D other)
     {
-        //if (other.gameObject.CompareTag("Player"))
-        //{
-        //    SmallTank.Target = other.transform;
-        //}
     }
 
     public override void OnTriggerExit2D(Collider2D other)

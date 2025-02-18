@@ -1,5 +1,6 @@
+using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class World : MonoBehaviour
 {
@@ -26,21 +27,45 @@ public class World : MonoBehaviour
         WorldProgress();
     }
 
-    private void WorldProgress()
+    void WorldProgress()
     {
         var pos = transform.position;
 
         if (pos.y <= nextCheckPointY)
         {
-            //fine-tuning Y position of tileset to prevent artifact
+            //finetune Y position of tileset to prevent artifact
             pos.y = nextCheckPointY;
             transform.position = pos;
-
             nextCheckPointY -= 10f;
 
-            var nextTile = Instantiate(groundTile[groundTileIndex], transform);
-            nextTile.transform.position = new Vector3(0, TILE_ORIGIN_Y, 0);
-            groundTileIndex = (groundTileIndex + 1) % groundTile.Length;
+            SpawnNextTile();
+        }
+    }
+
+    void SpawnNextTile()
+    {
+
+        var nextTile = Instantiate(groundTile[groundTileIndex], transform);
+        nextTile.transform.position = new Vector3(0, TILE_ORIGIN_Y, 0);
+        groundTileIndex = (groundTileIndex + 1) % groundTile.Length;
+
+        SeparateAllEnemyFromTile(nextTile);
+    }
+
+    void SeparateAllEnemyFromTile(GroundTile nextTile)
+    {
+        var tank = new List<Transform>();
+
+        foreach (Transform child in nextTile.transform)
+        {
+            if (child.CompareTag("Enemy"))
+            {
+                tank.Add(child);
+            }
+        }
+        foreach (Transform child in tank)
+        {
+            child.SetParent(transform);
         }
     }
 

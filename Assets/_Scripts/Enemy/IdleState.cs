@@ -37,7 +37,7 @@ public class IdleState : BaseState<STankState>
 
     public override void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("Player"))
+        if (other.CompareTag("Player"))
         {
             SmallTank.Target = other.transform;
             tartgetAcquired = true;

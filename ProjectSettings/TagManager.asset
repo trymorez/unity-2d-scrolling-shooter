@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 3
   tags:
   - Activator
+  - Enemy
+  - Tile
   layers:
   - Default
   - TransparentFX
@@ -16,7 +18,7 @@ TagManager:
   - PlayerBullet
   - Enemy
   - EnemyBullet
-  - 
+  - Activator
   - 
   - 
   - 

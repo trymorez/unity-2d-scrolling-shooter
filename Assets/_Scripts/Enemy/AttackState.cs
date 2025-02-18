@@ -33,7 +33,6 @@ public class AttackState : BaseState<STankState>
 
     public override STankState GetNextState()
     {
-            Debug.Log(isBurstCompleted);
         if (!isTartgetAcquired && !isBurstOngoing)
         {
             return STankState.Idle;
@@ -111,7 +110,7 @@ public class AttackState : BaseState<STankState>
 
     public override void OnTriggerExit2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("Player"))
+        if (other.CompareTag("Player"))
         {
             isTartgetAcquired = false;
         }

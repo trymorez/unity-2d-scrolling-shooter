@@ -19,6 +19,7 @@ public class SmallTank : StateManager<STankState>
     public float ShootPerBurst = 3f;
     public float DelayPerBurst = 2.0f;
     public float DelayPerShoot = 0.2f;
+    public bool IsOutOfScreen;
 
     void Awake()
     {
@@ -44,11 +45,24 @@ public class SmallTank : StateManager<STankState>
 
     protected override void Update()
     {
-        //overrides the base Update() method, allowing control over Update() execution
+        //overrides base Update() method to control update routine
     }
 
     void ControlTank()
     {
         base.Update();
+        if (IsOutOfScreen)
+        {
+            Destroy(gameObject);
+        }
+    }
+    
+    protected override void OnTriggerExit2D(Collider2D other)
+    {
+        base.OnTriggerExit2D(other);
+        if (other.CompareTag("Activator"))
+        {
+            IsOutOfScreen = true;
+        }
     }
 }

@@ -1,4 +1,4 @@
-# 2D Scrolling Shooter V 1.4
+# 2D Scrolling Shooter V 1.5
 
 I started developing a 2D vertical scrolling shooter game similar to 1942. The goal is to implement all the main features by February 10th. Currently, the game is not functioning.
 
@@ -8,6 +8,9 @@ I started developing a 2D vertical scrolling shooter game similar to 1942. The g
 ![screenshot](Assets/Screenshot/screenshot-V1.0-02.png)
 
 ## Version History
+**V 1.5 - (2025-02-19)**
+- Now tanks don't share lifecycle with background tileset.
+
 **V 1.4 - (2025-02-18)**
 - Simplified the initialization of the tank's state pattern using dependency injection
 

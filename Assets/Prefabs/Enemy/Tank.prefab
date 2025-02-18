@@ -132,7 +132,7 @@ GameObject:
   - component: {fileID: 7446744361784136666}
   m_Layer: 8
   m_Name: Tank
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -167,7 +167,7 @@ BoxCollider2D:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 1152
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -254,8 +254,9 @@ MonoBehaviour:
   Muzzle: {fileID: 5392466743348798944}
   MoveSpeed: 0.5
   ShootPerBurst: 3
-  DelayPerBurst: 1.5
+  DelayPerBurst: 2.5
   DelayPerShoot: 0.2
+  IsOutOfScreen: 0
 --- !u!1 &6042065582847368167
 GameObject:
   m_ObjectHideFlags: 0
