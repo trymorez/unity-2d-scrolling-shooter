@@ -13,8 +13,7 @@ public class AttackState : BaseState<STankState>
 
     bool isTimeForNextShoot { get => Time.time > nextShootTime; }
 
-    public AttackState(SmallTank smallTank) : base(STankState.Attack)
-    {
+    public AttackState(SmallTank smallTank) : base(STankState.Attack) {
         SmallTank = smallTank;
     }
 
@@ -60,6 +59,7 @@ public class AttackState : BaseState<STankState>
             {
                 CalculateNextShootTime(SmallTank.DelayPerShoot);
                 RotateTurretToPlayer();
+                SmallTank.Turret.OnFireEffect();
 
                 var dir = SmallTank.Target.position - SmallTank.Muzzle.position;
                 var angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg - 90f;
@@ -93,10 +93,10 @@ public class AttackState : BaseState<STankState>
 
     void RotateTurretToPlayer()
     {
-        Vector2 dir = SmallTank.Target.position - SmallTank.Turret.position;
+        Vector2 dir = SmallTank.Target.position - SmallTank.TurretTransform.position;
 
         float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg + 90f;
-        SmallTank.Turret.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
+        SmallTank.TurretTransform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
     }
 
     void CalculateNextShootTime(float delay)

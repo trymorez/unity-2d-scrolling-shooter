@@ -130,6 +130,7 @@ GameObject:
   - component: {fileID: 747535605291734446}
   - component: {fileID: 8244278472172702546}
   - component: {fileID: 7446744361784136666}
+  - component: {fileID: 7384809141337022636}
   m_Layer: 8
   m_Name: Tank
   m_TagString: Enemy
@@ -249,14 +250,33 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Target: {fileID: 0}
-  Turret: {fileID: 677003338368698635}
+  TurretTransform: {fileID: 677003338368698635}
+  Turret: {fileID: 7384809141337022636}
   tankShell: {fileID: 8783994545260008078, guid: f952a66e118cfd0468ef1f7f038ea576, type: 3}
   Muzzle: {fileID: 5392466743348798944}
   MoveSpeed: 0.5
   ShootPerBurst: 3
   DelayPerBurst: 2.5
-  DelayPerShoot: 0.2
+  DelayPerShoot: 0.3
   IsOutOfScreen: 0
+--- !u!114 &7384809141337022636
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3592462802335127844}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1d35c9670b4c03468c2932fd12336de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  turret: {fileID: 677003338368698635}
+  turretSprite: {fileID: 6651404320482084016}
+  shrinkX: 1.2
+  shrinkY: 0.8
+  shrinkDuration: 0.1
+  recoverDuration: 0.1
 --- !u!1 &6042065582847368167
 GameObject:
   m_ObjectHideFlags: 0
@@ -285,7 +305,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: -0.11, z: 0}
   m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
-  m_ConstrainProportionsScale: 1
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5392466743348798944}
   m_Father: {fileID: 677003338368698635}
@@ -443,7 +463,7 @@ GameObject:
   m_Component:
   - component: {fileID: 677003338368698635}
   m_Layer: 8
-  m_Name: Barrel
+  m_Name: Turret
   m_TagString: Untagged
   m_Icon: {fileID: 4422084297763085224, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -459,7 +479,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 0.8, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 570082868716119742}

@@ -11,7 +11,8 @@ public enum STankState
 public class SmallTank : StateManager<STankState>
 {
     public Transform Target;
-    public Transform Turret;
+    public Transform TurretTransform;
+    public Turret Turret;
     public TankShell tankShell;
     public Transform Muzzle;
     public ObjectPool<TankShell> Pool;
