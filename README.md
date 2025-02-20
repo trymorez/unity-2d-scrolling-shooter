@@ -1,4 +1,4 @@
-# 2D Scrolling Shooter V 1.6
+# 2D Scrolling Shooter V 1.7
 
 I started developing a 2D vertical scrolling shooter game similar to 1942. The goal is to implement all the main features by February 10th. Currently, the game is not functioning.
 
@@ -8,6 +8,10 @@ I started developing a 2D vertical scrolling shooter game similar to 1942. The g
 ![screenshot](Assets/Screenshot/screenshot-V1.0-02.png)
 
 ## Version History
+
+**V 1.7 - (2025-02-20)**
+- Added muzzle flash effect for tank
+
 **V 1.6 - (2025-02-19)**
 - Added an effect that changes the shape of the turret when the tank fires a shell
 

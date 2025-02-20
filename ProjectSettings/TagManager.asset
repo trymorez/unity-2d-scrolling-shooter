@@ -57,7 +57,13 @@ TagManager:
     uniqueID: 3785514081
     locked: 0
   - name: EnemyBullet
-    uniqueID: 211592281
+    uniqueID: 3293870321
+    locked: 0
+  - name: New Layer 6
+    uniqueID: 3217699167
+    locked: 0
+  - name: New Layer 7
+    uniqueID: 557669763
     locked: 0
   m_RenderingLayers:
   - Default

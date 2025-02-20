@@ -254,6 +254,7 @@ MonoBehaviour:
   Turret: {fileID: 7384809141337022636}
   tankShell: {fileID: 8783994545260008078, guid: f952a66e118cfd0468ef1f7f038ea576, type: 3}
   Muzzle: {fileID: 5392466743348798944}
+  muzzleFlash: {fileID: -2455377419434463033, guid: 307b65f237137904ab7e2885b2dc277c, type: 3}
   MoveSpeed: 0.5
   ShootPerBurst: 3
   DelayPerBurst: 2.5
@@ -273,8 +274,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   turret: {fileID: 677003338368698635}
   turretSprite: {fileID: 6651404320482084016}
-  shrinkX: 1.2
-  shrinkY: 0.8
+  shrinkX: 1.5
+  shrinkY: 0.5
   shrinkDuration: 0.1
   recoverDuration: 0.1
 --- !u!1 &6042065582847368167
@@ -477,7 +478,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6341497671156413715}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 0.8, z: 1}
   m_ConstrainProportionsScale: 0

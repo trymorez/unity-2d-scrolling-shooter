@@ -627,7 +627,7 @@ MonoBehaviour:
   m_Intensity: 1
   m_LightVolumeIntensity: 1
   m_LightVolumeEnabled: 0
-  m_ApplyToSortingLayers: 00000000615ca2e1f5155991f7494f05f9461c5a
+  m_ApplyToSortingLayers: 00000000615ca2e1f5155991f7494f05f9461c5af17854c45f31cabf835d3d21
   m_LightCookieSprite: {fileID: 0}
   m_DeprecatedPointLightCookieSprite: {fileID: 0}
   m_LightOrder: 0
@@ -1107,7 +1107,7 @@ Transform:
   m_GameObject: {fileID: 1103302456}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.2, z: 0}
+  m_LocalPosition: {x: 0, y: -0.04, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1263,7 +1263,7 @@ ParticleSystem:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-  moveWithTransform: 0
+  moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
   randomSeed: 0
@@ -1326,7 +1326,7 @@ ParticleSystem:
     startSpeed:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 1.5
+      scalar: 2
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -1444,7 +1444,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.2
+      scalar: 0.5
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -2027,7 +2027,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 60
+      scalar: 80
       minScalar: 10
       maxCurve:
         serializedVersion: 2
@@ -5958,6 +5958,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc45d1e969feb4a4e9212a9e832715a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  world: {fileID: 309082356}
 --- !u!4 &1570310490
 Transform:
   m_ObjectHideFlags: 0

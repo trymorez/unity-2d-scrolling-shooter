@@ -4,7 +4,6 @@ using UnityEngine;
 public class TankShell : MonoBehaviour
 {
     [SerializeField] float speed = 5f;
-    [SerializeField] float life = 3f;
 
     void Awake()
     {

@@ -67,6 +67,8 @@ public class AttackState : BaseState<STankState>
 
                 var shell = ShellPoolManager.Pool.Get();
                 shell.transform.SetPositionAndRotation(SmallTank.Muzzle.position, direction);
+                var flash = SmallTank.Instantiate(SmallTank.muzzleFlash, SmallTank.Muzzle.position, Quaternion.identity);
+                flash.transform.SetParent(GameManager.World);
                 currentShoot++;
             }
         }

@@ -15,6 +15,7 @@ public class SmallTank : StateManager<STankState>
     public Turret Turret;
     public TankShell tankShell;
     public Transform Muzzle;
+    public MuzzleFlash muzzleFlash;
     public ObjectPool<TankShell> Pool;
     public float MoveSpeed = 2f;
     public float ShootPerBurst = 3f;

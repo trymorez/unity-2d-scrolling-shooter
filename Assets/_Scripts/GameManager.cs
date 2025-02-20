@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    public static Transform World;
+    [SerializeField] Transform world;
     public static Action OnPlayingGame;
     public static Action OnStartingGame;
     public static Action<GameState> OnEnterGameState;
@@ -15,7 +17,12 @@ public class GameManager : MonoBehaviour
         Paused,
     }
     public static GameState State = GameState.Starting;
-    
+
+    void Start()
+    {
+        World = world;
+    }
+
     public static void ChangeGameState(GameState newState)
     {
         OnExitGameState?.Invoke(State);
