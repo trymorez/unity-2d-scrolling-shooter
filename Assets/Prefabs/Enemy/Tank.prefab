@@ -130,7 +130,7 @@ GameObject:
   - component: {fileID: 747535605291734446}
   - component: {fileID: 8244278472172702546}
   - component: {fileID: 7446744361784136666}
-  - component: {fileID: 7384809141337022636}
+  - component: {fileID: 6311752352335548220}
   m_Layer: 8
   m_Name: Tank
   m_TagString: Enemy
@@ -251,7 +251,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Target: {fileID: 0}
   TurretTransform: {fileID: 677003338368698635}
-  Turret: {fileID: 7384809141337022636}
+  Turret: {fileID: 6311752352335548220}
   tankShell: {fileID: 8783994545260008078, guid: f952a66e118cfd0468ef1f7f038ea576, type: 3}
   Muzzle: {fileID: 5392466743348798944}
   muzzleFlash: {fileID: -2455377419434463033, guid: 307b65f237137904ab7e2885b2dc277c, type: 3}
@@ -260,7 +260,7 @@ MonoBehaviour:
   DelayPerBurst: 2.5
   DelayPerShoot: 0.3
   IsOutOfScreen: 0
---- !u!114 &7384809141337022636
+--- !u!114 &6311752352335548220
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -269,13 +269,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 3592462802335127844}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f1d35c9670b4c03468c2932fd12336de, type: 3}
+  m_Script: {fileID: 11500000, guid: 748d8726fd788204d9862a377b9ffcee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   turret: {fileID: 677003338368698635}
   turretSprite: {fileID: 6651404320482084016}
-  shrinkX: 1.5
-  shrinkY: 0.5
+  shrinkX: 1.1
+  shrinkY: 0.8
   shrinkDuration: 0.1
   recoverDuration: 0.1
 --- !u!1 &6042065582847368167

@@ -12,7 +12,7 @@ public class SmallTank : StateManager<STankState>
 {
     public Transform Target;
     public Transform TurretTransform;
-    public Turret Turret;
+    public TankTurret Turret;
     public TankShell tankShell;
     public Transform Muzzle;
     public MuzzleFlash muzzleFlash;
@@ -26,22 +26,24 @@ public class SmallTank : StateManager<STankState>
     void Awake()
     {
         States[STankState.Idle] = new IdleState(this);
-
         States[STankState.Attack] = new AttackState(this);
-
         States[STankState.Move] = new MoveState(this);
 
+        ChangeState(STankState.Idle);
         GameManager.OnPlayingGame += ControlTank;
     }
 
     void OnDestroy()
     {
+        States[STankState.Idle] = null;
+        States[STankState.Attack] = null;
+        States[STankState.Move] = null;
+
         GameManager.OnPlayingGame -= ControlTank;
     }
 
     protected override void Start()
     {
-        ChangeState(STankState.Idle);
         base.Start();
     }
 

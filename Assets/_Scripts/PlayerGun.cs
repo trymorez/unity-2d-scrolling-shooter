@@ -7,6 +7,8 @@ public class PlayerGun : MonoBehaviour
     [SerializeField] Gun[] gun;
     [SerializeField] float fireRate = 0.3f;
     float nextFireTime;
+    bool isNextFireTime { get => Time.time >= nextFireTime; }
+    bool isAttacking;
     [SerializeField] int currentUpgrade;
     [SerializeField] int maxUpgrade = 5;
     bool[,] upgradeMatrix = new bool[5, 5] {
@@ -21,8 +23,32 @@ public class PlayerGun : MonoBehaviour
 
     void Start()
     {
-        nextFireTime = Time.time + fireRate;
+        GameManager.OnPlayingGame += OnPlayingGame;
+        CalculateNextFireTime();
         SetGun();
+    }
+    void OnDestroy()
+    {
+        GameManager.OnPlayingGame -= OnPlayingGame;
+    }
+
+    void CalculateNextFireTime()
+    {
+        nextFireTime = Time.time + fireRate;
+    }
+
+    void OnPlayingGame()
+    {
+        if (isAttacking && isNextFireTime)
+        {
+            Attack();
+        }
+    }
+
+    void Attack()
+    {
+        CalculateNextFireTime();
+        OnGunFire?.Invoke();
     }
 
     [ContextMenu("Upgrade Gun")]
@@ -50,10 +76,22 @@ public class PlayerGun : MonoBehaviour
             return;
         }
 
-        if (context.performed && Time.time > nextFireTime)
+        //if (context.started)
+        //{
+        //    Attack();
+            
+        //    isAttacking = true;
+        //}
+
+        if (context.performed)
         {
-            nextFireTime = Time.time + fireRate;
-            OnGunFire?.Invoke();
+            Debug.Log("performed");
+            isAttacking = true;
+        }
+        else if (context.canceled)
+        {
+            Debug.Log("canceled");
+            isAttacking = false;
         }
     }
 }

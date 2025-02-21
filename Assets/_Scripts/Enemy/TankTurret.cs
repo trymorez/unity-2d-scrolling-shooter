@@ -1,7 +1,7 @@
 using UnityEngine;
 using DG.Tweening;
 
-public class Turret : MonoBehaviour
+public class TankTurret : MonoBehaviour
 {
     [SerializeField] Transform turret;
     Vector3 turretScale;

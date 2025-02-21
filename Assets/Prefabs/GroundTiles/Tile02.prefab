@@ -6853,8 +6853,8 @@ Transform:
   m_Children:
   - {fileID: 7976509226722782516}
   - {fileID: 5824849502079583604}
-  - {fileID: 1001960212611924718}
-  - {fileID: 7763774515299946852}
+  - {fileID: 2194389328269477674}
+  - {fileID: 1845881451889445943}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!156049354 &428907297029700942
@@ -6881,7 +6881,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a532efddb5c8ff84a80c9be3ca100fa4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1001 &2147370404391530509
+--- !u!1001 &699941297487937236
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -6899,11 +6899,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1165116739390714595, guid: d678c41a881712c43ab02dc35c1180de, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -4.5311084
+      value: 4.728027
       objectReference: {fileID: 0}
     - target: {fileID: 1165116739390714595, guid: d678c41a881712c43ab02dc35c1180de, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.03741443
+      value: 2.015104
       objectReference: {fileID: 0}
     - target: {fileID: 1165116739390714595, guid: d678c41a881712c43ab02dc35c1180de, type: 3}
       propertyPath: m_LocalPosition.z
@@ -6939,19 +6939,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3592462802335127844, guid: d678c41a881712c43ab02dc35c1180de, type: 3}
       propertyPath: m_Name
-      value: Tank1
+      value: Tank (1)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d678c41a881712c43ab02dc35c1180de, type: 3}
---- !u!4 &1001960212611924718 stripped
+--- !u!4 &1845881451889445943 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1165116739390714595, guid: d678c41a881712c43ab02dc35c1180de, type: 3}
-  m_PrefabInstance: {fileID: 2147370404391530509}
+  m_PrefabInstance: {fileID: 699941297487937236}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &8905063737528001415
+--- !u!1001 &1035646460103210441
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -6969,11 +6969,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1165116739390714595, guid: d678c41a881712c43ab02dc35c1180de, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 4.4999695
+      value: -3.983773
       objectReference: {fileID: 0}
     - target: {fileID: 1165116739390714595, guid: d678c41a881712c43ab02dc35c1180de, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 5.344746
+      value: -0.12863743
       objectReference: {fileID: 0}
     - target: {fileID: 1165116739390714595, guid: d678c41a881712c43ab02dc35c1180de, type: 3}
       propertyPath: m_LocalPosition.z
@@ -7009,15 +7009,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3592462802335127844, guid: d678c41a881712c43ab02dc35c1180de, type: 3}
       propertyPath: m_Name
-      value: Tank5
+      value: Tank
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d678c41a881712c43ab02dc35c1180de, type: 3}
---- !u!4 &7763774515299946852 stripped
+--- !u!4 &2194389328269477674 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1165116739390714595, guid: d678c41a881712c43ab02dc35c1180de, type: 3}
-  m_PrefabInstance: {fileID: 8905063737528001415}
+  m_PrefabInstance: {fileID: 1035646460103210441}
   m_PrefabAsset: {fileID: 0}
