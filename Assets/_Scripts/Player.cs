@@ -11,12 +11,16 @@ public class Player : MonoBehaviour
     [SerializeField] float shadowStartOffset = -0.05f;
     [SerializeField] float shadowEndOffset = -0.5f;
     [SerializeField] Transform shadow;
-    Vector2 shadowPosition;
     [SerializeField] Transform plane;
+    [SerializeField] SpriteRenderer sprite;
+    Vector2 shadowPosition;
     float launchElapsed;
+
+    Vector2 screenSize;
 
     void Awake()
     {
+        screenSize = Camera.main.ScreenToWorldPoint(new Vector2(Screen.width, Screen.height));
         GameManager.OnStartingGame += LaunchPlane;
         GameManager.OnPlayingGame += ControlPlane;
     }
@@ -54,7 +58,13 @@ public class Player : MonoBehaviour
 
     void ControlPlane()
     {
-        transform.Translate(inputVector * (moveSpeed * Time.deltaTime));
+        var newPos = (Vector2)transform.position + inputVector * (moveSpeed * Time.deltaTime);
+        var spriteSizeX = sprite.bounds.size.x * 0.5f - 0.2f;
+        var spriteSizeY = sprite.bounds.size.y * 0.5f - 0.3f;
+        newPos.x = Mathf.Clamp(newPos.x, -screenSize.x + spriteSizeX, screenSize.x - spriteSizeX);
+        newPos.y = Mathf.Clamp(newPos.y, -screenSize.y + spriteSizeY, screenSize.y - spriteSizeY);
+        transform.position = newPos;
+
 
         //horizontal rotation for plane and shadow
         float rotate = inputVector.x * 10f;

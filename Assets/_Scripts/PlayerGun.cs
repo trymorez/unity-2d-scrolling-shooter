@@ -11,8 +11,8 @@ public class PlayerGun : MonoBehaviour
     bool isAttacking;
     [SerializeField] int currentUpgrade;
     [SerializeField] int maxUpgrade = 5;
-    bool[,] upgradeMatrix = new bool[5, 5] {
-        { false, false, true, false, false },
+    bool[,] upgradeMatrix =
+    {
         { false, true, false, true, false },
         { true, false, true, false, true },
         { true, true, false, true, true },
@@ -75,22 +75,12 @@ public class PlayerGun : MonoBehaviour
         {
             return;
         }
-
-        //if (context.started)
-        //{
-        //    Attack();
-            
-        //    isAttacking = true;
-        //}
-
-        if (context.performed)
+        if (context.started)
         {
-            Debug.Log("performed");
             isAttacking = true;
         }
         else if (context.canceled)
         {
-            Debug.Log("canceled");
             isAttacking = false;
         }
     }

@@ -737,6 +737,7 @@ MonoBehaviour:
   shadowEndOffset: -0.5
   shadow: {fileID: 1905042430}
   plane: {fileID: 1030417524}
+  sprite: {fileID: 1030417525}
 --- !u!114 &674034666
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -958,7 +959,7 @@ MonoBehaviour:
   - {fileID: 1187879282}
   - {fileID: 1091766149}
   - {fileID: 775188069}
-  fireRate: 0.25
+  fireRate: 0.2
   currentUpgrade: 0
   maxUpgrade: 4
 --- !u!4 &775188068 stripped
@@ -6484,10 +6485,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9124762725995183188, guid: fb1c1cc3e0415ed43a834aa004f98ab1, type: 3}
       propertyPath: m_Color.a
-      value: 0.09803922
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 7154980266816129881, guid: fb1c1cc3e0415ed43a834aa004f98ab1, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fb1c1cc3e0415ed43a834aa004f98ab1, type: 3}
