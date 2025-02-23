@@ -10,19 +10,27 @@ public class Player : MonoBehaviour
     [SerializeField] float landedSize = 0.5f;
     [SerializeField] float shadowStartOffset = -0.05f;
     [SerializeField] float shadowEndOffset = -0.5f;
-    [SerializeField] Transform shadow;
     [SerializeField] Transform plane;
-    [SerializeField] SpriteRenderer sprite;
-    Vector2 shadowPosition;
+    [SerializeField] Transform shadow;
+    
+    Collider2D collider2d;
+    float width;
+    float height;
+
+    Vector2 shadowPos;
     float launchElapsed;
+
 
     Vector2 screenSize;
 
     void Awake()
     {
-        screenSize = Camera.main.ScreenToWorldPoint(new Vector2(Screen.width, Screen.height));
         GameManager.OnStartingGame += LaunchPlane;
         GameManager.OnPlayingGame += ControlPlane;
+
+        var sr = plane.GetComponent<SpriteRenderer>();
+        sr.color = Color.white;
+        sr.color = new Color(1f, 0f, 0f, 1f);
     }
 
     void OnDestroy()
@@ -33,7 +41,11 @@ public class Player : MonoBehaviour
 
     void Start()
     {
-        shadowPosition = shadow.position;
+        screenSize = Camera.main.ScreenToWorldPoint(new Vector2(Screen.width, Screen.height));
+        collider2d = GetComponent<Collider2D>();
+        width = collider2d.bounds.size.x * 0.5f;
+        height = collider2d.bounds.size.y * 0.5f;
+        shadowPos = shadow.position;
     }
 
     void LaunchPlane()
@@ -48,7 +60,7 @@ public class Player : MonoBehaviour
         //relocate plane shadow
         var offset = Mathf.Lerp(shadowStartOffset, shadowEndOffset, 
             1f - ((launchDuration - launchElapsed) / launchDuration));
-        shadow.position = new Vector2(shadowPosition.x + offset, shadowPosition.y + offset);
+        shadow.position = new Vector2(shadowPos.x + offset, shadowPos.y + offset);
 
         if (launchElapsed > launchDuration)
         {
@@ -59,17 +71,21 @@ public class Player : MonoBehaviour
     void ControlPlane()
     {
         var newPos = (Vector2)transform.position + inputVector * (moveSpeed * Time.deltaTime);
-        var spriteSizeX = sprite.bounds.size.x * 0.5f - 0.2f;
-        var spriteSizeY = sprite.bounds.size.y * 0.5f - 0.3f;
-        newPos.x = Mathf.Clamp(newPos.x, -screenSize.x + spriteSizeX, screenSize.x - spriteSizeX);
-        newPos.y = Mathf.Clamp(newPos.y, -screenSize.y + spriteSizeY, screenSize.y - spriteSizeY);
+
+        newPos.x = Mathf.Clamp(newPos.x, -screenSize.x + width, screenSize.x - width);
+        newPos.y = Mathf.Clamp(newPos.y, -screenSize.y + height, screenSize.y - height);
         transform.position = newPos;
 
 
         //horizontal rotation for plane and shadow
-        float rotate = inputVector.x * 10f;
-        plane.transform.rotation = Quaternion.Euler(0, 0, -rotate);
-        shadow.transform.rotation = Quaternion.Euler(0, 0, -rotate);
+        var maxRotate = 15f;
+        var rotateSpeed = 10f;
+        var endRotate = inputVector.normalized.x * maxRotate;
+        var curRotate = plane.transform.eulerAngles.z;
+        var smoothRotate = Mathf.LerpAngle(curRotate, -endRotate, Time.deltaTime * rotateSpeed);
+
+        plane.transform.rotation = Quaternion.Euler(0, 0, smoothRotate);
+        shadow.transform.rotation = Quaternion.Euler(0, 0, smoothRotate);
     }
 
     public void OnMove(InputAction.CallbackContext context)
