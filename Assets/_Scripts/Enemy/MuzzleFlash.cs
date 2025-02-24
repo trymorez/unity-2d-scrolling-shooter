@@ -4,12 +4,13 @@ using UnityEngine;
 public class MuzzleFlash : MonoBehaviour
 {
     [SerializeField] float life = 0.5f;
-    [SerializeField] float size = 0.15f;
+    [SerializeField] float _maxSize = 0.15f;
+    [SerializeField] float _minSize = 0.05f;
 
     void Start()
     {
-        var minSize = new Vector2 (0, 0);
-        var maxSize = new Vector2 (size, size);
+        var minSize = new Vector2(_minSize, _minSize);
+        var maxSize = new Vector2(_maxSize, _maxSize);
 
         var sr = GetComponentInChildren<SpriteRenderer>();
         sr.DOFade(0.5f, life).OnComplete(DestroyObject);

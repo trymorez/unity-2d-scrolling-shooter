@@ -1,5 +1,6 @@
 using UnityEngine;
 using System;
+using Unity.Mathematics;
 
 public class AttackState : BaseState<STankState>
 {
@@ -49,7 +50,7 @@ public class AttackState : BaseState<STankState>
     public override void UpdateState()
     {
         CheckShouldStartBurst();
-        RotateTurretToPlayer();
+        //RotateTurretToPlayer();
 
         if (isBurstOngoing)
         {
@@ -57,22 +58,47 @@ public class AttackState : BaseState<STankState>
 
             if (isTimeForNextShoot)
             {
-                CalculateNextShootTime(SmallTank.DelayPerShoot);
-                RotateTurretToPlayer();
-                SmallTank.Turret.OnFireEffect();
-
-                var dir = SmallTank.Target.position - SmallTank.Muzzle.position;
-                var angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg - 90f;
-                var direction = Quaternion.Euler(new Vector3(0, 0, angle));
-
-                var shell = ShellPoolManager.Pool.Get();
-                shell.transform.SetPositionAndRotation(SmallTank.Muzzle.position, direction);
-                var flash = SmallTank.Instantiate(SmallTank.muzzleFlash, SmallTank.Muzzle.position, Quaternion.identity);
-                flash.transform.SetParent(GameManager.World);
-                currentShoot++;
+                ShootIfCan();
             }
         }
     }
+
+    void ShootIfCan()
+    {
+        bool isTurretAligned;
+
+        float curAngleZ = SmallTank.TurretTransform.rotation.eulerAngles.z;
+        Vector2 targetDir = SmallTank.Target.position - SmallTank.Muzzle.position;
+        float fireAngleZ = Mathf.Atan2(targetDir.y, targetDir.x) * Mathf.Rad2Deg - 90f;
+        float turretAngleZ = Mathf.Atan2(targetDir.y, targetDir.x) * Mathf.Rad2Deg + 90f;
+        quaternion fireDir = Quaternion.Euler(new Vector3(0, 0, fireAngleZ));
+        float angleDiff = Mathf.DeltaAngle(curAngleZ, turretAngleZ);
+        float allowedRange = 10f;
+        float turningSpeed = 10f;
+
+        isTurretAligned = MathF.Abs(angleDiff) <= allowedRange;
+
+        if (isTurretAligned)
+        {
+            CalculateNextShootTime(SmallTank.DelayPerShoot);
+            SmallTank.Turret.OnFireEffect();
+
+            var shell = ShellPoolManager.Pool.Get();
+            shell.transform.SetPositionAndRotation(SmallTank.Muzzle.position, fireDir);
+
+            var flash = SmallTank.Instantiate(SmallTank.muzzleFlash,
+                                              SmallTank.Muzzle.position,
+                                              Quaternion.identity);
+            flash.transform.SetParent(GameManager.World);
+            currentShoot++;
+        }
+        else
+        {
+            float smoothRotate = Mathf.LerpAngle(curAngleZ, turretAngleZ, Time.deltaTime * turningSpeed);
+            SmallTank.TurretTransform.rotation = Quaternion.Euler(new Vector3(0, 0, smoothRotate));
+        }
+    }
+
     void CheckShouldStartBurst()
     {
         if (!isBurstOngoing && Time.time > nextShootTime)
@@ -96,9 +122,8 @@ public class AttackState : BaseState<STankState>
     void RotateTurretToPlayer()
     {
         Vector2 dir = SmallTank.Target.position - SmallTank.TurretTransform.position;
-
-        float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg + 90f;
-        SmallTank.TurretTransform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
+        var fireAngle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg + 90f;
+        SmallTank.TurretTransform.rotation = Quaternion.Euler(new Vector3(0, 0, fireAngle));
     }
 
     void CalculateNextShootTime(float delay)

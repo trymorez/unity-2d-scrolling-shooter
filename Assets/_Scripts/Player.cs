@@ -27,10 +27,6 @@ public class Player : MonoBehaviour
     {
         GameManager.OnStartingGame += LaunchPlane;
         GameManager.OnPlayingGame += ControlPlane;
-
-        var sr = plane.GetComponent<SpriteRenderer>();
-        sr.color = Color.white;
-        sr.color = new Color(1f, 0f, 0f, 1f);
     }
 
     void OnDestroy()

@@ -1,4 +1,4 @@
-# 2D Scrolling Shooter V 2.0
+# 2D Scrolling Shooter V 2.1
 
 I started developing a 2D vertical scrolling shooter game similar to 1942. The goal is to implement all the main features by February 10th. Currently, the game is not functioning.
 
@@ -8,6 +8,9 @@ I started developing a 2D vertical scrolling shooter game similar to 1942. The g
 ![screenshot](Assets/Screenshot/screenshot-V1.8-02.png)
 
 ## Version History
+**V 2.1 - (2025-02-24)**
+- Adjusted the turret's rotation smoothly before firing the projectile
+
 **V 2.0 - (2025-02-23)**
 - Fixed to use Collider2D instead of SpriteRenderer for the test to prevent the player from going off-screen
 - Modified to ensure smooth rotation of the player when turning left and right

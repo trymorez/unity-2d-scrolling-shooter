@@ -46,6 +46,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   life: 0.8
+  _maxSize: 0.15
+  _minSize: 0.08
 --- !u!1 &8264263224652338329
 GameObject:
   m_ObjectHideFlags: 0
