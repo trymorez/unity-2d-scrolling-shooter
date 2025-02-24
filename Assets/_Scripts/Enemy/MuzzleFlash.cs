@@ -7,7 +7,7 @@ public class MuzzleFlash : MonoBehaviour
     [SerializeField] float _maxSize = 0.15f;
     [SerializeField] float _minSize = 0.05f;
 
-    void Start()
+    void OnEnable()
     {
         var minSize = new Vector2(_minSize, _minSize);
         var maxSize = new Vector2(_maxSize, _maxSize);
@@ -22,6 +22,6 @@ public class MuzzleFlash : MonoBehaviour
 
     void DestroyObject()
     {
-        Destroy(gameObject);
+        MuzzleFlashPoolManager.Pool.Release(this);
     }
 }

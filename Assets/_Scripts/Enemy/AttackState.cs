@@ -1,6 +1,7 @@
+using Unity.Mathematics;
 using UnityEngine;
 using System;
-using Unity.Mathematics;
+using static UnityEngine.GraphicsBuffer;
 
 public class AttackState : BaseState<STankState>
 {
@@ -12,10 +13,17 @@ public class AttackState : BaseState<STankState>
     bool isTartgetAcquired;
     bool isBurstCompleted;
 
+    float minAngleDiff = 10f;
+    float turnSpeed = 10f;
+    Transform target, turret, muzzle;
+
     bool isTimeForNextShoot { get => Time.time > nextShootTime; }
 
     public AttackState(SmallTank smallTank) : base(STankState.Attack) {
         SmallTank = smallTank;
+        target = SmallTank.Target;
+        turret = SmallTank.TurretTransform;
+        muzzle = SmallTank.Muzzle;
     }
 
     public override void EnterState()
@@ -23,6 +31,7 @@ public class AttackState : BaseState<STankState>
         isTartgetAcquired = true;
         isBurstOngoing = false;
         isBurstCompleted = false;
+
         currentShoot = 0;
         CalculateNextShootTime(SmallTank.DelayPerShoot);
     }
@@ -65,37 +74,32 @@ public class AttackState : BaseState<STankState>
 
     void ShootIfCan()
     {
-        bool isTurretAligned;
+        Vector2 targetDir = target.position - muzzle.position;
+        float curAngle = turret.rotation.eulerAngles.z;
+        float turretAngle = Mathf.Atan2(targetDir.y, targetDir.x) * Mathf.Rad2Deg + 90f;
+        float angleDiff = Mathf.DeltaAngle(curAngle, turretAngle);
 
-        float curAngleZ = SmallTank.TurretTransform.rotation.eulerAngles.z;
-        Vector2 targetDir = SmallTank.Target.position - SmallTank.Muzzle.position;
-        float fireAngleZ = Mathf.Atan2(targetDir.y, targetDir.x) * Mathf.Rad2Deg - 90f;
-        float turretAngleZ = Mathf.Atan2(targetDir.y, targetDir.x) * Mathf.Rad2Deg + 90f;
-        quaternion fireDir = Quaternion.Euler(new Vector3(0, 0, fireAngleZ));
-        float angleDiff = Mathf.DeltaAngle(curAngleZ, turretAngleZ);
-        float allowedRange = 10f;
-        float turningSpeed = 10f;
-
-        isTurretAligned = MathF.Abs(angleDiff) <= allowedRange;
+        bool isTurretAligned = MathF.Abs(angleDiff) <= minAngleDiff;
 
         if (isTurretAligned)
         {
             CalculateNextShootTime(SmallTank.DelayPerShoot);
-            SmallTank.Turret.OnFireEffect();
+            SmallTank.Turret.OnTurretMorph();
+            float fireAngleZ = Mathf.Atan2(targetDir.y, targetDir.x) * Mathf.Rad2Deg - 90f;
+            quaternion fireDir = Quaternion.Euler(new Vector3(0, 0, fireAngleZ));
 
             var shell = ShellPoolManager.Pool.Get();
-            shell.transform.SetPositionAndRotation(SmallTank.Muzzle.position, fireDir);
+            shell.transform.SetPositionAndRotation(muzzle.position, fireDir);
 
-            var flash = SmallTank.Instantiate(SmallTank.muzzleFlash,
-                                              SmallTank.Muzzle.position,
-                                              Quaternion.identity);
+            var flash = MuzzleFlashPoolManager.Pool.Get();
+            flash.transform.position = muzzle.position;
             flash.transform.SetParent(GameManager.World);
             currentShoot++;
         }
         else
         {
-            float smoothRotate = Mathf.LerpAngle(curAngleZ, turretAngleZ, Time.deltaTime * turningSpeed);
-            SmallTank.TurretTransform.rotation = Quaternion.Euler(new Vector3(0, 0, smoothRotate));
+            float smoothRotate = Mathf.LerpAngle(curAngle, turretAngle, Time.deltaTime * turnSpeed);
+            turret.rotation = Quaternion.Euler(new Vector3(0, 0, smoothRotate));
         }
     }
 
@@ -121,9 +125,9 @@ public class AttackState : BaseState<STankState>
 
     void RotateTurretToPlayer()
     {
-        Vector2 dir = SmallTank.Target.position - SmallTank.TurretTransform.position;
+        Vector2 dir = target.position - turret.position;
         var fireAngle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg + 90f;
-        SmallTank.TurretTransform.rotation = Quaternion.Euler(new Vector3(0, 0, fireAngle));
+        turret.rotation = Quaternion.Euler(new Vector3(0, 0, fireAngle));
     }
 
     void CalculateNextShootTime(float delay)

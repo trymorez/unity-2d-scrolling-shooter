@@ -255,6 +255,7 @@ GameObject:
   - component: {fileID: 223489154}
   - component: {fileID: 223489156}
   - component: {fileID: 223489155}
+  - component: {fileID: 223489157}
   m_Layer: 0
   m_Name: PoolManager
   m_TagString: Untagged
@@ -305,6 +306,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tankShell: {fileID: 8783994545260008078, guid: f952a66e118cfd0468ef1f7f038ea576, type: 3}
+  defaultSize: 30
+  maxSize: 90
+--- !u!114 &223489157
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 223489153}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2f12bf2337637645a11e3e78647f170, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  muzzleFlash: {fileID: -2455377419434463033, guid: 307b65f237137904ab7e2885b2dc277c, type: 3}
   defaultSize: 30
   maxSize: 90
 --- !u!1001 &226319357
