@@ -11,6 +11,7 @@ I started developing a 2D vertical scrolling shooter game similar to 1942. The g
 **V 2.15 - (2025-02-24)**
 - Adjusted the turret's rotation smoothly before firing the projectile
 - Added muzzle flash object pool
+- Added rocket flame effect
 
 **V 2.0 - (2025-02-23)**
 - Fixed to use Collider2D instead of SpriteRenderer for the test to prevent the player from going off-screen

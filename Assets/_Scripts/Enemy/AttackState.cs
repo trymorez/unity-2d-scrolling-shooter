@@ -21,17 +21,18 @@ public class AttackState : BaseState<STankState>
 
     public AttackState(SmallTank smallTank) : base(STankState.Attack) {
         SmallTank = smallTank;
-        target = SmallTank.Target;
-        turret = SmallTank.TurretTransform;
-        muzzle = SmallTank.Muzzle;
     }
 
     public override void EnterState()
     {
+        //set reference
+        target = SmallTank.Target;
+        turret = SmallTank.TurretTransform;
+        muzzle = SmallTank.Muzzle;
+
         isTartgetAcquired = true;
         isBurstOngoing = false;
         isBurstCompleted = false;
-
         currentShoot = 0;
         CalculateNextShootTime(SmallTank.DelayPerShoot);
     }
@@ -59,7 +60,6 @@ public class AttackState : BaseState<STankState>
     public override void UpdateState()
     {
         CheckShouldStartBurst();
-        //RotateTurretToPlayer();
 
         if (isBurstOngoing)
         {
@@ -74,7 +74,7 @@ public class AttackState : BaseState<STankState>
 
     void ShootIfCan()
     {
-        Vector2 targetDir = target.position - muzzle.position;
+        var targetDir = target.position - muzzle.position;
         float curAngle = turret.rotation.eulerAngles.z;
         float turretAngle = Mathf.Atan2(targetDir.y, targetDir.x) * Mathf.Rad2Deg + 90f;
         float angleDiff = Mathf.DeltaAngle(curAngle, turretAngle);
@@ -84,9 +84,10 @@ public class AttackState : BaseState<STankState>
         if (isTurretAligned)
         {
             CalculateNextShootTime(SmallTank.DelayPerShoot);
+            RotateTurretToPlayer();
             SmallTank.Turret.OnTurretMorph();
             float fireAngleZ = Mathf.Atan2(targetDir.y, targetDir.x) * Mathf.Rad2Deg - 90f;
-            quaternion fireDir = Quaternion.Euler(new Vector3(0, 0, fireAngleZ));
+            var fireDir = Quaternion.Euler(new Vector3(0, 0, fireAngleZ));
 
             var shell = ShellPoolManager.Pool.Get();
             shell.transform.SetPositionAndRotation(muzzle.position, fireDir);
@@ -137,6 +138,10 @@ public class AttackState : BaseState<STankState>
 
     public override void OnTriggerEnter2D(Collider2D other)
     {
+        if (other.CompareTag("Player"))
+        {
+            isTartgetAcquired = true;
+        }
     }
 
     public override void OnTriggerExit2D(Collider2D other)
