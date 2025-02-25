@@ -28,7 +28,7 @@ public class Bullet : MonoBehaviour
     {
         if (other.CompareTag("Activator"))
         {
-            BulletPoolManager.Pool.Release(this);
+            BulletPoolManager.Release(this);
         }
     }
 }

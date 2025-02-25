@@ -2,6 +2,8 @@ using Unity.Mathematics;
 using UnityEngine;
 using System;
 using static UnityEngine.GraphicsBuffer;
+using UnityEditor.Experimental.GraphView;
+using System.Collections.Generic;
 
 public class AttackState : BaseState<STankState>
 {
@@ -18,6 +20,14 @@ public class AttackState : BaseState<STankState>
     Transform target, turret, muzzle;
 
     bool isTimeForNextShoot { get => Time.time > nextShootTime; }
+
+    Dictionary<Vector2, float> spriteAngle = new()
+    {
+    {Vector2.up, -90f},
+    {Vector2.down, 90f},
+    {Vector2.left, 180f},
+    {Vector2.right, 0f}
+    };
 
     public AttackState(SmallTank smallTank) : base(STankState.Attack) {
         SmallTank = smallTank;
@@ -89,15 +99,17 @@ public class AttackState : BaseState<STankState>
             float fireAngleZ = Mathf.Atan2(targetDir.y, targetDir.x) * Mathf.Rad2Deg - 90f;
             var fireDir = Quaternion.Euler(new Vector3(0, 0, fireAngleZ));
 
+            //get tank shell from pool manager
             var shell = ShellPoolManager.Pool.Get();
             shell.transform.SetPositionAndRotation(muzzle.position, fireDir);
 
+            //get muzzle flash from pool manager
             var flash = MuzzleFlashPoolManager.Pool.Get();
             flash.transform.position = muzzle.position;
             flash.transform.SetParent(GameManager.World);
             currentShoot++;
         }
-        else
+        else //rotate turret smoothly
         {
             float smoothRotate = Mathf.LerpAngle(curAngle, turretAngle, Time.deltaTime * turnSpeed);
             turret.rotation = Quaternion.Euler(new Vector3(0, 0, smoothRotate));
@@ -126,9 +138,15 @@ public class AttackState : BaseState<STankState>
 
     void RotateTurretToPlayer()
     {
-        Vector2 dir = target.position - turret.position;
-        var fireAngle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg + 90f;
-        turret.rotation = Quaternion.Euler(new Vector3(0, 0, fireAngle));
+        Rotate2D(turret, target, Vector2.down);
+    }
+
+    void Rotate2D(Transform sourceTr, Transform targetTr, Vector2 orientation)
+    {
+        Vector2 dir = targetTr.position - sourceTr.position;
+        float angleZ = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg + spriteAngle[orientation];
+
+        sourceTr.rotation = Quaternion.Euler(new Vector3(0, 0, angleZ));
     }
 
     void CalculateNextShootTime(float delay)

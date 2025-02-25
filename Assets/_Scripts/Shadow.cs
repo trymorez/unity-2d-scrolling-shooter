@@ -16,16 +16,6 @@ public class Shadow : MonoBehaviour
         GameManager.OnPlayingGame -= ChangeOffset;
     }
 
-    void Start()
-    {
-        
-    }
-
-    void Update()
-    {
-        
-    }
-
     void ChangeOffset()
     {
         Vector2 bodyPos = body.transform.position;

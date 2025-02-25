@@ -13,13 +13,16 @@ public class Player : MonoBehaviour
     [SerializeField] Transform plane;
     [SerializeField] Transform shadow;
     
-    Collider2D collider2d;
+    //plane's width and height
     float width;
     float height;
 
     Vector2 shadowPos;
     float launchElapsed;
 
+    //plane rotation
+    float maxRotate = 15f;
+    float rotateSpeed = 10f;
 
     Vector2 screenSize;
 
@@ -38,7 +41,7 @@ public class Player : MonoBehaviour
     void Start()
     {
         screenSize = Camera.main.ScreenToWorldPoint(new Vector2(Screen.width, Screen.height));
-        collider2d = GetComponent<Collider2D>();
+        var collider2d = GetComponent<Collider2D>();
         width = collider2d.bounds.size.x * 0.5f;
         height = collider2d.bounds.size.y * 0.5f;
         shadowPos = shadow.position;
@@ -72,10 +75,7 @@ public class Player : MonoBehaviour
         newPos.y = Mathf.Clamp(newPos.y, -screenSize.y + height, screenSize.y - height);
         transform.position = newPos;
 
-
         //horizontal rotation for plane and shadow
-        var maxRotate = 15f;
-        var rotateSpeed = 10f;
         var endRotate = inputVector.normalized.x * maxRotate;
         var curRotate = plane.transform.eulerAngles.z;
         var smoothRotate = Mathf.LerpAngle(curRotate, -endRotate, Time.deltaTime * rotateSpeed);

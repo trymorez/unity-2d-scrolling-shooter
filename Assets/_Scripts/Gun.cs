@@ -15,7 +15,7 @@ public class Gun : MonoBehaviour
 
     void OnFire()
     {
-        var bullet = BulletPoolManager.Pool.Get();
+        var bullet = BulletPoolManager.Get();
         bullet.transform.position = transform.position;
     }
 }

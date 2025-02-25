@@ -27,4 +27,7 @@ public class BulletPoolManager : MonoBehaviour
             Destroy(bullet.gameObject);
         }, false, defaultSize, maxSize);
     }
+
+    public static Bullet Get() => Pool.Get();
+    public static void Release(Bullet bullet) => Pool.Release(bullet);
 }

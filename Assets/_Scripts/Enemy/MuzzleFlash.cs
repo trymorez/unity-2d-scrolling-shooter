@@ -15,6 +15,7 @@ public class MuzzleFlash : MonoBehaviour
         var sr = GetComponentInChildren<SpriteRenderer>();
         sr.DOFade(0.5f, life).OnComplete(DestroyObject);
         sr.transform.localScale = minSize;
+
         var sequence = DOTween.Sequence();
         sequence.Append(sr.transform.DOScale(maxSize, life * 0.5f))
                 .Append(sr.transform.DOScale(minSize, life * 0.5f));
