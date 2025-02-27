@@ -339,11 +339,12 @@ MonoBehaviour:
   Muzzle: {fileID: 5392466743348798944}
   muzzleFlash: {fileID: -2455377419434463033, guid: 307b65f237137904ab7e2885b2dc277c, type: 3}
   Waypoints: {fileID: 8993333428880597754}
-  MoveSpeed: 1
+  MoveSpeed: 0.8
   ShootPerBurst: 3
   DelayPerBurst: 2.5
   DelayPerShoot: 0.3
   IsOutOfScreen: 0
+  IsTurning: 0
   previousPos: {x: 0, y: 0, z: 0}
 --- !u!114 &6311752352335548220
 MonoBehaviour:

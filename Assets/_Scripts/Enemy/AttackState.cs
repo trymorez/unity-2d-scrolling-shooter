@@ -14,18 +14,15 @@ public class AttackState : BaseState<STankState>
 
     float minAngleDiff = 5f;
     float turretTurnSpeed = 10f;
-    float tankTurnSpeed = 5f;
-    Transform target, turret, muzzle, transform;
-    Waypoints waypoints;
+    Transform target, turret, muzzle;
 
     bool isTimeForNextShoot { get => Time.time > nextShootTime; }
 
-    Dictionary<Vector2, float> spriteAngle = new()
-    {
+    Dictionary<Vector2, float> spriteAngle = new() {
     {Vector2.up, 270f},
     {Vector2.down, 90f},
     {Vector2.left, 180f},
-    {Vector2.right, 0f},
+    {Vector2.right, 0f}
     };
 
     public AttackState(SmallTank smallTank) : base(STankState.Attack) {
@@ -38,8 +35,6 @@ public class AttackState : BaseState<STankState>
         target = SmallTank.Target;
         turret = SmallTank.TurretTransform;
         muzzle = SmallTank.Muzzle;
-        waypoints = SmallTank.Waypoints;
-        transform = SmallTank.transform;
 
         //initialize variables
         isTartgetAcquired = true;
@@ -105,7 +100,7 @@ public class AttackState : BaseState<STankState>
             //shoot
             currentShoot++;
             CalculateNextShootTime(SmallTank.DelayPerShoot);
-            RotateTurretToPlayer();
+            TurnTurretToPlayer();
             SmallTank.Turret.OnTurretMorph();
 
             SpawnShell(vectorToTarget);
@@ -156,7 +151,7 @@ public class AttackState : BaseState<STankState>
         }
     }
 
-    void RotateTurretToPlayer()
+    void TurnTurretToPlayer()
     {
         Rotate2D(turret, target, spriteAngle[Vector2.down]);
     }

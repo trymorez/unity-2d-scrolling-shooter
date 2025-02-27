@@ -8,6 +8,9 @@ I started developing a 2D vertical scrolling shooter game similar to 1942. The g
 ![screenshot](Assets/Screenshot/screenshot-V1.8-02.png)
 
 ## Version History
+**V 2.3
+- Generic object pool implemented
+
 **V 2.2
 - Tank's waypoint routine finished
 - No tank will turn smoothly between each waypoint
