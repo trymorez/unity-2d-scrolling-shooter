@@ -1,8 +1,5 @@
-using Unity.Mathematics;
 using UnityEngine;
 using System;
-using static UnityEngine.GraphicsBuffer;
-using UnityEditor.Experimental.GraphView;
 using System.Collections.Generic;
 
 public class AttackState : BaseState<STankState>
@@ -17,16 +14,17 @@ public class AttackState : BaseState<STankState>
 
     float minAngleDiff = 10f;
     float turnSpeed = 10f;
-    Transform target, turret, muzzle;
+    Transform target, turret, muzzle, transform;
+    Waypoints waypoints;
 
     bool isTimeForNextShoot { get => Time.time > nextShootTime; }
 
     Dictionary<Vector2, float> spriteAngle = new()
     {
-    {Vector2.up, -90f},
+    {Vector2.up, 270f},
     {Vector2.down, 90f},
     {Vector2.left, 180f},
-    {Vector2.right, 0f}
+    {Vector2.right, 0f},
     };
 
     public AttackState(SmallTank smallTank) : base(STankState.Attack) {
@@ -39,12 +37,18 @@ public class AttackState : BaseState<STankState>
         target = SmallTank.Target;
         turret = SmallTank.TurretTransform;
         muzzle = SmallTank.Muzzle;
+        waypoints = SmallTank.Waypoints;
+        transform = SmallTank.transform;
 
+        //initialize variables
         isTartgetAcquired = true;
         isBurstOngoing = false;
         isBurstCompleted = false;
         currentShoot = 0;
         CalculateNextShootTime(SmallTank.DelayPerShoot);
+
+        Vector2 nextDir = waypoints.GetWaypoint();
+        Rotate2D(transform, nextDir, Vector2.up);
     }
 
     public override void ExitState()
@@ -84,36 +88,47 @@ public class AttackState : BaseState<STankState>
 
     void ShootIfCan()
     {
-        var targetDir = target.position - muzzle.position;
+        var vectorToTarget = target.position - muzzle.position;
         float curAngle = turret.rotation.eulerAngles.z;
-        float turretAngle = Mathf.Atan2(targetDir.y, targetDir.x) * Mathf.Rad2Deg + 90f;
+        float turretAngle = Mathf.Atan2(vectorToTarget.y, vectorToTarget.x) * Mathf.Rad2Deg + 90f;
         float angleDiff = Mathf.DeltaAngle(curAngle, turretAngle);
 
         bool isTurretAligned = MathF.Abs(angleDiff) <= minAngleDiff;
 
         if (isTurretAligned)
         {
+            //shoot
+            currentShoot++;
             CalculateNextShootTime(SmallTank.DelayPerShoot);
             RotateTurretToPlayer();
             SmallTank.Turret.OnTurretMorph();
-            float fireAngleZ = Mathf.Atan2(targetDir.y, targetDir.x) * Mathf.Rad2Deg - 90f;
-            var fireDir = Quaternion.Euler(new Vector3(0, 0, fireAngleZ));
 
-            //get tank shell from pool manager
-            var shell = ShellPoolManager.Pool.Get();
-            shell.transform.SetPositionAndRotation(muzzle.position, fireDir);
-
-            //get muzzle flash from pool manager
-            var flash = MuzzleFlashPoolManager.Pool.Get();
-            flash.transform.position = muzzle.position;
-            flash.transform.SetParent(GameManager.World);
-            currentShoot++;
+            SpawnShell(vectorToTarget);
+            SpawnMuzzleFlash();
         }
-        else //rotate turret smoothly
+        else 
         {
-            float smoothRotate = Mathf.LerpAngle(curAngle, turretAngle, Time.deltaTime * turnSpeed);
-            turret.rotation = Quaternion.Euler(new Vector3(0, 0, smoothRotate));
+            //rotate turret smoothly
+            float smoothAngleZ = Mathf.LerpAngle(curAngle, turretAngle, Time.deltaTime * turnSpeed);
+            turret.rotation = Quaternion.Euler(new Vector3(0, 0, smoothAngleZ));
         }
+    }
+
+    void SpawnMuzzleFlash()
+    {
+        //get muzzle flash from pool manager
+        var flash = MuzzleFlashPoolManager.Pool.Get();
+        flash.transform.position = muzzle.position;
+        flash.transform.SetParent(GameManager.World);
+    }
+
+    void SpawnShell(Vector3 targetDir)
+    {
+        float fireAngleZ = Mathf.Atan2(targetDir.y, targetDir.x) * Mathf.Rad2Deg - 90f;
+        var fireDir = Quaternion.Euler(new Vector3(0, 0, fireAngleZ));
+        //get tank shell from pool manager
+        var shell = ShellPoolManager.Pool.Get();
+        shell.transform.SetPositionAndRotation(muzzle.position, fireDir);
     }
 
     void CheckShouldStartBurst()
@@ -143,9 +158,14 @@ public class AttackState : BaseState<STankState>
 
     void Rotate2D(Transform sourceTr, Transform targetTr, Vector2 orientation)
     {
-        Vector2 dir = targetTr.position - sourceTr.position;
-        float angleZ = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg + spriteAngle[orientation];
+        Vector2 vectorToTarget = targetTr.position - sourceTr.position;
+        float angleZ = Mathf.Atan2(vectorToTarget.y, vectorToTarget.x) * Mathf.Rad2Deg + spriteAngle[orientation];
+        sourceTr.rotation = Quaternion.Euler(new Vector3 (0,0,angleZ));
+    }
 
+    void Rotate2D(Transform sourceTr, Vector2 vectorToTarget, Vector2 orientation)
+    {
+        float angleZ = Mathf.Atan2(vectorToTarget.y, vectorToTarget.x) * Mathf.Rad2Deg + spriteAngle[orientation];
         sourceTr.rotation = Quaternion.Euler(new Vector3(0, 0, angleZ));
     }
 

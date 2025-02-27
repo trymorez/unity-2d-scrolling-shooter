@@ -17,11 +17,14 @@ public class SmallTank : StateManager<STankState>
     public Transform Muzzle;
     public MuzzleFlash muzzleFlash;
     public ObjectPool<TankShell> Pool;
+    public Waypoints Waypoints;
     public float MoveSpeed = 2f;
     public float ShootPerBurst = 3f;
     public float DelayPerBurst = 2.0f;
     public float DelayPerShoot = 0.2f;
     public bool IsOutOfScreen;
+
+    public Vector3 previousPos;
 
     void Awake()
     {
@@ -33,6 +36,12 @@ public class SmallTank : StateManager<STankState>
         GameManager.OnPlayingGame += ControlTank;
     }
 
+    protected override void Start()
+    {
+        base.Start();
+        previousPos = transform.localPosition;
+    }
+
     void OnDestroy()
     {
         States[STankState.Idle] = null;
@@ -40,11 +49,6 @@ public class SmallTank : StateManager<STankState>
         States[STankState.Move] = null;
 
         GameManager.OnPlayingGame -= ControlTank;
-    }
-
-    protected override void Start()
-    {
-        base.Start();
     }
 
     protected override void Update()

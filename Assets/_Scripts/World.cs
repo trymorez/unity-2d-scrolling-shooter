@@ -1,5 +1,5 @@
+using System;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class World : MonoBehaviour
@@ -8,7 +8,9 @@ public class World : MonoBehaviour
     [SerializeField] GroundTile[] groundTile;
     [SerializeField] int groundTileIndex;
     float nextCheckPointY = 0f;
-    const float TILE_ORIGIN_Y = 10f;
+    float tileOriginY = 10f;
+
+    public static Action<float> OnScrollMap;
 
     void Awake()
     {
@@ -46,7 +48,7 @@ public class World : MonoBehaviour
     {
 
         var nextTile = Instantiate(groundTile[groundTileIndex], transform);
-        nextTile.transform.position = new Vector3(0, TILE_ORIGIN_Y, 0);
+        nextTile.transform.position = new Vector3(0, tileOriginY, 0);
         groundTileIndex = (groundTileIndex + 1) % groundTile.Length;
 
         SeparateAllEnemyFromTile(nextTile);
@@ -73,5 +75,6 @@ public class World : MonoBehaviour
     {
         var posY = transform.position.y;
         transform.position = new Vector3(0, posY -= scrollSpeed * Time.deltaTime, 0);
+        OnScrollMap?.Invoke(scrollSpeed * Time.deltaTime);
     }
 }
