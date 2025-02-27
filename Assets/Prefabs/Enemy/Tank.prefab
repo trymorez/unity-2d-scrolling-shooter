@@ -132,7 +132,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   body: {fileID: 4421307910473855868}
-  offset: -0.1
+  offset: -0.05
 --- !u!1 &3077517050345228387
 GameObject:
   m_ObjectHideFlags: 0
@@ -319,7 +319,7 @@ CircleCollider2D:
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
-  m_Radius: 8
+  m_Radius: 6.5
 --- !u!114 &7446744361784136666
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -338,7 +338,7 @@ MonoBehaviour:
   tankShell: {fileID: 8783994545260008078, guid: f952a66e118cfd0468ef1f7f038ea576, type: 3}
   Muzzle: {fileID: 5392466743348798944}
   muzzleFlash: {fileID: -2455377419434463033, guid: 307b65f237137904ab7e2885b2dc277c, type: 3}
-  Waypoints: {fileID: 0}
+  Waypoints: {fileID: 8993333428880597754}
   MoveSpeed: 1
   ShootPerBurst: 3
   DelayPerBurst: 2.5

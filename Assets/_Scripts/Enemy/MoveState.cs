@@ -27,36 +27,40 @@ public class MoveState : BaseState<STankState>
         nextPos = previousPos + vectorToNextWaypoint;
     }
 
-    bool isWaypointEnd;
+    bool isWaypointEnded;
 
     public override void UpdateState()
     {
-        if (!isWaypointEnd)
+        if (SmallTank.IsTurning)
         {
-            transform.Translate(Vector3.up * SmallTank.MoveSpeed * Time.deltaTime);
-            Vector2 delta = transform.localPosition - nextPos;
-            float distance = delta.magnitude;
-            //Debug.Log(distance);
-            if (distance <= minDistance)
-            {
-                //Debug.Log("Next!");
-                transform.localPosition = nextPos;
-                SmallTank.previousPos = nextPos;
-                if (waypoints.isLastWaypoint)
-                {
-                    //Debug.Log("end!");
-                    isWaypointEnd = true;
-                }
-                waypoints.NextPoint();
-                Vector3 vectorToNextWaypoint = waypoints.GetWaypoint();
-                nextPos = SmallTank.previousPos + vectorToNextWaypoint;
+            SmallTank.TurnToNextWaypont();
+            return;
+        }
+        if (isWaypointEnded)
+        {
+            return;
+        }
 
-                float angleZ = Mathf.Atan2(vectorToNextWaypoint.y, vectorToNextWaypoint.x) * Mathf.Rad2Deg +270f;
-                transform.rotation = Quaternion.Euler(new Vector3(0, 0, angleZ));
+        transform.Translate(Vector3.up * SmallTank.MoveSpeed * Time.deltaTime);
+
+        Vector2 delta = transform.localPosition - nextPos;
+        float distance = delta.magnitude;
+
+        //waypoint reached
+        if (distance <= minDistance)
+        {
+            transform.localPosition = nextPos;
+            SmallTank.previousPos = nextPos;
+            if (waypoints.isLastWaypoint)
+            {
+                isWaypointEnded = true;
             }
+            waypoints.NextWaypoint();
+            Vector3 vectorToNextWaypoint = waypoints.GetWaypoint();
+            nextPos = SmallTank.previousPos + vectorToNextWaypoint;
+            SmallTank.IsTurning = true;
         }
     }
-
 
     public override void ExitState()
     {

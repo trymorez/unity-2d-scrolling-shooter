@@ -1,6 +1,6 @@
-using UnityEngine;
 using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 public class AttackState : BaseState<STankState>
 {
@@ -12,8 +12,9 @@ public class AttackState : BaseState<STankState>
     bool isTartgetAcquired;
     bool isBurstCompleted;
 
-    float minAngleDiff = 10f;
-    float turnSpeed = 10f;
+    float minAngleDiff = 5f;
+    float turretTurnSpeed = 10f;
+    float tankTurnSpeed = 5f;
     Transform target, turret, muzzle, transform;
     Waypoints waypoints;
 
@@ -46,9 +47,7 @@ public class AttackState : BaseState<STankState>
         isBurstCompleted = false;
         currentShoot = 0;
         CalculateNextShootTime(SmallTank.DelayPerShoot);
-
-        Vector2 nextDir = waypoints.GetWaypoint();
-        Rotate2D(transform, nextDir, Vector2.up);
+        SmallTank.IsTurning = true;
     }
 
     public override void ExitState()
@@ -73,6 +72,12 @@ public class AttackState : BaseState<STankState>
 
     public override void UpdateState()
     {
+        if (SmallTank.IsTurning)
+        {
+            SmallTank.TurnToNextWaypont();
+            return;
+        }
+
         CheckShouldStartBurst();
 
         if (isBurstOngoing)
@@ -89,9 +94,9 @@ public class AttackState : BaseState<STankState>
     void ShootIfCan()
     {
         var vectorToTarget = target.position - muzzle.position;
-        float curAngle = turret.rotation.eulerAngles.z;
-        float turretAngle = Mathf.Atan2(vectorToTarget.y, vectorToTarget.x) * Mathf.Rad2Deg + 90f;
-        float angleDiff = Mathf.DeltaAngle(curAngle, turretAngle);
+        float currentAngleZ = turret.rotation.eulerAngles.z;
+        float wantedTurretAngleZ = Mathf.Atan2(vectorToTarget.y, vectorToTarget.x) * Mathf.Rad2Deg + 90f;
+        float angleDiff = Mathf.DeltaAngle(currentAngleZ, wantedTurretAngleZ);
 
         bool isTurretAligned = MathF.Abs(angleDiff) <= minAngleDiff;
 
@@ -109,7 +114,7 @@ public class AttackState : BaseState<STankState>
         else 
         {
             //rotate turret smoothly
-            float smoothAngleZ = Mathf.LerpAngle(curAngle, turretAngle, Time.deltaTime * turnSpeed);
+            float smoothAngleZ = Mathf.LerpAngle(currentAngleZ, wantedTurretAngleZ, Time.deltaTime * turretTurnSpeed);
             turret.rotation = Quaternion.Euler(new Vector3(0, 0, smoothAngleZ));
         }
     }
@@ -153,19 +158,19 @@ public class AttackState : BaseState<STankState>
 
     void RotateTurretToPlayer()
     {
-        Rotate2D(turret, target, Vector2.down);
+        Rotate2D(turret, target, spriteAngle[Vector2.down]);
     }
 
-    void Rotate2D(Transform sourceTr, Transform targetTr, Vector2 orientation)
+    void Rotate2D(Transform sourceTr, Transform targetTr, float angleOffset)
     {
         Vector2 vectorToTarget = targetTr.position - sourceTr.position;
-        float angleZ = Mathf.Atan2(vectorToTarget.y, vectorToTarget.x) * Mathf.Rad2Deg + spriteAngle[orientation];
+        float angleZ = Mathf.Atan2(vectorToTarget.y, vectorToTarget.x) * Mathf.Rad2Deg + angleOffset;
         sourceTr.rotation = Quaternion.Euler(new Vector3 (0,0,angleZ));
     }
 
-    void Rotate2D(Transform sourceTr, Vector2 vectorToTarget, Vector2 orientation)
+    void Rotate2D(Transform sourceTr, Vector2 vectorToTarget, float angleOffset)
     {
-        float angleZ = Mathf.Atan2(vectorToTarget.y, vectorToTarget.x) * Mathf.Rad2Deg + spriteAngle[orientation];
+        float angleZ = Mathf.Atan2(vectorToTarget.y, vectorToTarget.x) * Mathf.Rad2Deg + angleOffset;
         sourceTr.rotation = Quaternion.Euler(new Vector3(0, 0, angleZ));
     }
 

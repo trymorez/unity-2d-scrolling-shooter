@@ -23,7 +23,8 @@ public class SmallTank : StateManager<STankState>
     public float DelayPerBurst = 2.0f;
     public float DelayPerShoot = 0.2f;
     public bool IsOutOfScreen;
-
+    public bool IsTurning;
+    float tankTurnSpeed = 5f;
     public Vector3 previousPos;
 
     void Awake()
@@ -64,7 +65,28 @@ public class SmallTank : StateManager<STankState>
             Destroy(gameObject);
         }
     }
-    
+
+    public void TurnToNextWaypont()
+    {
+        var minAngleDiff = 1f;
+        Vector2 VectorToNextWaypoint = Waypoints.GetWaypoint();
+        float wantedTankAngleZ = Mathf.Atan2(VectorToNextWaypoint.y, VectorToNextWaypoint.x) * Mathf.Rad2Deg + 270f;
+        float currentAngleZ = transform.rotation.eulerAngles.z;
+        float smoothAngleZ = Mathf.LerpAngle(currentAngleZ, wantedTankAngleZ, Time.deltaTime * tankTurnSpeed);
+
+        var turretRotation = TurretTransform.rotation;
+        transform.rotation = Quaternion.Euler(new Vector3(0, 0, smoothAngleZ));
+        TurretTransform.rotation = turretRotation;
+
+        float angleDiff = Mathf.DeltaAngle(currentAngleZ, wantedTankAngleZ);
+        if (Mathf.Abs(angleDiff) < minAngleDiff)
+        {
+            //align tank to next waypoint
+            transform.rotation = Quaternion.Euler(new Vector3(0, 0, wantedTankAngleZ));
+            IsTurning = false;
+        }
+    }
+
     protected override void OnTriggerExit2D(Collider2D other)
     {
         base.OnTriggerExit2D(other);

@@ -19,7 +19,7 @@ public class Waypoints : MonoBehaviour
         }
     }
 
-    public void NextPoint()
+    public void NextWaypoint()
     {
         if (currentPoint < waypointsPos.Length - 1)
         {
