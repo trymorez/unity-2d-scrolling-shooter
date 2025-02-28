@@ -291,7 +291,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5f7a5cb6eaa97c42a233d9bbe357cc4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bullet: {fileID: 7729664251608048232, guid: 2a4022e70b1c82145b1780130a890596, type: 3}
+  prefab: {fileID: 7729664251608048232, guid: 2a4022e70b1c82145b1780130a890596, type: 3}
   defaultSize: 30
   maxSize: 90
 --- !u!114 &223489156
@@ -306,7 +306,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9913be54b097cb54980e619a573f04d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tankShell: {fileID: 8783994545260008078, guid: f952a66e118cfd0468ef1f7f038ea576, type: 3}
+  prefab: {fileID: 8783994545260008078, guid: f952a66e118cfd0468ef1f7f038ea576, type: 3}
   defaultSize: 30
   maxSize: 90
 --- !u!114 &223489157
@@ -321,7 +321,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2f12bf2337637645a11e3e78647f170, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  muzzleFlash: {fileID: -2455377419434463033, guid: 307b65f237137904ab7e2885b2dc277c, type: 3}
+  prefab: {fileID: -2455377419434463033, guid: 307b65f237137904ab7e2885b2dc277c, type: 3}
   defaultSize: 30
   maxSize: 90
 --- !u!114 &223489158
@@ -722,6 +722,9 @@ GameObject:
   - component: {fileID: 674034666}
   - component: {fileID: 674034665}
   - component: {fileID: 674034669}
+  - component: {fileID: 674034670}
+  - component: {fileID: 674034672}
+  - component: {fileID: 674034671}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -903,13 +906,13 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 674034663}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -990,6 +993,93 @@ MonoBehaviour:
   fireRate: 0.2
   currentUpgrade: 0
   maxUpgrade: 4
+--- !u!114 &674034670
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 674034663}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85224d996baca5148a81663fc9eaa401, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 0
+--- !u!70 &674034671
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 674034663}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_Size: {x: 0.36, y: 0.61}
+  m_Direction: 0
+--- !u!70 &674034672
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 674034663}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0.06}
+  m_Size: {x: 0.9, y: 0.35}
+  m_Direction: 1
 --- !u!4 &775188068 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6948577707939108954, guid: d86e81f889e5b5847a737908fe79fa73, type: 3}

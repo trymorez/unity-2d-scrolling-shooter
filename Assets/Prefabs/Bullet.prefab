@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5047763159261541371}
   - component: {fileID: 3699892678478436950}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -97,7 +97,7 @@ GameObject:
   m_Component:
   - component: {fileID: 355110954704495300}
   - component: {fileID: 8610245678966014687}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Shadow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -186,9 +186,9 @@ GameObject:
   - component: {fileID: 4076636427952055911}
   - component: {fileID: 2183830573340173686}
   - component: {fileID: 7729664251608048232}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Bullet
-  m_TagString: Untagged
+  m_TagString: PlayerBullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

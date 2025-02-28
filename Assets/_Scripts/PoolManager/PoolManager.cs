@@ -24,7 +24,7 @@ public class PoolManager<T> : MonoBehaviour where T : MonoBehaviour
             {
                 Destroy(obj.gameObject);
             },
-            false,
+            true,
             defaultSize,
             maxSize
         );

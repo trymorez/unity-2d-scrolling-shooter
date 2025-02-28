@@ -5,12 +5,12 @@ public class TankShell : MonoBehaviour
 {
     [SerializeField] float speed = 5f;
 
-    void Awake()
+    void OnEnable()
     {
         GameManager.OnPlayingGame += ProcessProjectile;
     }
 
-    void OnDestroy()
+    void OnDisable()
     {
         GameManager.OnPlayingGame -= ProcessProjectile;
     }
@@ -24,7 +24,7 @@ public class TankShell : MonoBehaviour
     {
         if (other.CompareTag("Activator"))
         {
-            ShellPoolManager.Pool.Release(this);
+            ShellPoolManager.Release(this);
         }
     }
 }

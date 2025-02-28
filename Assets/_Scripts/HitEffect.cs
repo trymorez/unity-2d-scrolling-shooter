@@ -9,6 +9,8 @@ public class HitEffect : MonoBehaviour
 
     void OnEnable()
     {
+        World.OnScrollMap += OnScrollMap;
+
         var minSize = new Vector2(_minSize, _minSize);
         var maxSize = new Vector2(_maxSize, _maxSize);
 
@@ -19,6 +21,18 @@ public class HitEffect : MonoBehaviour
         var sequence = DOTween.Sequence();
         sequence.Append(sr.transform.DOScale(maxSize, life * 0.5f))
                 .Append(sr.transform.DOScale(minSize, life * 0.5f));
+    }
+
+    void OnDisable()
+    {
+        World.OnScrollMap -= OnScrollMap;
+    }
+
+    void OnScrollMap(float amount)
+    {
+        var pos = transform.position;
+        pos.y -= amount;
+        transform.position = pos;
     }
 
     void DestroyObject()

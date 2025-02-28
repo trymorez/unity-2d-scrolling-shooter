@@ -9,11 +9,13 @@ public class MuzzleFlash : MonoBehaviour
 
     void OnEnable()
     {
+        World.OnScrollMap += OnScrollMap;
+
         var minSize = new Vector2(_minSize, _minSize);
         var maxSize = new Vector2(_maxSize, _maxSize);
 
         var sr = GetComponentInChildren<SpriteRenderer>();
-        sr.DOFade(0.5f, life).OnComplete(DestroyObject);
+        sr.DOFade(0.5f, life).OnComplete(Release);
         sr.transform.localScale = minSize;
 
         var sequence = DOTween.Sequence();
@@ -21,7 +23,19 @@ public class MuzzleFlash : MonoBehaviour
                 .Append(sr.transform.DOScale(minSize, life * 0.5f));
     }
 
-    void DestroyObject()
+    void OnDisable()
+    {
+        World.OnScrollMap -= OnScrollMap;
+    }
+
+    void OnScrollMap(float amount)
+    {
+        var pos = transform.position;
+        pos.y -= amount;
+        transform.position = pos;
+    }
+
+    void Release()
     {
         MuzzleFlashPoolManager.Pool.Release(this);
     }

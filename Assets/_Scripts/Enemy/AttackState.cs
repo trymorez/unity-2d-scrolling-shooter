@@ -119,16 +119,16 @@ public class AttackState : BaseState<STankState>
         //get muzzle flash from pool manager
         var flash = MuzzleFlashPoolManager.Pool.Get();
         flash.transform.position = muzzle.position;
-        flash.transform.SetParent(GameManager.World);
+        //flash.transform.SetParent(GameManager.World);
     }
 
-    void SpawnShell(Vector3 targetDir)
+    void SpawnShell(Vector3 vectorToTarget)
     {
-        float fireAngleZ = Mathf.Atan2(targetDir.y, targetDir.x) * Mathf.Rad2Deg - 90f;
-        var fireDir = Quaternion.Euler(new Vector3(0, 0, fireAngleZ));
+        float fireAngleZ = Mathf.Atan2(vectorToTarget.y, vectorToTarget.x) * Mathf.Rad2Deg - 90f;
+        var fireRotation = Quaternion.Euler(new Vector3(0, 0, fireAngleZ));
         //get tank shell from pool manager
         var shell = ShellPoolManager.Pool.Get();
-        shell.transform.SetPositionAndRotation(muzzle.position, fireDir);
+        shell.transform.SetPositionAndRotation(muzzle.position, fireRotation);
     }
 
     void CheckShouldStartBurst()
