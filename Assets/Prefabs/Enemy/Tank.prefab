@@ -213,6 +213,7 @@ GameObject:
   - component: {fileID: 7446744361784136666}
   - component: {fileID: 6311752352335548220}
   - component: {fileID: 8993333428880597754}
+  - component: {fileID: 3243571957294460101}
   m_Layer: 8
   m_Name: Tank
   m_TagString: Enemy
@@ -300,7 +301,7 @@ CircleCollider2D:
     m_Bits: 64
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 128
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -383,6 +384,23 @@ MonoBehaviour:
   - {fileID: 4742129962372115589}
   waypointsPos: []
   currentPoint: 0
+--- !u!114 &3243571957294460101
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3592462802335127844}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e7137f6a4332c241bb04f4f9e18d95b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Health: 0
+  bodyPart:
+  - {fileID: 9188581025658551028}
+  - {fileID: 6651404320482084016}
+  flashingTime: 0.2
 --- !u!1 &4251488374128576762
 GameObject:
   m_ObjectHideFlags: 0
