@@ -1,14 +1,18 @@
-# 2D Scrolling Shooter V 2.3
+# 2D Scrolling Shooter V 2.45
 
 I started developing a 2D vertical scrolling shooter game similar to 1942. The goal is to implement all the main features by February 10th. Currently, the game is not functioning.
 
 ## Screenshots
 
 ![screenshot](Assets/Screenshot/screenshot-V1.0-01.png)
-![screenshot](Assets/Screenshot/screenshot-V1.8-02.png)
+![screenshot](Assets/Screenshot/screenshot-V2.4-01.png)
 
 ## Version History
-**V 2.3 - (2025-02-27)**
+**V 2.45 - (2025-02-27)**
+- Player's bullets now collide with enemies
+
+## Version History
+**V 2.4 - (2025-02-27)**
 - Generic object pool has been implemented
 - All object pool has been converted to generic pool
 - The tank's cannon now collides with the player
