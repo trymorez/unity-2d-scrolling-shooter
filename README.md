@@ -1,4 +1,4 @@
-# 2D Scrolling Shooter V 2.45
+# 2D Scrolling Shooter V 2.46
 
 I started developing a 2D vertical scrolling shooter game similar to 1942. The goal is to implement all the main features by February 10th. Currently, the game is not functioning.
 
@@ -14,7 +14,6 @@ I started developing a 2D vertical scrolling shooter game similar to 1942. The g
 **V 2.45 - (2025-02-28)**
 - Player's bullets now collide with enemies
 
-## Version History
 **V 2.4 - (2025-02-27)**
 - Generic object pool has been implemented
 - All object pool has been converted to generic pool
