@@ -8,7 +8,10 @@ I started developing a 2D vertical scrolling shooter game similar to 1942. The g
 ![screenshot](Assets/Screenshot/screenshot-V2.4-01.png)
 
 ## Version History
-**V 2.45 - (2025-02-27)**
+**V 2.46 - (2025-03-01)**
+- Added enemy tank flash effect when hit with player bullet
+
+**V 2.45 - (2025-02-28)**
 - Player's bullets now collide with enemies
 
 ## Version History

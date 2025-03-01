@@ -23,12 +23,12 @@ public class EnemyHealth : MonoBehaviour
         {
             var hitEffect = HitEffectPoolManager.Get();
             hitEffect.transform.position = other.transform.position;
-
             other.gameObject.SetActive(false);
-        }
-        if (!isFlashing)
-        {
-            StartFlashing();
+
+            if (!isFlashing)
+            {
+                StartFlashing();
+            }
         }
     }
 
@@ -37,7 +37,7 @@ public class EnemyHealth : MonoBehaviour
         isFlashing = true;
         for (int i = 0; i < bodyPart.Length; i++)
         {
-            bodyPart[i].color = Color.red;
+            bodyPart[i].enabled = true;
         }
         Invoke("EndFlashing", flashingTime);
     }
@@ -46,7 +46,7 @@ public class EnemyHealth : MonoBehaviour
     {
         for (int i = 0; i < bodyPart.Length; i++)
         {
-            bodyPart[i].color = originalColor[i];
+            bodyPart[i].enabled = false;
         }
         isFlashing = false;
     }
