@@ -571,11 +571,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e7137f6a4332c241bb04f4f9e18d95b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Health: 0
+  Health: 10
   bodyPart:
   - {fileID: 8865215076298966817}
   - {fileID: 4375713490887516240}
-  flashingTime: 0.1
+  flashingTime: 0.05
 --- !u!1 &4251488374128576762
 GameObject:
   m_ObjectHideFlags: 0
