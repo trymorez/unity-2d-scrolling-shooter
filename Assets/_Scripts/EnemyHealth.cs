@@ -9,17 +9,12 @@ public class EnemyHealth : MonoBehaviour
     [SerializeField] float flashingTime = 0.3f;
     Color[] originalColor;
     bool isFlashing;
-    Sequence[] flashSequence;
-    Sequence[] distortSequence;
 
     void Start()
     {
-        flashSequence = new Sequence[bodyPart.Length];
-        distortSequence = new Sequence[bodyPart.Length];
         originalColor = new Color[bodyPart.Length];
         for (int i = 0; i < bodyPart.Length; i++)
         {
-            //flashSequence[i] = DOTween.Sequence();
             originalColor[i] = bodyPart[i].color;
         }
     }
@@ -32,11 +27,7 @@ public class EnemyHealth : MonoBehaviour
             hitEffect.transform.position = other.transform.position;
             other.gameObject.SetActive(false);
 
-            if (--Health < 0)
-            {
-                Destroy(this.gameObject);
-                return;
-            }
+            CheckIfDead();
             if (!isFlashing)
             {
                 StartFlashing();
@@ -44,11 +35,17 @@ public class EnemyHealth : MonoBehaviour
         }
     }
 
+    void CheckIfDead()
+    {
+        if (--Health < 0)
+        {
+            Destroy(this.gameObject);
+        }
+    }
+
     void OnDestroy()
     {
-                Debug.Log("destroied");
-        //DOTween.Kill(this.gameObject);
-            DOTween.Kill(this);
+        DOTween.Kill(this);
     }
 
     void StartFlashing()
@@ -57,36 +54,36 @@ public class EnemyHealth : MonoBehaviour
 
         for (int i = 0; i < bodyPart.Length; i++)
         {
-            var index = i;
-            var currentPart = bodyPart[index];
-            var bodyColor = currentPart.color;
+            int index = i;
+            SpriteRenderer currentPart = bodyPart[index];
+            Color bodyColor = currentPart.color;
             bodyColor.a = 0;
 
-            flashSequence[index] = DOTween.Sequence(this);
-            flashSequence[index]
+            Sequence flashSequence = DOTween.Sequence(this);
+            flashSequence
                 .AppendCallback(() => {
                 currentPart.enabled = true;
             });
 
-            flashSequence[index]
+            flashSequence
                 .Append(currentPart.DOColor(originalColor[index], flashingTime))
                 .Append(currentPart.DOColor(bodyColor, flashingTime))
                 .AppendCallback(() => {
                     currentPart.enabled = false;
                 });
 
-            flashSequence[index].OnComplete(() => {
+            flashSequence.OnComplete(() => {
                 if (index == bodyPart.Length - 1)
                 {
                     isFlashing = false;
                 }
             });
 
-            distortSequence[index] = DOTween.Sequence(this);
-            var originalSize = currentPart.transform.localScale;
-            var newSize = 1.1f;
+            Sequence distortSequence = DOTween.Sequence(this);
+            Vector3 originalSize = currentPart.transform.localScale;
+            float newSize = 1.1f;
 
-            distortSequence[index]
+            distortSequence
                 .Append(currentPart.transform.DOScale(originalSize * newSize, flashingTime))
                 .Append(currentPart.transform.DOScale(originalSize, flashingTime));
         }
