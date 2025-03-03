@@ -77,7 +77,7 @@ SpriteRenderer:
   m_SortingLayer: 3
   m_SortingOrder: 3
   m_Sprite: {fileID: 21300000, guid: 3d475eb9813b9ae45a1bdd5bbbd7b397, type: 3}
-  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -298,7 +298,7 @@ SpriteRenderer:
   m_SortingLayer: 3
   m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: a34763f4497b0a849a535a3c16300f36, type: 3}
-  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -389,6 +389,7 @@ GameObject:
   - component: {fileID: 6311752352335548220}
   - component: {fileID: 8993333428880597754}
   - component: {fileID: 3243571957294460101}
+  - component: {fileID: 897815471867142908}
   m_Layer: 8
   m_Name: Tank
   m_TagString: Enemy
@@ -572,11 +573,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Health: 10
+  flashEffect: {fileID: 897815471867142908}
+  cratorPrefab: {fileID: 4657822738529125256, guid: 8c8a73627c54ab5469021616b1431fd9, type: 3}
+--- !u!114 &897815471867142908
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3592462802335127844}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 823c09639a91535479a65fa75e37be06, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   bodyPart:
   - {fileID: 8865215076298966817}
   - {fileID: 4375713490887516240}
-  flashingTime: 0.05
-  cratorPrefab: {fileID: 4657822738529125256, guid: 8c8a73627c54ab5469021616b1431fd9, type: 3}
+  flashingTime: 0.1
+  IsFlashing: 0
 --- !u!1 &4251488374128576762
 GameObject:
   m_ObjectHideFlags: 0

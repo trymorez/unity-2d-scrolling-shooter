@@ -1,8 +1,10 @@
+using DG.Tweening;
 using UnityEngine;
 
 public class PlayerHealth : MonoBehaviour
 {
     public int Health;
+    [SerializeField] FlashEffect flashEffect;
 
     void OnTriggerEnter2D(Collider2D other)
     {
@@ -12,6 +14,12 @@ public class PlayerHealth : MonoBehaviour
             hitEffect.transform.position = other.transform.position;
 
             other.gameObject.SetActive(false);
+            flashEffect.ProcessFlashing();
         }
+    }
+
+    void OnDestroy()
+    {
+        DOTween.Kill(flashEffect);
     }
 }

@@ -5,20 +5,12 @@ using System;
 public class EnemyHealth : MonoBehaviour
 {
     public int Health;
-    [SerializeField] SpriteRenderer[] bodyPart;
-    [SerializeField] float flashingTime = 0.3f;
+    [SerializeField] FlashEffect flashEffect;
     [SerializeField] GameObject cratorPrefab;
-    Color[] originalColor;
-    bool isFlashing;
     bool isDead;
 
     void Start()
     {
-        originalColor = new Color[bodyPart.Length];
-        for (int i = 0; i < bodyPart.Length; i++)
-        {
-            originalColor[i] = bodyPart[i].color;
-        }
     }
 
     void OnTriggerEnter2D(Collider2D other)
@@ -30,10 +22,7 @@ public class EnemyHealth : MonoBehaviour
             other.gameObject.SetActive(false);
 
             CheckIfDead();
-            if (!isFlashing)
-            {
-                StartFlashing();
-            }
+            flashEffect.ProcessFlashing();
         }
     }
 
@@ -55,47 +44,6 @@ public class EnemyHealth : MonoBehaviour
 
     void OnDestroy()
     {
-        DOTween.Kill(this);
-    }
-
-    void StartFlashing()
-    {
-        isFlashing = true;
-
-        for (int i = 0; i < bodyPart.Length; i++)
-        {
-            int index = i;
-            SpriteRenderer currentPart = bodyPart[index];
-            Color bodyColor = currentPart.color;
-            bodyColor.a = 0;
-
-            Sequence flashSequence = DOTween.Sequence(this);
-            flashSequence
-                .AppendCallback(() => {
-                currentPart.enabled = true;
-            });
-
-            flashSequence
-                .Append(currentPart.DOColor(originalColor[index], flashingTime))
-                .Append(currentPart.DOColor(bodyColor, flashingTime))
-                .AppendCallback(() => {
-                    currentPart.enabled = false;
-                });
-
-            flashSequence.OnComplete(() => {
-                if (index == bodyPart.Length - 1)
-                {
-                    isFlashing = false;
-                }
-            });
-
-            Sequence distortSequence = DOTween.Sequence(this);
-            Vector3 originalSize = currentPart.transform.localScale;
-            float newSize = 1.1f;
-
-            distortSequence
-                .Append(currentPart.transform.DOScale(originalSize * newSize, flashingTime))
-                .Append(currentPart.transform.DOScale(originalSize, flashingTime));
-        }
+        DOTween.Kill(flashEffect);
     }
 }

@@ -11,6 +11,7 @@ I started developing a 2D vertical scrolling shooter game similar to 1942. The g
 **V 2.48 - (2025-03-03)**
 - Added Enemy tank explostion effect
 - Crator created when enemy tank destoried
+- Added player plane flash effect when hit with enemy projectiles
 
 **V 2.47 - (2025-03-02)**
 - Started testing enemy tank destroy routine
