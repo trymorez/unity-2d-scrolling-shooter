@@ -1,4 +1,4 @@
-# 2D Scrolling Shooter V 2.47
+# 2D Scrolling Shooter V 2.48
 
 I started developing a 2D vertical scrolling shooter game similar to 1942. The goal is to implement all the main features by February 10th. Currently, the game is not functioning.
 
@@ -8,6 +8,10 @@ I started developing a 2D vertical scrolling shooter game similar to 1942. The g
 ![screenshot](Assets/Screenshot/screenshot-V2.4-01.png)
 
 ## Version History
+**V 2.48 - (2025-03-03)**
+- Added Enemy tank explostion effect
+- Crator created when enemy tank destoried
+
 **V 2.47 - (2025-03-02)**
 - Started testing enemy tank destroy routine
 

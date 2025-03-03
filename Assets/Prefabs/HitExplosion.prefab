@@ -9,9 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1525186131617382677}
-  - component: {fileID: -4136119068911776169}
+  - component: {fileID: 7476892516460210574}
   m_Layer: 0
-  m_Name: HitEffect
+  m_Name: HitExplosion
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -33,7 +33,7 @@ Transform:
   - {fileID: 2715654135549012997}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &-4136119068911776169
+--- !u!114 &7476892516460210574
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -42,12 +42,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1332425259003941696}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 66ca9856839f46e4881508303e26620b, type: 3}
+  m_Script: {fileID: 11500000, guid: 8a7d471c3214c19428c7131def0c6362, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   life: 0.5
-  _maxSize: 0.2
-  _minSize: 0.05
+  maxSize: 0.15
+  minSize: 0.05
 --- !u!1 &5199315916468362768
 GameObject:
   m_ObjectHideFlags: 0

@@ -7,8 +7,10 @@ public class EnemyHealth : MonoBehaviour
     public int Health;
     [SerializeField] SpriteRenderer[] bodyPart;
     [SerializeField] float flashingTime = 0.3f;
+    [SerializeField] GameObject cratorPrefab;
     Color[] originalColor;
     bool isFlashing;
+    bool isDead;
 
     void Start()
     {
@@ -37,8 +39,16 @@ public class EnemyHealth : MonoBehaviour
 
     void CheckIfDead()
     {
-        if (--Health < 0)
+        if (--Health < 0 && !isDead)
         {
+            isDead = true;
+            //spawn explosion effect
+            var explosion = ExplosionPoolManager.Get();
+            explosion.transform.position = transform.position;
+
+            //spawn crator
+            var crator = Instantiate(cratorPrefab, World.worldTransform);
+            crator.transform.position = transform.position;
             Destroy(this.gameObject);
         }
     }

@@ -536,9 +536,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   turret: {fileID: 677003338368698635}
   turretSprite: {fileID: 6651404320482084016}
-  morphX: 1.1
-  morphY: 0.8
-  morphDuration: 0.1
+  morphX: 1.2
+  morphY: 0.7
+  morphDuration: 0.15
   recoverDuration: 0.1
 --- !u!114 &8993333428880597754
 MonoBehaviour:
@@ -576,6 +576,7 @@ MonoBehaviour:
   - {fileID: 8865215076298966817}
   - {fileID: 4375713490887516240}
   flashingTime: 0.05
+  cratorPrefab: {fileID: 4657822738529125256, guid: 8c8a73627c54ab5469021616b1431fd9, type: 3}
 --- !u!1 &4251488374128576762
 GameObject:
   m_ObjectHideFlags: 0

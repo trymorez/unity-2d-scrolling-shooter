@@ -9,11 +9,13 @@ public class World : MonoBehaviour
     [SerializeField] int groundTileIndex;
     float nextCheckPointY = 0f;
     float tileOriginY = 10f;
+    public static Transform worldTransform;
 
     public static Action<float> OnScrollMap;
 
     void Awake()
     {
+        worldTransform = transform;
         GameManager.OnStartingGame += ScrollMap;
         GameManager.OnPlayingGame += ScrollMap;
     }
