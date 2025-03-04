@@ -17,18 +17,20 @@ public class EnemyHealth : MonoBehaviour
     {
         if (other.CompareTag("PlayerBullet"))
         {
+            //spawn explosion effect
             var hitEffect = HitEffectPoolManager.Get();
             hitEffect.transform.position = other.transform.position;
-            other.gameObject.SetActive(false);
 
-            CheckIfDead();
+            CheckIfDead(other.GetComponent<Bullet>().Damage);
+            other.gameObject.SetActive(false);
             flashEffect.ProcessFlashing();
         }
     }
 
-    void CheckIfDead()
+    void CheckIfDead(int damage)
     {
-        if (--Health < 0 && !isDead)
+        Health -= damage;
+        if (Health < 0 && !isDead)
         {
             isDead = true;
             //spawn explosion effect

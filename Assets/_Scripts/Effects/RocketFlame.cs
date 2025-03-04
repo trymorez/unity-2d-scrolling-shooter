@@ -11,7 +11,7 @@ public class RocketFlame : MonoBehaviour
 
     void Start()
     {
-        //Effect();
+        Effect();
     }
 
     void Effect()
@@ -26,6 +26,6 @@ public class RocketFlame : MonoBehaviour
 
     void OnDisable()
     {
-        //sequence.Kill();
+        sequence.Kill();
     }
 }

@@ -5,7 +5,7 @@ public class Bullet : MonoBehaviour
 {
     [SerializeField] Vector2 direction = Vector2.up;
     [SerializeField] float speed = 5.0f;
-    [SerializeField] int damage = 1;
+    public int Damage = 1;
 
     public static Action<Bullet> OnRelease;
 

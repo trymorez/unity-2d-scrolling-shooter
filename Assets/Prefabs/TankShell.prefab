@@ -385,8 +385,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tr: {fileID: 8979941107787312781}
-  time: 0.25
-  maxFlame: 1
+  time: 0.2
+  maxFlame: 1.2
   minFlame: 0.3
 --- !u!1 &7265296035597114613
 GameObject:
