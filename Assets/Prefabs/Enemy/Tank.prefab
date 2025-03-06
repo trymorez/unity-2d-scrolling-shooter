@@ -572,7 +572,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e7137f6a4332c241bb04f4f9e18d95b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Health: 10
+  Health: 5
   flashEffect: {fileID: 897815471867142908}
   cratorPrefab: {fileID: 4657822738529125256, guid: 8c8a73627c54ab5469021616b1431fd9, type: 3}
 --- !u!114 &897815471867142908

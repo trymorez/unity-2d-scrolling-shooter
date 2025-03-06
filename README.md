@@ -8,6 +8,9 @@ I started developing a 2D vertical scrolling shooter game similar to 1942. The g
 ![screenshot](Assets/Screenshot/screenshot-V2.5-02.png)
 
 ## Version History
+**V 2.51 - (2025-03-06)**
+- Started testing player shield
+
 **V 2.5 - (2025-03-05)**
 - Implemented blinking "get ready" message
 

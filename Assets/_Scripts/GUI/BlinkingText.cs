@@ -1,14 +1,12 @@
-using DG.Tweening;
-using System.Collections;
 using TMPro;
 using UnityEngine;
+using DG.Tweening;
 
 public class BlinkingText : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI textMesh;
     [SerializeField] int blinkRepeat = 3;
     [SerializeField] float waitAfterFadeInTime = 1f;
-    WaitForSeconds waitAfterFadeIn;
     [SerializeField] float fadeInDuration = 1f;
     [SerializeField] float fadeOutDuration = 0.5f;
 
@@ -30,6 +28,7 @@ public class BlinkingText : MonoBehaviour
         }
     }
 
+    //WaitForSeconds waitAfterFadeIn;
     //void Start()
     //{
     //    waitAfterFadeIn = new WaitForSeconds(fadeInDuration);
@@ -63,7 +62,6 @@ public class BlinkingText : MonoBehaviour
     //        SetTextAlpha(newAlpha);
     //        yield return null;
     //    }
-
     //}
 
     void SetTextAlpha(float newAlpha)
