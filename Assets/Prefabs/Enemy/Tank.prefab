@@ -591,6 +591,7 @@ MonoBehaviour:
   - {fileID: 8865215076298966817}
   - {fileID: 4375713490887516240}
   flashingTime: 0.1
+  distortSize: 1.2
   IsFlashing: 0
 --- !u!1 &4251488374128576762
 GameObject:

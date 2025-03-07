@@ -5,6 +5,7 @@ public class FlashEffect : MonoBehaviour
 {
     [SerializeField] SpriteRenderer[] bodyPart;
     [SerializeField] float flashingTime = 0.3f;
+    [SerializeField] float distortSize = 1f;
     Color[] originalColor;
     [HideInInspector]
     public bool IsFlashing;
@@ -54,13 +55,15 @@ public class FlashEffect : MonoBehaviour
                 }
             });
 
-            Sequence distortSequence = DOTween.Sequence(this);
-            Vector3 originalSize = currentPart.transform.localScale;
-            float newSize = 1.1f;
+            if (distortSize != 0)
+            {
+                Sequence distortSequence = DOTween.Sequence(this);
+                Vector3 originalSize = currentPart.transform.localScale;
 
-            distortSequence
-                .Append(currentPart.transform.DOScale(originalSize * newSize, flashingTime))
-                .Append(currentPart.transform.DOScale(originalSize, flashingTime));
+                distortSequence
+                    .Append(currentPart.transform.DOScale(originalSize * distortSize, flashingTime))
+                    .Append(currentPart.transform.DOScale(originalSize, flashingTime));
+            }
         }
     }
 }

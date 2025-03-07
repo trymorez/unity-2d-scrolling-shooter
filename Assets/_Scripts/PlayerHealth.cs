@@ -5,6 +5,7 @@ public class PlayerHealth : MonoBehaviour
 {
     public int Health;
     [SerializeField] FlashEffect flashEffect;
+    [SerializeField] SpriteRenderer shield;
 
     void OnTriggerEnter2D(Collider2D other)
     {
