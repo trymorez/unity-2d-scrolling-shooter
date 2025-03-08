@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class TankShell : MonoBehaviour
 {
+    public int Damage = 1;
     [SerializeField] float speed = 5f;
 
     void OnEnable()
