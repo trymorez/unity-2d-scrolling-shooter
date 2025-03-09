@@ -8,12 +8,12 @@ public class TankShell : MonoBehaviour
 
     void OnEnable()
     {
-        GameManager.OnPlayingGame += ProcessProjectile;
+        GameManager.OnPlaying += ProcessProjectile;
     }
 
     void OnDisable()
     {
-        GameManager.OnPlayingGame -= ProcessProjectile;
+        GameManager.OnPlaying -= ProcessProjectile;
     }
 
     void ProcessProjectile()

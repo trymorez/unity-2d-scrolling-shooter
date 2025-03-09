@@ -34,7 +34,7 @@ public class SmallTank : StateManager<STankState>
         States[STankState.Move] = new MoveState(this);
 
         ChangeState(STankState.Idle);
-        GameManager.OnPlayingGame += ControlTank;
+        GameManager.OnPlaying += ControlTank;
     }
 
     protected override void Start()
@@ -49,7 +49,7 @@ public class SmallTank : StateManager<STankState>
         States[STankState.Attack] = null;
         States[STankState.Move] = null;
 
-        GameManager.OnPlayingGame -= ControlTank;
+        GameManager.OnPlaying -= ControlTank;
     }
 
     protected override void Update()

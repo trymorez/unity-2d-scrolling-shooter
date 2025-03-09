@@ -11,12 +11,12 @@ public class Bullet : MonoBehaviour
 
     void OnEnable()
     {
-        GameManager.OnPlayingGame += BulletFlying;
+        GameManager.OnPlaying += BulletFlying;
     }
 
     void OnDisable()
     {
-        GameManager.OnPlayingGame -= BulletFlying;
+        GameManager.OnPlaying -= BulletFlying;
     }
 
     void BulletFlying()

@@ -23,13 +23,13 @@ public class PlayerGun : MonoBehaviour
 
     void Start()
     {
-        GameManager.OnPlayingGame += OnPlayingGame;
+        GameManager.OnPlaying += OnPlayingGame;
         CalculateNextFireTime();
         SetGun();
     }
     void OnDestroy()
     {
-        GameManager.OnPlayingGame -= OnPlayingGame;
+        GameManager.OnPlaying -= OnPlayingGame;
     }
 
     void CalculateNextFireTime()

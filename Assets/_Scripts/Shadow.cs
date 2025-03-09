@@ -8,12 +8,12 @@ public class Shadow : MonoBehaviour
 
     void Awake()
     {
-        GameManager.OnPlayingGame += ChangeOffset;
+        GameManager.OnPlaying += ChangeOffset;
     }
 
     void OnDestroy()
     {
-        GameManager.OnPlayingGame -= ChangeOffset;
+        GameManager.OnPlaying -= ChangeOffset;
     }
 
     void ChangeOffset()

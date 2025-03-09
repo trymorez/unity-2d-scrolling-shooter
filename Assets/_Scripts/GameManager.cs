@@ -6,14 +6,19 @@ public class GameManager : MonoBehaviour
 {
     public static Transform World;
     [SerializeField] Transform world;
-    public static Action OnPlayingGame;
-    public static Action OnStartingGame;
+    public static Action OnStarting;
+    public static Action OnRestarting;
+    public static Action OnPlaying;
+    public static Action OnExploding;
+    public static Action OnPaused;
     public static Action<GameState> OnEnterGameState;
     public static Action<GameState> OnExitGameState;
     public enum GameState
     {
         Starting,
+        Restarting,
         Playing,
+        Exploding,
         Paused,
     }
     public static GameState State = GameState.Starting;
@@ -35,10 +40,16 @@ public class GameManager : MonoBehaviour
         switch (State)
         {
             case GameState.Starting:
-                OnStartingGame?.Invoke();
+                OnStarting?.Invoke();
+                break;
+            case GameState.Restarting:
+                OnRestarting?.Invoke();
                 break;
             case GameState.Playing:
-                OnPlayingGame?.Invoke();
+                OnPlaying?.Invoke();
+                break;
+            case GameState.Exploding:
+                OnExploding?.Invoke();
                 break;
             case GameState.Paused:
                 break;

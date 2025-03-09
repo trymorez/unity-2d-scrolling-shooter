@@ -28,14 +28,14 @@ public class Player : MonoBehaviour
 
     void Awake()
     {
-        GameManager.OnStartingGame += LaunchPlane;
-        GameManager.OnPlayingGame += ControlPlane;
+        GameManager.OnStarting += LaunchPlane;
+        GameManager.OnPlaying += ControlPlane;
     }
 
     void OnDestroy()
     {
-        GameManager.OnStartingGame -= LaunchPlane;
-        GameManager.OnPlayingGame -= ControlPlane;
+        GameManager.OnStarting -= LaunchPlane;
+        GameManager.OnPlaying -= ControlPlane;
     }
 
     void Start()
