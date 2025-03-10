@@ -1,4 +1,5 @@
 using System;
+using System.Drawing;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -7,6 +8,7 @@ public class Player : MonoBehaviour
     Vector2 inputVector;
     [SerializeField] float moveSpeed = 2f;
     [SerializeField] float launchDuration = 3f;
+    [SerializeField] float crashDuration = 5f;
     [SerializeField] float landedSize = 0.5f;
     [SerializeField] float shadowStartOffset = -0.05f;
     [SerializeField] float shadowEndOffset = -0.5f;
@@ -18,6 +20,8 @@ public class Player : MonoBehaviour
     float height;
 
     Vector2 shadowPos;
+    Vector2 shadowTemp;
+    Vector2 planePos;
     float launchElapsed;
 
     //plane rotation
@@ -30,12 +34,18 @@ public class Player : MonoBehaviour
     {
         GameManager.OnStarting += LaunchPlane;
         GameManager.OnPlaying += ControlPlane;
+        GameManager.OnExploding += CrashPlane;
+        GameManager.OnExitGameState += OnExitGameState;
+        GameManager.OnEnterGameState += OnEnterGameState;
     }
 
     void OnDestroy()
     {
         GameManager.OnStarting -= LaunchPlane;
         GameManager.OnPlaying -= ControlPlane;
+        GameManager.OnExploding -= CrashPlane;
+        GameManager.OnExitGameState -= OnExitGameState;
+        GameManager.OnEnterGameState -= OnEnterGameState;
     }
 
     void Start()
@@ -44,7 +54,7 @@ public class Player : MonoBehaviour
         var collider2d = GetComponent<Collider2D>();
         width = collider2d.bounds.size.x * 0.5f;
         height = collider2d.bounds.size.y * 0.5f;
-        shadowPos = shadow.position;
+        shadowTemp = shadow.position;
     }
 
     void LaunchPlane()
@@ -59,11 +69,61 @@ public class Player : MonoBehaviour
         //relocate plane shadow
         var offset = Mathf.Lerp(shadowStartOffset, shadowEndOffset, 
             1f - ((launchDuration - launchElapsed) / launchDuration));
-        shadow.position = new Vector2(shadowPos.x + offset, shadowPos.y + offset);
+        shadow.position = new Vector2(shadowTemp.x + offset, shadowTemp.y + offset);
 
         if (launchElapsed > launchDuration)
         {
+            SavePlanePosition();
             GameManager.ChangeGameState(GameManager.GameState.Playing);
+        }
+    }
+
+    void CrashPlane()
+    {
+        launchElapsed += Time.deltaTime;
+
+        //decrease plane size (crash effect)
+        var size = Mathf.Lerp(1f, landedSize,
+            1f - ((crashDuration - launchElapsed) / crashDuration));
+        transform.localScale = new Vector2(size, size);
+
+        //relocate plane shadow
+        var offset = Mathf.Lerp(shadowStartOffset, shadowEndOffset,
+            1f - ((crashDuration - launchElapsed) / crashDuration));
+        shadow.position = new Vector2(shadowTemp.x - offset, shadowTemp.y - offset);
+
+        //rotate plane on Z axis
+        plane.transform.Rotate(0, 0, Time.deltaTime * -360);
+    }
+
+    void OnEnterGameState(GameManager.GameState state)
+    {
+        if (state == GameManager.GameState.Exploding)
+        {
+            shadowTemp = shadow.position;
+            launchElapsed = 0;
+        }
+    }
+
+    void ResetPlanePosition()
+    {
+        plane.transform.rotation = Quaternion.identity;
+        transform.position = planePos;
+        shadow.position = shadowPos;
+    }
+
+    void SavePlanePosition()
+    {
+        planePos = transform.position;
+        shadowPos = shadow.position;
+    }
+
+    void OnExitGameState(GameManager.GameState state)
+    {
+        if (state == GameManager.GameState.Exploding)
+        {
+            transform.localScale = Vector2.one;
+            ResetPlanePosition();
         }
     }
 

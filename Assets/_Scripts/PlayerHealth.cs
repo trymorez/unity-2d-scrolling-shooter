@@ -1,12 +1,13 @@
 using DG.Tweening;
-using Unity.VisualScripting;
 using UnityEngine;
+using static GameManager.GameState;
 
 public class PlayerHealth : MonoBehaviour
 {
-    [SerializeField] int armorStrength = 5;
-    [SerializeField] int armorMaxStrength = 5;
+    [SerializeField] int armorCount = 5;
+    [SerializeField] int armorMaxCount = 5;
     [SerializeField] SpriteRenderer[] armorDot;
+    [SerializeField] SpriteRenderer plane;
     [SerializeField] FlashEffect flashEffect;
 
     [SerializeField] int explosionCount = 8;
@@ -29,55 +30,63 @@ public class PlayerHealth : MonoBehaviour
 
             flashEffect.ProcessFlashing();
 
-            DrawArmorDot(damage);
+            ApplyDamage(damage);
         }
     }
 
-    void DrawArmorDot(int damage)
+    void ApplyDamage(int damage)
     {
-        armorStrength -= damage;
+        armorCount -= damage;
 
-        if (armorStrength > 0)
+        foreach (var armor in armorDot)
         {
-            foreach (var armor in armorDot)
-            {
-                armor.enabled = false;
-            }
-            for (int i = 0; i < armorStrength; i++)
+            armor.enabled = false;
+        }
+        if (armorCount > 0)
+        {
+            for (int i = 0; i < armorCount; i++)
             {
                 armorDot[i].enabled = true;
             }
         }
         else
         {
-                ShipDestroied();
+            ShipCrash();
         }
     }
 
-    void ShipDestroied()
-    {
-        Debug.Log("Ship Destroied!!!");
 
-        GameManager.ChangeGameState(GameManager.GameState.Exploding);
-        DestoryingEffect();
+
+    void ShipCrash()
+    {
+        GameManager.ChangeGameState(Exploding);
+        CrashEffect();
     }
 
     void Restart()
     {
         ResetArmor();
-        GameManager.ChangeGameState(GameManager.GameState.Playing);
+        SetPlayerColor(Color.white);
+        GameManager.ChangeGameState(Playing);
     }
 
+    void SetPlayerColor(Color color)
+    {
+        plane.color = color;
+    }
 
-    void DestoryingEffect()
+    void CrashEffect()
     {
         var sequence = DOTween.Sequence();
+        var crashFade = 0.3f;
+
+        plane.DOFade(crashFade, explosionCount * explosionDelay);
 
         for (int i = 0; i <= explosionCount; i++)
         {
             sequence.AppendCallback(() =>
             {
-                ExplosionPoolManager.Get()
+                CrashingPoolManager.Get()
                 .transform.position = transform.position + Random.onUnitSphere * explosionGap;
             });
 
@@ -88,8 +97,8 @@ public class PlayerHealth : MonoBehaviour
 
     void ResetArmor()
     {
-        armorStrength = 5;
-        DrawArmorDot(0);
+        armorCount = armorMaxCount;
+        ApplyDamage(0);
     }
 
     void OnDestroy()
