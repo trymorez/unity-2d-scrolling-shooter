@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using static GameManager.GameState;
 
 public class PlayerGun : MonoBehaviour
 {
@@ -24,12 +25,24 @@ public class PlayerGun : MonoBehaviour
     void Start()
     {
         GameManager.OnPlaying += OnPlayingGame;
+        GameManager.OnEnterGameState += OnEnterGameState;
         CalculateNextFireTime();
         SetGun();
     }
+
     void OnDestroy()
     {
         GameManager.OnPlaying -= OnPlayingGame;
+        GameManager.OnEnterGameState -= OnEnterGameState;
+    }
+
+    void OnEnterGameState(GameManager.GameState state)
+    {
+        //reset attack key pressing state
+        if (state == Playing)
+        {
+            isAttacking = false;
+        }
     }
 
     void CalculateNextFireTime()
@@ -71,7 +84,7 @@ public class PlayerGun : MonoBehaviour
 
     public void OnFire(InputAction.CallbackContext context)
     {
-        if (GameManager.State != GameManager.GameState.Playing)
+        if (GameManager.State != Playing)
         {
             return;
         }

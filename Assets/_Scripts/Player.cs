@@ -1,7 +1,7 @@
 using System;
-using System.Drawing;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using static GameManager.GameState;
 
 public class Player : MonoBehaviour
 {
@@ -74,7 +74,7 @@ public class Player : MonoBehaviour
         if (launchElapsed > launchDuration)
         {
             SavePlanePosition();
-            GameManager.ChangeGameState(GameManager.GameState.Playing);
+            GameManager.ChangeGameState(Playing);
         }
     }
 
@@ -98,7 +98,7 @@ public class Player : MonoBehaviour
 
     void OnEnterGameState(GameManager.GameState state)
     {
-        if (state == GameManager.GameState.Exploding)
+        if (state == Exploding)
         {
             shadowTemp = shadow.position;
             launchElapsed = 0;
@@ -120,7 +120,7 @@ public class Player : MonoBehaviour
 
     void OnExitGameState(GameManager.GameState state)
     {
-        if (state == GameManager.GameState.Exploding)
+        if (state == Exploding)
         {
             transform.localScale = Vector2.one;
             ResetPlanePosition();

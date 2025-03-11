@@ -1,4 +1,4 @@
-# 2D Scrolling Shooter V 2.54
+# 2D Scrolling Shooter V 2.55
 
 I started developing a 2D vertical scrolling shooter game similar to 1942. The goal is to implement all the main features by February 10th. Currently, the game is not functioning.
 
@@ -8,6 +8,9 @@ I started developing a 2D vertical scrolling shooter game similar to 1942. The g
 ![screenshot](Assets/Screenshot/screenshot-V2.5-02.png)
 
 ## Version History
+**V 2.55 - (2025-03-11)**
+- Fixed the bug that player keep firing after crash
+
 **V 2.54 - (2025-03-10)**
 - Implemented player crash effect
 - Implemented player respawn
