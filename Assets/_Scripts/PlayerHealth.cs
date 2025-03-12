@@ -19,10 +19,8 @@ public class PlayerHealth : MonoBehaviour
         if (other.CompareTag("TankShell"))
         {
 
-            int damage = other.GetComponent<TankShell>().Damage;
-            //delete projectile
-            other.gameObject.SetActive(false);
-            Debug.Log(damage);
+            var tankShell = other.GetComponent<TankShell>();
+            ApplyDamage(tankShell.Damage);
 
             //spawn hit explosion
             var hitEffect = HitEffectPoolManager.Get();
@@ -30,7 +28,9 @@ public class PlayerHealth : MonoBehaviour
 
             flashEffect.ProcessFlashing();
 
-            ApplyDamage(damage);
+            //delete projectile
+            //ShellPoolManager.Release(tankShell);
+            other.gameObject.SetActive(false);
         }
     }
 
@@ -55,8 +55,6 @@ public class PlayerHealth : MonoBehaviour
         }
     }
 
-
-
     void ShipCrash()
     {
         GameManager.ChangeGameState(Exploding);
@@ -66,8 +64,9 @@ public class PlayerHealth : MonoBehaviour
     void Restart()
     {
         ResetArmor();
+        //restore alpha
         SetPlayerColor(Color.white);
-        GameManager.ChangeGameState(Playing);
+        GameManager.ChangeGameState(Restarting);
     }
 
     void SetPlayerColor(Color color)

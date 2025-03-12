@@ -288,7 +288,6 @@ GameObject:
   - component: {fileID: 4164296249506342312}
   - component: {fileID: 1364201269197748743}
   - component: {fileID: 8783994545260008078}
-  - component: {fileID: 3502841402305801869}
   m_Layer: 9
   m_Name: TankShell
   m_TagString: TankShell
@@ -371,23 +370,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a78c1e9774444145815378b6f527de1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Damage: 1
   speed: 5
---- !u!114 &3502841402305801869
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5250962020990459631}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3fa9a086b590f3a4cb00b3cc11652ecf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  tr: {fileID: 8979941107787312781}
-  time: 0.2
-  maxFlame: 1.2
-  minFlame: 0.3
 --- !u!1 &7265296035597114613
 GameObject:
   m_ObjectHideFlags: 0
@@ -397,6 +381,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8979941107787312781}
+  - component: {fileID: 3204034103614500139}
   m_Layer: 9
   m_Name: Flame
   m_TagString: Untagged
@@ -420,3 +405,19 @@ Transform:
   - {fileID: 4042310115543946496}
   m_Father: {fileID: 4164296249506342312}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3204034103614500139
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7265296035597114613}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3fa9a086b590f3a4cb00b3cc11652ecf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tr: {fileID: 8979941107787312781}
+  time: 0.2
+  maxFlame: 1.2
+  minFlame: 0.3

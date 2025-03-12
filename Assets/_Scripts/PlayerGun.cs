@@ -82,19 +82,18 @@ public class PlayerGun : MonoBehaviour
         }
     }
 
-    public void OnFire(InputAction.CallbackContext context)
+    public void OnFirePressed(InputAction.CallbackContext context)
     {
-        if (GameManager.State != Playing)
+        if (GameManager.State == Playing || GameManager.State == Restarting)
         {
-            return;
-        }
-        if (context.started)
-        {
-            isAttacking = true;
-        }
-        else if (context.canceled)
-        {
-            isAttacking = false;
+            if (context.started)
+            {
+                isAttacking = true;
+            }
+            else if (context.canceled)
+            {
+                isAttacking = false;
+            }
         }
     }
 }

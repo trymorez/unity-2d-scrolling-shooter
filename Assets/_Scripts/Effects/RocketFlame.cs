@@ -9,14 +9,14 @@ public class RocketFlame : MonoBehaviour
     [SerializeField] float minFlame = 0.2f;
     Sequence sequence;
 
-    void Start()
+    void OnEnable()
     {
         Effect();
     }
 
     void Effect()
     {
-        var sequence = DOTween.Sequence();
+        sequence = DOTween.Sequence();
         sequence.Append(tr.DOScale(Vector2.one * maxFlame, time)
                     .SetEase(Ease.InOutSine))
                 .Append(tr.DOScale(Vector2.one * minFlame, time)

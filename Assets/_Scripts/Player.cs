@@ -23,6 +23,7 @@ public class Player : MonoBehaviour
     Vector2 shadowTemp;
     Vector2 planePos;
     float launchElapsed;
+    float restartElapsed;
 
     //plane rotation
     float maxRotate = 15f;
@@ -33,6 +34,7 @@ public class Player : MonoBehaviour
     void Awake()
     {
         GameManager.OnStarting += LaunchPlane;
+        GameManager.OnRestarting += RestartPlane;
         GameManager.OnPlaying += ControlPlane;
         GameManager.OnExploding += CrashPlane;
         GameManager.OnExitGameState += OnExitGameState;
@@ -42,6 +44,7 @@ public class Player : MonoBehaviour
     void OnDestroy()
     {
         GameManager.OnStarting -= LaunchPlane;
+        GameManager.OnRestarting -= RestartPlane;
         GameManager.OnPlaying -= ControlPlane;
         GameManager.OnExploding -= CrashPlane;
         GameManager.OnExitGameState -= OnExitGameState;
@@ -96,12 +99,28 @@ public class Player : MonoBehaviour
         plane.transform.Rotate(0, 0, Time.deltaTime * -360);
     }
 
+    void RestartPlane()
+    {
+
+        restartElapsed += Time.deltaTime;
+        if (restartElapsed >= 3f)
+        {
+            GameManager.ChangeGameState(Playing);
+        }
+    }
+
     void OnEnterGameState(GameManager.GameState state)
     {
-        if (state == Exploding)
+        switch (state)
         {
-            shadowTemp = shadow.position;
-            launchElapsed = 0;
+            case Exploding:
+                shadowTemp = shadow.position;
+                launchElapsed = 0;
+                break;
+            case Restarting:
+                restartElapsed = 0;
+                GUIManager.ShowGetReady();
+                break;
         }
     }
 

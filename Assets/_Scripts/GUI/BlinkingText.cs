@@ -10,7 +10,7 @@ public class BlinkingText : MonoBehaviour
     [SerializeField] float fadeInDuration = 1f;
     [SerializeField] float fadeOutDuration = 0.5f;
 
-    void Start()
+    void OnEnable()
     {
         StartTextBlinkEffect();
     }
@@ -26,6 +26,9 @@ public class BlinkingText : MonoBehaviour
                 .AppendInterval(waitAfterFadeInTime)
                 .Append(textMesh.DOFade(0f, fadeOutDuration));
         }
+        sequence.OnComplete(() => {
+            SetTextAlpha(1f);
+            gameObject.SetActive(false); });
     }
 
     //WaitForSeconds waitAfterFadeIn;

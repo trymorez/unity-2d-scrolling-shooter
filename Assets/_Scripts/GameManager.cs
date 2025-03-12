@@ -44,6 +44,7 @@ public class GameManager : MonoBehaviour
                 break;
             case GameState.Restarting:
                 OnRestarting?.Invoke();
+                OnPlaying?.Invoke();
                 break;
             case GameState.Playing:
                 OnPlaying?.Invoke();

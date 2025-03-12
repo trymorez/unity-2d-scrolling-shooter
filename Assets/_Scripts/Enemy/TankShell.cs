@@ -1,24 +1,30 @@
 using System;
 using UnityEngine;
+using static GameManager.GameState;
 
-public class TankShell : MonoBehaviour
+public class TankShell : EnemyProjectileBase
 {
-    public int Damage = 1;
-    [SerializeField] float speed = 5f;
-
-    void OnEnable()
+    protected override void OnEnable()
     {
-        GameManager.OnPlaying += ProcessProjectile;
+        base.OnEnable();
+        GameManager.OnExitGameState += OnExitGameState;
     }
 
-    void OnDisable()
+    protected override void OnDisable()
     {
-        GameManager.OnPlaying -= ProcessProjectile;
+        base.OnDisable();
+        GameManager.OnExitGameState -= OnExitGameState;
     }
 
-    void ProcessProjectile()
+    void OnExitGameState(GameManager.GameState state)
     {
-        transform.Translate(Vector3.up * (speed * Time.deltaTime), Space.Self);
+        switch (state)
+        {
+            case Exploding:
+                //ShellPoolManager.Release(this);
+                gameObject.SetActive(false);
+                break;
+        }
     }
 
     void OnTriggerExit2D(Collider2D other)
@@ -28,4 +34,6 @@ public class TankShell : MonoBehaviour
             ShellPoolManager.Release(this);
         }
     }
+
+
 }
