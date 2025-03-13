@@ -4,6 +4,7 @@ using static GameManager.GameState;
 
 public class PlayerHealth : MonoBehaviour
 {
+    [SerializeField] int life = 3;
     [SerializeField] int armorCount = 5;
     [SerializeField] int armorMaxCount = 5;
     [SerializeField] SpriteRenderer[] armorDot;
@@ -16,22 +17,23 @@ public class PlayerHealth : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("TankShell"))
+        if (!other.CompareTag("TankShell"))
         {
-
-            var tankShell = other.GetComponent<TankShell>();
-            ApplyDamage(tankShell.Damage);
-
-            //spawn hit explosion
-            var hitEffect = HitEffectPoolManager.Get();
-            hitEffect.transform.position = other.transform.position;
-
-            flashEffect.ProcessFlashing();
-
-            //delete projectile
-            //ShellPoolManager.Release(tankShell);
-            other.gameObject.SetActive(false);
+            return;
         }
+
+        var tankShell = other.GetComponent<TankShell>();
+        ApplyDamage(tankShell.Damage);
+
+        //spawn hit explosion
+        var hitEffect = HitEffectPoolManager.Get();
+        hitEffect.transform.position = other.transform.position;
+
+        flashEffect.ProcessFlashing();
+
+        //delete projectile
+        //ShellPoolManager.Release(tankShell);
+        other.gameObject.SetActive(false);
     }
 
     void ApplyDamage(int damage)
