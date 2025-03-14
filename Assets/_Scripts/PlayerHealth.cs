@@ -44,6 +44,7 @@ public class PlayerHealth : MonoBehaviour
         {
             armor.enabled = false;
         }
+
         if (armorCount > 0)
         {
             for (int i = 0; i < armorCount; i++)
@@ -54,6 +55,14 @@ public class PlayerHealth : MonoBehaviour
         else
         {
             ShipCrash();
+            if (life == 0)
+            {
+                GameManager.GameOver();
+            }
+            else
+            {
+                GUIManager.ChangeLifeIcon(ref life, -1);
+            }
         }
     }
 

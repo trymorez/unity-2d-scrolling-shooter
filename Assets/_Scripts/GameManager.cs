@@ -35,6 +35,11 @@ public class GameManager : MonoBehaviour
         OnEnterGameState?.Invoke(State);
     }
 
+    public static void GameOver()
+    {
+        Debug.Log("Game Over");
+    }
+
     void Update()
     {
         switch (State)

@@ -773,6 +773,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5629015017674142102, guid: fb1c1cc3e0415ed43a834aa004f98ab1, type: 3}
   m_PrefabInstance: {fileID: 8402592214944002820}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &452209458 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2428365507228445147, guid: fa8acaab22f4c624b9152cdfbcf2d550, type: 3}
+  m_PrefabInstance: {fileID: 1844270004242495009}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -1386,8 +1391,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   getReady: {fileID: 649690070}
-  lifeIcon: {fileID: 0}
-  lifePanel: {fileID: 0}
+  lifeIconPrefab: {fileID: 2428365507228445147, guid: fa8acaab22f4c624b9152cdfbcf2d550, type: 3}
+  lifePanel: {fileID: 1340921994}
+  lifeIcons:
+  - {fileID: 452209458}
+  - {fileID: 1296531954}
 --- !u!1 &674034663
 GameObject:
   m_ObjectHideFlags: 0
@@ -7308,6 +7316,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 674034664}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1296531954 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2428365507228445147, guid: fa8acaab22f4c624b9152cdfbcf2d550, type: 3}
+  m_PrefabInstance: {fileID: 579935309}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1340921993
 GameObject:
   m_ObjectHideFlags: 0
