@@ -7502,6 +7502,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   world: {fileID: 309082356}
+  gameOver: {fileID: 1813325397}
 --- !u!4 &1570310490
 Transform:
   m_ObjectHideFlags: 0

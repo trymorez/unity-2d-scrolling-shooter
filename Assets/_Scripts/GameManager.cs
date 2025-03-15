@@ -6,11 +6,14 @@ public class GameManager : MonoBehaviour
 {
     public static Transform World;
     [SerializeField] Transform world;
+    [SerializeField] GameObject gameOver;
+
     public static Action OnStarting;
     public static Action OnRestarting;
     public static Action OnPlaying;
     public static Action OnExploding;
     public static Action OnPaused;
+    public static Action OnGameOver;
     public static Action<GameState> OnEnterGameState;
     public static Action<GameState> OnExitGameState;
     public enum GameState
@@ -20,12 +23,16 @@ public class GameManager : MonoBehaviour
         Playing,
         Exploding,
         Paused,
+        GameOver,
     }
     public static GameState State = GameState.Starting;
+
+    static GameManager instance;
 
     void Start()
     {
         World = world;
+        instance = this;
     }
 
     public static void ChangeGameState(GameState newState)
@@ -38,6 +45,7 @@ public class GameManager : MonoBehaviour
     public static void GameOver()
     {
         Debug.Log("Game Over");
+        instance.gameOver.SetActive(true);
     }
 
     void Update()
@@ -58,6 +66,9 @@ public class GameManager : MonoBehaviour
                 OnExploding?.Invoke();
                 break;
             case GameState.Paused:
+                break;
+            case GameState.GameOver:
+                OnGameOver?.Invoke();
                 break;
         }
     }
