@@ -46,6 +46,7 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("Game Over");
         instance.gameOver.SetActive(true);
+        ChangeGameState(GameState.GameOver);
     }
 
     void Update()
