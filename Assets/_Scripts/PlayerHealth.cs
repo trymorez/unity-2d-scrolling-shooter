@@ -9,11 +9,13 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] int armorMaxCount = 5;
     [SerializeField] SpriteRenderer[] armorDot;
     [SerializeField] SpriteRenderer plane;
+    [SerializeField] GameObject graphics;
     [SerializeField] FlashEffect flashEffect;
 
     [SerializeField] int explosionCount = 8;
     [SerializeField] float explosionDelay = 0.3f;
     [SerializeField] float explosionGap = 0.3f;
+    bool isGameOver;
 
     void OnTriggerEnter2D(Collider2D other)
     {
@@ -55,29 +57,31 @@ public class PlayerHealth : MonoBehaviour
         else
         {
             ShipCrash();
-            if (life == 0)
-            {
-                GameManager.GameOver();
-            }
-            else
-            {
-                GUIManager.ChangeLifeIcon(ref life, -1);
-            }
         }
     }
 
     void ShipCrash()
     {
         GameManager.ChangeGameState(Exploding);
-        CrashEffect();
+        ShipCrashEffect();
     }
 
     void Restart()
     {
-        ResetArmor();
-        //restore alpha
         SetPlayerColor(Color.white);
-        GameManager.ChangeGameState(Restarting);
+
+        if (life == 1)
+        {
+            GameManager.GameOver();
+            graphics.SetActive(false);
+        }
+        else
+        {
+            GUIManager.ChangeLifeIcon(ref life, -1);
+            ResetArmor();
+            //restore alpha
+            GameManager.ChangeGameState(Restarting);
+        }
     }
 
     void SetPlayerColor(Color color)
@@ -85,7 +89,7 @@ public class PlayerHealth : MonoBehaviour
         plane.color = color;
     }
 
-    void CrashEffect()
+    void ShipCrashEffect()
     {
         var sequence = DOTween.Sequence();
         var crashFade = 0.3f;
