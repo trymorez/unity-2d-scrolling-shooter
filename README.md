@@ -1,4 +1,4 @@
-# 2D Scrolling Shooter V 2.60
+# 2D Scrolling Shooter V 2.61
 
 I started developing a 2D vertical scrolling shooter game similar to 1942. The goal is to implement all the main features by February 10th. Currently, the game is not functioning.
 
@@ -9,7 +9,7 @@ I started developing a 2D vertical scrolling shooter game similar to 1942. The g
 
 ## Version History
 **V 2.61 - (2025-03-18)**
-- Implemented "Press Any Key" message blinking in game over screen
+- Implemented "Press Any Key" message blinking on game over screen
 
 **V 2.60 - (2025-03-17)**
 - Started testing game screen
