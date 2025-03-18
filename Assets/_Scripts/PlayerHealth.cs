@@ -68,6 +68,7 @@ public class PlayerHealth : MonoBehaviour
 
     void Restart()
     {
+        //restore alpha
         SetPlayerColor(Color.white);
 
         if (life == 1)
@@ -79,7 +80,6 @@ public class PlayerHealth : MonoBehaviour
         {
             GUIManager.ChangeLifeIcon(ref life, -1);
             ResetArmor();
-            //restore alpha
             GameManager.ChangeGameState(Restarting);
         }
     }

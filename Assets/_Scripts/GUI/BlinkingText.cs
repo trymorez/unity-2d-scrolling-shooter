@@ -5,30 +5,46 @@ using DG.Tweening;
 public class BlinkingText : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI textMesh;
-    [SerializeField] int blinkRepeat = 3;
+    [SerializeField, Tooltip("-1 : repeat indefinitely")]
+    int blinkCount = 3;
     [SerializeField] float waitAfterFadeInTime = 1f;
     [SerializeField] float fadeInDuration = 1f;
     [SerializeField] float fadeOutDuration = 0.5f;
+    Sequence sequence;
 
     void OnEnable()
     {
         StartTextBlinkEffect();
     }
 
+    void OnDisable()
+    {
+        if (sequence != null && sequence.IsActive())
+        {
+            sequence.Kill();
+        }
+    }
+
     void StartTextBlinkEffect()
     {
-        Sequence sequence = DOTween.Sequence();
+        sequence = DOTween.Sequence();
 
         SetTextAlpha(0f);
-        for (int i = 0; i < blinkRepeat; i++)
-        {
-            sequence.Append(textMesh.DOFade(1f, fadeInDuration))
+        //for (int i = 0; i < blinkCount; i++)
+        //{
+        //    sequence.Append(textMesh.DOFade(1f, fadeInDuration))
+        //        .AppendInterval(waitAfterFadeInTime)
+        //        .Append(textMesh.DOFade(0f, fadeOutDuration));
+        //}
+        sequence.Append(textMesh.DOFade(1f, fadeInDuration))
                 .AppendInterval(waitAfterFadeInTime)
-                .Append(textMesh.DOFade(0f, fadeOutDuration));
-        }
+                .Append(textMesh.DOFade(0f, fadeOutDuration))
+                .SetLoops(blinkCount);
+
         sequence.OnComplete(() => {
             SetTextAlpha(1f);
-            gameObject.SetActive(false); });
+            gameObject.SetActive(false); 
+        });
     }
 
     //WaitForSeconds waitAfterFadeIn;

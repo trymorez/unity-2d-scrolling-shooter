@@ -8,6 +8,9 @@ I started developing a 2D vertical scrolling shooter game similar to 1942. The g
 ![screenshot](Assets/Screenshot/screenshot-V2.5-02.png)
 
 ## Version History
+**V 2.61 - (2025-03-18)**
+- Implemented "Press Any Key" message blinking in game over screen
+
 **V 2.60 - (2025-03-17)**
 - Started testing game screen
 
