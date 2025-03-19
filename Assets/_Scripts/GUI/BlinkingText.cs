@@ -4,9 +4,10 @@ using DG.Tweening;
 
 public class BlinkingText : MonoBehaviour
 {
+    
     [SerializeField] TextMeshProUGUI textMesh;
-    [SerializeField, Tooltip("-1 : repeat indefinitely")]
-    int blinkCount = 3;
+    [Tooltip("-1 : repeat indefinitely")]
+    [SerializeField] int blinkCount = 3;
     [SerializeField] float waitAfterFadeInTime = 1f;
     [SerializeField] float fadeInDuration = 1f;
     [SerializeField] float fadeOutDuration = 0.5f;

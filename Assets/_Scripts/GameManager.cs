@@ -1,12 +1,14 @@
 using System;
-using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
     public static Transform World;
     [SerializeField] Transform world;
     [SerializeField] GameObject gameOver;
+    PlayerInput gameOverInput;
 
     public static Action OnStarting;
     public static Action OnRestarting;
@@ -29,6 +31,17 @@ public class GameManager : MonoBehaviour
 
     static GameManager instance;
 
+    void Awake()
+    {
+        gameOverInput = GetComponent<PlayerInput>();
+        OnGameOver += HandleGameOver;
+    }
+
+    void OnDestroy()
+    {
+        OnGameOver -= HandleGameOver;
+    }
+
     void Start()
     {
         World = world;
@@ -44,9 +57,23 @@ public class GameManager : MonoBehaviour
 
     public static void GameOver()
     {
-        Debug.Log("Game Over");
         instance.gameOver.SetActive(true);
+        instance.gameOverInput.enabled = true;
         ChangeGameState(GameState.GameOver);
+    }
+
+    public void OnAnyKey(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            State = GameState.Starting;
+            SceneManager.LoadScene(0);
+        }
+    }
+
+    void HandleGameOver()
+    {
+
     }
 
     void Update()

@@ -16,13 +16,14 @@ public class Player : MonoBehaviour
     [SerializeField] Transform shadow;
     
     //plane's width and height
-    float width;
-    float height;
+    float planeWidth;
+    float PlaneLength;
 
     Vector2 shadowPos;
     Vector2 shadowTemp;
     Vector2 planePos;
     float launchElapsed;
+    float crashElapsed;
     float restartElapsed;
 
     //plane rotation
@@ -55,8 +56,8 @@ public class Player : MonoBehaviour
     {
         screenSize = Camera.main.ScreenToWorldPoint(new Vector2(Screen.width, Screen.height));
         var collider2d = GetComponent<Collider2D>();
-        width = collider2d.bounds.size.x * 0.5f;
-        height = collider2d.bounds.size.y * 0.5f;
+        planeWidth = collider2d.bounds.size.x * 0.5f;
+        PlaneLength = collider2d.bounds.size.y * 0.5f;
         shadowTemp = shadow.position;
     }
 
@@ -76,6 +77,7 @@ public class Player : MonoBehaviour
 
         if (launchElapsed > launchDuration)
         {
+            launchElapsed = 0;
             SavePlanePosition();
             GameManager.ChangeGameState(Playing);
         }
@@ -83,16 +85,16 @@ public class Player : MonoBehaviour
 
     void CrashPlane()
     {
-        launchElapsed += Time.deltaTime;
+        crashElapsed += Time.deltaTime;
 
         //decrease plane size (crash effect)
         var size = Mathf.Lerp(1f, landedSize,
-            1f - ((crashDuration - launchElapsed) / crashDuration));
+            1f - ((crashDuration - crashElapsed) / crashDuration));
         transform.localScale = new Vector2(size, size);
 
         //relocate plane shadow
         var offset = Mathf.Lerp(shadowStartOffset, shadowEndOffset,
-            1f - ((crashDuration - launchElapsed) / crashDuration));
+            1f - ((crashDuration - crashElapsed) / crashDuration));
         shadow.position = new Vector2(shadowTemp.x - offset, shadowTemp.y - offset);
 
         //rotate plane on Z axis
@@ -115,7 +117,7 @@ public class Player : MonoBehaviour
         {
             case Exploding:
                 shadowTemp = shadow.position;
-                launchElapsed = 0;
+                crashElapsed = 0;
                 break;
             case Restarting:
                 restartElapsed = 0;
@@ -150,8 +152,8 @@ public class Player : MonoBehaviour
     {
         var newPos = (Vector2)transform.position + inputVector * (moveSpeed * Time.deltaTime);
 
-        newPos.x = Mathf.Clamp(newPos.x, -screenSize.x + width, screenSize.x - width);
-        newPos.y = Mathf.Clamp(newPos.y, -screenSize.y + height, screenSize.y - height);
+        newPos.x = Mathf.Clamp(newPos.x, -screenSize.x + planeWidth, screenSize.x - planeWidth);
+        newPos.y = Mathf.Clamp(newPos.y, -screenSize.y + PlaneLength, screenSize.y - PlaneLength);
         transform.position = newPos;
 
         //horizontal rotation for plane and shadow

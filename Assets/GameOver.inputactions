@@ -1,5 +1,34 @@
 {
     "name": "GameOver",
-    "maps": [],
+    "maps": [
+        {
+            "name": "Game Over Map",
+            "id": "c5d47cda-8c1c-469f-8d3c-7745cad8e362",
+            "actions": [
+                {
+                    "name": "Any Key",
+                    "type": "Button",
+                    "id": "54836a23-cdfd-4798-9b22-b392be779ab4",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "05f0c981-e7ea-41e8-891f-626053fcb630",
+                    "path": "<Keyboard>/anyKey",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Any Key",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
     "controlSchemes": []
 }
