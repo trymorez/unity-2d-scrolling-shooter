@@ -8,7 +8,7 @@ public class BlinkingText : MonoBehaviour
     [SerializeField] TextMeshProUGUI textMesh;
     [Tooltip("-1 : repeat indefinitely")]
     [SerializeField] int blinkCount = 3;
-    [SerializeField] float waitAfterFadeInTime = 1f;
+    [SerializeField] float waitAfterFadeIn = 1f;
     [SerializeField] float fadeInDuration = 1f;
     [SerializeField] float fadeOutDuration = 0.5f;
     Sequence sequence;
@@ -38,7 +38,7 @@ public class BlinkingText : MonoBehaviour
         //        .Append(textMesh.DOFade(0f, fadeOutDuration));
         //}
         sequence.Append(textMesh.DOFade(1f, fadeInDuration))
-                .AppendInterval(waitAfterFadeInTime)
+                .AppendInterval(waitAfterFadeIn)
                 .Append(textMesh.DOFade(0f, fadeOutDuration))
                 .SetLoops(blinkCount);
 
