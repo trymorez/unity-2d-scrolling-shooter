@@ -33,7 +33,7 @@ public class GUIManager : MonoBehaviour
             return;
         }
 
-        for (int i = 0; i < life -1; i++)
+        for (int i = 0; i < life; i++)
         {
             instance.lifeIcons.Add( Instantiate(instance.lifeIconPrefab, instance.lifePanel) );
         }
