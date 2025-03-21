@@ -124,6 +124,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6948577707939108954, guid: d86e81f889e5b5847a737908fe79fa73, type: 3}
   m_PrefabInstance: {fileID: 226319357}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &13956771 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2428365507228445147, guid: fa8acaab22f4c624b9152cdfbcf2d550, type: 3}
+  m_PrefabInstance: {fileID: 982868755}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &13956772 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5451383302545439312, guid: fa8acaab22f4c624b9152cdfbcf2d550, type: 3}
@@ -1388,6 +1393,7 @@ MonoBehaviour:
   lifeIcons:
   - {fileID: 452209458}
   - {fileID: 1296531954}
+  - {fileID: 13956771}
 --- !u!1 &674034663
 GameObject:
   m_ObjectHideFlags: 0
