@@ -1697,7 +1697,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85224d996baca5148a81663fc9eaa401, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  life: 3
+  life: 1
   armorCount: 5
   armorMaxCount: 5
   armorDot:
@@ -7889,12 +7889,12 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '[SPACE] Restart
+  m_text: '[Any Key] Restart
 
     [ESC] Quit'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 2539660dd83d7894e875d907f1f600ec, type: 2}
-  m_sharedMaterial: {fileID: 1251602523827024537, guid: 2539660dd83d7894e875d907f1f600ec, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 77b979316c0c8494eb270f83f4fff832, type: 2}
+  m_sharedMaterial: {fileID: 1251602523827024537, guid: 77b979316c0c8494eb270f83f4fff832, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -8160,8 +8160,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: GAME OVER
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 2539660dd83d7894e875d907f1f600ec, type: 2}
-  m_sharedMaterial: {fileID: 1251602523827024537, guid: 2539660dd83d7894e875d907f1f600ec, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 77b979316c0c8494eb270f83f4fff832, type: 2}
+  m_sharedMaterial: {fileID: 1251602523827024537, guid: 77b979316c0c8494eb270f83f4fff832, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []

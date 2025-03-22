@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.Controls;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
@@ -66,8 +67,29 @@ public class GameManager : MonoBehaviour
     {
         if (context.performed)
         {
-            State = GameState.Starting;
-            SceneManager.LoadScene(0);
+            //Key anykey = context.ReadValue<Key>();
+
+            if (context.control is KeyControl key)
+            {
+                Debug.Log(key.keyCode);
+                if (key.keyCode == Key.Escape)
+                {
+                    Application.Quit();
+
+#if UNITY_EDITOR
+                    UnityEditor.EditorApplication.isPlaying = false;
+#endif
+                }
+                else
+                {
+                    State = GameState.Starting;
+                    SceneManager.LoadScene(0);
+                }
+            }
+                else
+                {
+                    Debug.Log(context.control);
+                }
         }
     }
 

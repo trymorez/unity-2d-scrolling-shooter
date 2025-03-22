@@ -17,6 +17,11 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] float explosionGap = 0.3f;
     bool isGameOver;
 
+    void Start()
+    {
+        GUIManager.ChangeLifeIcon(ref life, 0);
+    }
+
     void OnTriggerEnter2D(Collider2D other)
     {
         if (!other.CompareTag("TankShell"))
@@ -34,7 +39,6 @@ public class PlayerHealth : MonoBehaviour
         flashEffect.ProcessFlashing();
 
         //delete projectile
-        //ShellPoolManager.Release(tankShell);
         other.gameObject.SetActive(false);
     }
 
