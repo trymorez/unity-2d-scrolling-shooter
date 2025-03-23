@@ -63,34 +63,27 @@ public class GameManager : MonoBehaviour
         ChangeGameState(GameState.GameOver);
     }
 
-    public void OnAnyKey(InputAction.CallbackContext context)
+    public void OnSpace(InputAction.CallbackContext context)
     {
         if (context.performed)
         {
-            //Key anykey = context.ReadValue<Key>();
-
-            if (context.control is KeyControl key)
-            {
-                Debug.Log(key.keyCode);
-                if (key.keyCode == Key.Escape)
-                {
-                    Application.Quit();
-
-#if UNITY_EDITOR
-                    UnityEditor.EditorApplication.isPlaying = false;
-#endif
-                }
-                else
-                {
-                    State = GameState.Starting;
-                    SceneManager.LoadScene(0);
-                }
-            }
-                else
-                {
-                    Debug.Log(context.control);
-                }
+            State = GameState.Starting;
+            SceneManager.LoadScene(0);
         }
+    }
+
+    public void OnEsc(InputAction.CallbackContext context)
+    {
+        Application.Quit();
+        #if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+        #endif
+    }
+
+
+    public void OnAnyKey(InputAction.CallbackContext context)
+    {
+
     }
 
     void HandleGameOver()
