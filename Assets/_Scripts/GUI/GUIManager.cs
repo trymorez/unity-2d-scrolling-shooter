@@ -25,13 +25,14 @@ public class GUIManager : MonoBehaviour
         {
             Destroy(lifeIcon);
         }
+        instance.lifeIcons.Clear();
 
         life += change;
 
-        if (life == 1)
-        {
-            return;
-        }
+        //if (life == 1)
+        //{
+        //    return;
+        //}
 
         for (int i = 0; i < life; i++)
         {
