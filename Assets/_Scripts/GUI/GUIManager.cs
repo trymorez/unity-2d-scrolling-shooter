@@ -29,11 +29,6 @@ public class GUIManager : MonoBehaviour
 
         life += change;
 
-        //if (life == 1)
-        //{
-        //    return;
-        //}
-
         for (int i = 0; i < life; i++)
         {
             instance.lifeIcons.Add( Instantiate(instance.lifeIconPrefab, instance.lifePanel) );
