@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class GUIManager : MonoBehaviour
 {
-    [SerializeField] GameObject getReady;
+    [SerializeField] GameObject getReadyText;
     [SerializeField] GameObject lifeIconPrefab;
     [SerializeField] Transform lifePanel;
     [SerializeField] List<GameObject> lifeIcons = new();
@@ -16,7 +16,7 @@ public class GUIManager : MonoBehaviour
 
     public static void ShowGetReady()
     {
-        instance.getReady.SetActive(true);
+        instance.getReadyText.SetActive(true);
     }
 
     public static void ChangeLifeIcon(ref int life, int change)
@@ -25,13 +25,14 @@ public class GUIManager : MonoBehaviour
         {
             Destroy(lifeIcon);
         }
+
         instance.lifeIcons.Clear();
 
         life += change;
 
         for (int i = 0; i < life; i++)
         {
-            instance.lifeIcons.Add( Instantiate(instance.lifeIconPrefab, instance.lifePanel) );
+            instance.lifeIcons.Add(Instantiate(instance.lifeIconPrefab, instance.lifePanel));
         }
     }
 }

@@ -1,4 +1,4 @@
-# 2D Scrolling Shooter V 2.62
+# 2D Scrolling Shooter V 2.7
 
 I started developing a 2D vertical scrolling shooter game similar to 1942. The goal is to implement all the main features by February 10th. Currently, the game is not functioning.
 
@@ -8,6 +8,10 @@ I started developing a 2D vertical scrolling shooter game similar to 1942. The g
 ![screenshot](Assets/Screenshot/screenshot-V2.5-02.png)
 
 ## Version History
+**V 2.7 - (2025-03-25)**
+- Fixed bug in display life count
+- Game over screen completed(really). 
+
 **V 2.62 - (2025-03-18)**
 - Game over screen completed. No you can press any key to start a new game
 

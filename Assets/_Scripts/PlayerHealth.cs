@@ -75,14 +75,15 @@ public class PlayerHealth : MonoBehaviour
         //restore alpha
         SetPlayerColor(Color.white);
 
-        if (life == 1)
+        GUIManager.ChangeLifeIcon(ref life, -1);
+
+        if (life == 0)
         {
             GameManager.GameOver();
             graphics.SetActive(false);
         }
         else
         {
-            GUIManager.ChangeLifeIcon(ref life, -1);
             ResetArmor();
             GameManager.ChangeGameState(Restarting);
         }
