@@ -4,9 +4,9 @@ using UnityEngine;
 public class FlashEffect : MonoBehaviour
 {
     [SerializeField] SpriteRenderer[] bodyPart;
+    Color[] originalColor;
     [SerializeField] float flashingTime = 0.3f;
     [SerializeField] float distortSize = 1f;
-    Color[] originalColor;
     [HideInInspector]
     public bool IsFlashing;
 
