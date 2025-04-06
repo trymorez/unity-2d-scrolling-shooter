@@ -606,10 +606,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3009f2ca3b65ef14684ca338d05268b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lootChanceTotal: 1
-  lootItems:
+  totalChance: 1
+  powerUps:
   - {fileID: 7893016843619269441, guid: eb4a30c13e48cbd4da7ada22f5a19e6d, type: 3}
   - {fileID: 304184706398177695, guid: 3ffed28790c1a0a4793670a61e670e19, type: 3}
+  chances: []
 --- !u!1 &4251488374128576762
 GameObject:
   m_ObjectHideFlags: 0

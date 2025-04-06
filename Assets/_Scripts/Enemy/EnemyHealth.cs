@@ -8,9 +8,11 @@ public class EnemyHealth : MonoBehaviour
     [SerializeField] FlashEffect flashEffect;
     [SerializeField] GameObject cratorPrefab;
     bool isDead;
+    SpawnPowerUp spawnPowerUp;
 
     void Start()
     {
+        spawnPowerUp = GetComponent<SpawnPowerUp>();
     }
 
     void OnTriggerEnter2D(Collider2D other)
@@ -40,8 +42,14 @@ public class EnemyHealth : MonoBehaviour
             //spawn crator
             var crator = Instantiate(cratorPrefab, World.worldTransform);
             crator.transform.position = transform.position;
+            GeneratePowerUp();
             Destroy(this.gameObject);
         }
+    }
+
+    void GeneratePowerUp()
+    {
+        Debug.Log(spawnPowerUp.ChoosePowerUp());
     }
 
     void OnDestroy()

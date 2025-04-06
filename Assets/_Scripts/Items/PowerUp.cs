@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Item : MonoBehaviour
+public class PowerUp : MonoBehaviour
 {
     [Range(0f, 1f)]
     [Tooltip("Chance to spawn this item")]
