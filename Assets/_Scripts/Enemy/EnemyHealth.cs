@@ -49,7 +49,7 @@ public class EnemyHealth : MonoBehaviour
 
     void GeneratePowerUp()
     {
-        Debug.Log(spawnPowerUp.ChoosePowerUp());
+        spawnPowerUp.ChoosePowerUp();
     }
 
     void OnDestroy()

@@ -5,8 +5,8 @@ public class SpawnPowerUp : MonoBehaviour
 {
     [SerializeField] float totalChance = 1.0f;
     [SerializeField] float noLootChance = 0.4f;
-    [SerializeField] List<PowerUp> powerUps = new List<PowerUp>();
-    [SerializeField] List<float> chances = new List<float>();
+    [SerializeField] List<PowerUp> powerUps = new();
+    [SerializeField] List<float> chances = new();
 
     void Start()
     {
@@ -37,6 +37,7 @@ public class SpawnPowerUp : MonoBehaviour
         {
             if (chance >= chances[i] && chance < chances[i + 1])
             {
+                Instantiate(powerUps[i], transform.position, Quaternion.identity, GameManager.World);
                 return i;
             }
         }

@@ -10,7 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4609573195596885608}
   - component: {fileID: 7893016843619269441}
-  m_Layer: 0
+  - component: {fileID: -6703539026274381051}
+  m_Layer: 13
   m_Name: Item_Shield
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -45,6 +46,45 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44e6eeeeb9d381748a15d2b95deaced0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Chance: 0.3
+  rotationSpeed: 80
+--- !u!70 &-6703539026274381051
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6824448606731888856}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_Size: {x: 0.55, y: 0.42}
+  m_Direction: 1
 --- !u!1 &7993533278286367281
 GameObject:
   m_ObjectHideFlags: 0
@@ -55,7 +95,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6963939964240973350}
   - component: {fileID: 2751182978885658849}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
