@@ -1,4 +1,4 @@
-# 2D Scrolling Shooter V 2.79
+# 2D Scrolling Shooter V 2.80
 
 I started developing a 2D vertical scrolling shooter game similar to 1942. The goal is to implement all the main features by February 10th. Currently, the game is not functioning.
 
@@ -8,6 +8,10 @@ I started developing a 2D vertical scrolling shooter game similar to 1942. The g
 ![screenshot](Assets/Screenshot/screenshot-V2.5-02.png)
 
 ## Version History
+**V 2.80 - (2025-04-08)**
+- Added rotation animation to power up items
+- Added shadow to power up items
+
 **V 2.79 - (2025-04-07)**
 - Started testing power up spawning
 
