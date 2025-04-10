@@ -100,7 +100,7 @@ GameObject:
   - component: {fileID: -6703539026274381051}
   m_Layer: 13
   m_Name: Item_Shield
-  m_TagString: Untagged
+  m_TagString: PowerUp
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -137,6 +137,7 @@ MonoBehaviour:
   Chance: 0.3
   sprite: {fileID: 2751182978885658849}
   shadow: {fileID: 2650667532806557014}
+  Type: 2
 --- !u!70 &-6703539026274381051
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

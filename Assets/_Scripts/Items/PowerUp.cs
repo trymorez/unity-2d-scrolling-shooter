@@ -9,6 +9,12 @@ public class PowerUp : MonoBehaviour
     public float Chance = 0.3f;
     [SerializeField] SpriteRenderer sprite;
     [SerializeField] SpriteRenderer shadow;
+    public ePowerUpType Type;
+    public enum ePowerUpType
+    {
+        Gun = 1,
+        Shield = 2,
+    }
     
 
     void Update()

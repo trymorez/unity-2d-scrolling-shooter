@@ -11,7 +11,7 @@ public class PlayerGun : MonoBehaviour
     bool isNextFireTime { get => Time.time >= nextFireTime; }
     bool isAttacking;
     [SerializeField] int currentUpgrade;
-    [SerializeField] int maxUpgrade = 5;
+    [SerializeField] int maxUpgrade = 4;
     bool[,] upgradeMatrix =
     {
         { false, true, false, true, false },
@@ -65,12 +65,13 @@ public class PlayerGun : MonoBehaviour
     }
 
     [ContextMenu("Upgrade Gun")]
-    void UpgradeGun()
+    public void UpgradeGun()
     {
-        if (++currentUpgrade > maxUpgrade)
+        if (++currentUpgrade >= maxUpgrade)
         {
-            currentUpgrade = 0;
+            currentUpgrade = maxUpgrade - 1;
         }
+
         SetGun();
     }
 
