@@ -1640,7 +1640,7 @@ MonoBehaviour:
   - {fileID: 1091766149}
   - {fileID: 775188069}
   fireRate: 0.2
-  currentUpgrade: 0
+  CurrentUpgrade: 0
   maxUpgrade: 4
 --- !u!114 &674034670
 MonoBehaviour:

@@ -16,10 +16,12 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] float explosionDelay = 0.3f;
     [SerializeField] float explosionGap = 0.3f;
     bool isGameOver;
+    PlayerGun playerGun;
 
     void Start()
     {
         GUIManager.ChangeLifeIcon(ref life, 0);
+        playerGun = GetComponent<PlayerGun>();
     }
 
     void OnTriggerEnter2D(Collider2D other)
@@ -42,9 +44,14 @@ public class PlayerHealth : MonoBehaviour
         other.gameObject.SetActive(false);
     }
 
-    void ApplyDamage(int damage)
+    public void ApplyDamage(int damage)
     {
-        armorCount -= damage;
+        //armorCount -= damage;
+        //if (armorCount > armorMaxCount)
+        //{
+        //    armorCount = armorMaxCount;
+        //}
+        armorCount = Mathf.Clamp(armorCount - damage, 0, armorMaxCount);
 
         foreach (var armor in armorDot)
         {
@@ -76,6 +83,9 @@ public class PlayerHealth : MonoBehaviour
         SetPlayerColor(Color.white);
 
         GUIManager.ChangeLifeIcon(ref life, -1);
+
+        playerGun.CurrentUpgrade = 0;
+        playerGun.SetGun();
 
         if (life == 0)
         {

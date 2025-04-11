@@ -3,10 +3,12 @@ using UnityEngine;
 public class HandlePowerUp : MonoBehaviour
 {
     PlayerGun playerGun;
+    PlayerHealth playerHealth;
 
     void Start()
     {
         playerGun = GetComponent<PlayerGun>();
+        playerHealth = GetComponent<PlayerHealth>();
     }
 
     void OnTriggerEnter2D(Collider2D other)
@@ -18,6 +20,7 @@ public class HandlePowerUp : MonoBehaviour
             switch (powerUp.Type)
             {
                 case PowerUp.ePowerUpType.Shield:
+                    playerHealth.ApplyDamage(-1);
                     Debug.Log("Shield Up");
                     break;
                 case PowerUp.ePowerUpType.Gun:
