@@ -1,4 +1,4 @@
-# 2D Scrolling Shooter V 2.82
+# 2D Scrolling Shooter V 2.84
 
 I started developing a 2D vertical scrolling shooter game similar to 1942. The goal is to implement all the main features by February 10th. Currently, the game is not functioning.
 
@@ -8,6 +8,9 @@ I started developing a 2D vertical scrolling shooter game similar to 1942. The g
 ![screenshot](Assets/Screenshot/screenshot-V2.5-02.png)
 
 ## Version History
+**V 2.84 - (2025-04-10)**
+- Rearranged player gun turret placement
+
 **V 2.82 - (2025-04-10)**
 - Implemented player weapon power up routine
 

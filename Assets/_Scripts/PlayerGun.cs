@@ -10,14 +10,15 @@ public class PlayerGun : MonoBehaviour
     float nextFireTime;
     bool isNextFireTime { get => Time.time >= nextFireTime; }
     bool isAttacking;
-    public int CurrentUpgrade;
+
+    public int currentUpgrade = 0;
     [SerializeField] int maxUpgrade = 4;
     bool[,] upgradeMatrix =
     {
-        { false, true, false, true, false },
-        { true, false, true, false, true },
-        { true, true, false, true, true },
-        { true, true, true, true, true }
+        { false, false, true, false, true, false, false },
+        { false, true, false, true, false, true, false },
+        { true, false, true, false, true, false, true },
+        { true, true, false, true, false, true, true },
     };
 
     public static Action OnGunFire;
@@ -26,7 +27,10 @@ public class PlayerGun : MonoBehaviour
     {
         GameManager.OnPlaying += OnPlayingGame;
         GameManager.OnEnterGameState += OnEnterGameState;
+
+        //initialize fire timing
         CalculateNextFireTime();
+        //initialize gun placement
         SetGun();
     }
 
@@ -67,9 +71,9 @@ public class PlayerGun : MonoBehaviour
     [ContextMenu("Upgrade Gun")]
     public void UpgradeGun()
     {
-        if (++CurrentUpgrade >= maxUpgrade)
+        if (++currentUpgrade >= maxUpgrade)
         {
-            CurrentUpgrade = maxUpgrade - 1;
+            currentUpgrade = maxUpgrade - 1;
         }
 
         SetGun();
@@ -79,7 +83,7 @@ public class PlayerGun : MonoBehaviour
     {
         for (int i = 0; i < gun.Length; i++)
         {
-            gun[i].gameObject.SetActive(upgradeMatrix[CurrentUpgrade, i]);
+            gun[i].gameObject.SetActive(upgradeMatrix[currentUpgrade, i]);
         }
     }
 

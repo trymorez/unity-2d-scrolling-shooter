@@ -84,7 +84,7 @@ public class PlayerHealth : MonoBehaviour
 
         GUIManager.ChangeLifeIcon(ref life, -1);
 
-        playerGun.CurrentUpgrade = 0;
+        playerGun.currentUpgrade = 0;
         playerGun.SetGun();
 
         if (life == 0)
