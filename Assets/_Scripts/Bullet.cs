@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using static GameManager.GameState;
 
 public class Bullet : MonoBehaviour
 {
@@ -22,6 +23,17 @@ public class Bullet : MonoBehaviour
     void BulletFlying()
     {
         transform.Translate(direction * (speed * Time.deltaTime));
+    }
+
+    void OnExitGameState(GameManager.GameState state)
+    {
+        switch (state)
+        {
+            case Exploding:
+                BulletPoolManager.Release(this);
+                //gameObject.SetActive(false);
+                break;
+        }
     }
 
     void OnTriggerExit2D(Collider2D other)
