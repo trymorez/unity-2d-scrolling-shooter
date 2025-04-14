@@ -37,6 +37,6 @@ public class MuzzleFlash : MonoBehaviour
 
     void Release()
     {
-        MuzzleFlashPoolManager.Pool.Release(this);
+        MuzzleFlashPoolManager.Release(this);
     }
 }

@@ -117,7 +117,7 @@ public class AttackState : BaseState<STankState>
     void SpawnMuzzleFlash()
     {
         //get muzzle flash from pool manager
-        var flash = MuzzleFlashPoolManager.Pool.Get();
+        var flash = MuzzleFlashPoolManager.Get();
         flash.transform.position = muzzle.position;
         //flash.transform.SetParent(GameManager.World);
     }
@@ -127,7 +127,7 @@ public class AttackState : BaseState<STankState>
         float fireAngleZ = Mathf.Atan2(vectorToTarget.y, vectorToTarget.x) * Mathf.Rad2Deg - 90f;
         var fireRotation = Quaternion.Euler(new Vector3(0, 0, fireAngleZ));
         //get tank shell from pool manager
-        var shell = ShellPoolManager.Pool.Get();
+        var shell = ShellPoolManager.Get();
         shell.transform.SetPositionAndRotation(muzzle.position, fireRotation);
     }
 

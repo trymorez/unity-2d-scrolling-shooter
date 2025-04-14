@@ -31,5 +31,11 @@ public class PoolManager<T> : MonoBehaviour where T : MonoBehaviour
     }
 
     public static T Get() => Pool.Get();
-    public static void Release(T obj) => Pool.Release(obj);
+    public static void Release(T obj)
+    {
+        if (Pool != null)
+        {
+            Pool.Release(obj);
+        }
+    }
 }

@@ -9,7 +9,8 @@ public class PlayerGun : MonoBehaviour
     [SerializeField] float fireRate = 0.3f;
     float nextFireTime;
     bool isNextFireTime { get => Time.time >= nextFireTime; }
-    bool isAttacking;
+    bool isShooting;
+    bool isFirePressed;
 
     public int currentUpgrade = 0;
     [SerializeField] int maxUpgrade = 4;
@@ -27,6 +28,7 @@ public class PlayerGun : MonoBehaviour
     {
         GameManager.OnPlaying += OnPlayingGame;
         GameManager.OnEnterGameState += OnEnterGameState;
+        GameManager.OnExitGameState += OnExitGameState;
 
         //initialize fire timing
         CalculateNextFireTime();
@@ -38,14 +40,24 @@ public class PlayerGun : MonoBehaviour
     {
         GameManager.OnPlaying -= OnPlayingGame;
         GameManager.OnEnterGameState -= OnEnterGameState;
+        GameManager.OnExitGameState -= OnExitGameState;
     }
 
     void OnEnterGameState(GameManager.GameState state)
     {
         //reset attack key pressing state
-        if (state == Playing)
+        if (state == Playing && isFirePressed)
         {
-            isAttacking = false;
+            isShooting = true;
+        }
+    }
+
+    void OnExitGameState(GameManager.GameState state)
+    {
+        //reset attack key pressing state
+        if (state == Exploding)
+        {
+            isShooting = false;
         }
     }
 
@@ -56,7 +68,7 @@ public class PlayerGun : MonoBehaviour
 
     void OnPlayingGame()
     {
-        if (isAttacking && isNextFireTime)
+        if (isShooting && isNextFireTime)
         {
             Attack();
         }
@@ -89,15 +101,17 @@ public class PlayerGun : MonoBehaviour
 
     public void OnFirePressed(InputAction.CallbackContext context)
     {
-        if (GameManager.State == Playing || GameManager.State == Restarting)
+        //if (GameManager.State == Playing || GameManager.State == Restarting)
         {
             if (context.started)
             {
-                isAttacking = true;
+                isShooting = true;
+                isFirePressed = true;
             }
             else if (context.canceled)
             {
-                isAttacking = false;
+                isShooting = false;
+                isFirePressed = false;
             }
         }
     }

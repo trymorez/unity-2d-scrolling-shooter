@@ -13,11 +13,13 @@ public class Bullet : MonoBehaviour
     void OnEnable()
     {
         GameManager.OnPlaying += BulletFlying;
+        GameManager.OnExitGameState += OnExitGameState;
     }
 
     void OnDisable()
     {
         GameManager.OnPlaying -= BulletFlying;
+        GameManager.OnExitGameState -= OnExitGameState;
     }
 
     void BulletFlying()
@@ -30,8 +32,8 @@ public class Bullet : MonoBehaviour
         switch (state)
         {
             case Exploding:
-                BulletPoolManager.Release(this);
-                //gameObject.SetActive(false);
+                //BulletPoolManager.Release(this);
+                gameObject.SetActive(false);
                 break;
         }
     }
