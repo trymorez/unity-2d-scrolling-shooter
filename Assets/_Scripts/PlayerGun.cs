@@ -68,7 +68,7 @@ public class PlayerGun : MonoBehaviour
 
     void OnPlayingGame()
     {
-        if (isShooting && isNextFireTime)
+        if (isFirePressed && isNextFireTime)
         {
             Attack();
         }
@@ -101,18 +101,15 @@ public class PlayerGun : MonoBehaviour
 
     public void OnFirePressed(InputAction.CallbackContext context)
     {
-        //if (GameManager.State == Playing || GameManager.State == Restarting)
+        if (context.started)
         {
-            if (context.started)
-            {
-                isShooting = true;
-                isFirePressed = true;
-            }
-            else if (context.canceled)
-            {
-                isShooting = false;
-                isFirePressed = false;
-            }
+            isShooting = true;
+            isFirePressed = true;
+        }
+        else if (context.canceled)
+        {
+            isShooting = false;
+            isFirePressed = false;
         }
     }
 }
