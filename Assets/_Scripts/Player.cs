@@ -103,7 +103,6 @@ public class Player : MonoBehaviour
 
     void RestartPlane()
     {
-
         restartElapsed += Time.deltaTime;
         if (restartElapsed >= 3f)
         {

@@ -119,7 +119,6 @@ public class AttackState : BaseState<STankState>
         //get muzzle flash from pool manager
         var flash = MuzzleFlashPoolManager.Get();
         flash.transform.position = muzzle.position;
-        //flash.transform.SetParent(GameManager.World);
     }
 
     void SpawnShell(Vector3 vectorToTarget)

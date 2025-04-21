@@ -32,7 +32,6 @@ public class Bullet : MonoBehaviour
         switch (state)
         {
             case Exploding:
-                //BulletPoolManager.Release(this);
                 gameObject.SetActive(false);
                 break;
         }
