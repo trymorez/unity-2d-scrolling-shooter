@@ -577,7 +577,7 @@ PrefabInstance:
       objectReference: {fileID: 223489155}
     - target: {fileID: 3288063357480684781, guid: d86e81f889e5b5847a737908fe79fa73, type: 3}
       propertyPath: m_Name
-      value: GunTurret5
+      value: MachineGun5
       objectReference: {fileID: 0}
     - target: {fileID: 3288063357480684781, guid: d86e81f889e5b5847a737908fe79fa73, type: 3}
       propertyPath: m_Layer
@@ -654,7 +654,7 @@ PrefabInstance:
       objectReference: {fileID: 223489155}
     - target: {fileID: 3288063357480684781, guid: d86e81f889e5b5847a737908fe79fa73, type: 3}
       propertyPath: m_Name
-      value: GunTurret3
+      value: MachineGun3
       objectReference: {fileID: 0}
     - target: {fileID: 3288063357480684781, guid: d86e81f889e5b5847a737908fe79fa73, type: 3}
       propertyPath: m_Layer
@@ -7220,7 +7220,7 @@ PrefabInstance:
       objectReference: {fileID: 223489155}
     - target: {fileID: 3288063357480684781, guid: d86e81f889e5b5847a737908fe79fa73, type: 3}
       propertyPath: m_Name
-      value: GunTurret6
+      value: MachineGun6
       objectReference: {fileID: 0}
     - target: {fileID: 3288063357480684781, guid: d86e81f889e5b5847a737908fe79fa73, type: 3}
       propertyPath: m_Layer
@@ -7914,7 +7914,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1747272179}
   m_Layer: 6
-  m_Name: GunTurrets
+  m_Name: MachineGuns
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7956,7 +7956,7 @@ PrefabInstance:
       objectReference: {fileID: 223489155}
     - target: {fileID: 3288063357480684781, guid: d86e81f889e5b5847a737908fe79fa73, type: 3}
       propertyPath: m_Name
-      value: GunTurret7
+      value: MachineGun7
       objectReference: {fileID: 0}
     - target: {fileID: 3288063357480684781, guid: d86e81f889e5b5847a737908fe79fa73, type: 3}
       propertyPath: m_Layer
@@ -8170,7 +8170,7 @@ PrefabInstance:
       objectReference: {fileID: 223489155}
     - target: {fileID: 3288063357480684781, guid: d86e81f889e5b5847a737908fe79fa73, type: 3}
       propertyPath: m_Name
-      value: GunTurret2
+      value: MachineGun2
       objectReference: {fileID: 0}
     - target: {fileID: 3288063357480684781, guid: d86e81f889e5b5847a737908fe79fa73, type: 3}
       propertyPath: m_Layer
@@ -8375,7 +8375,7 @@ PrefabInstance:
       objectReference: {fileID: 223489155}
     - target: {fileID: 3288063357480684781, guid: d86e81f889e5b5847a737908fe79fa73, type: 3}
       propertyPath: m_Name
-      value: GunTurret1
+      value: MachineGun1
       objectReference: {fileID: 0}
     - target: {fileID: 3288063357480684781, guid: d86e81f889e5b5847a737908fe79fa73, type: 3}
       propertyPath: m_Layer
@@ -8647,7 +8647,7 @@ PrefabInstance:
       objectReference: {fileID: 223489155}
     - target: {fileID: 3288063357480684781, guid: d86e81f889e5b5847a737908fe79fa73, type: 3}
       propertyPath: m_Name
-      value: GunTurret4
+      value: MachineGun4
       objectReference: {fileID: 0}
     - target: {fileID: 3288063357480684781, guid: d86e81f889e5b5847a737908fe79fa73, type: 3}
       propertyPath: m_Layer
