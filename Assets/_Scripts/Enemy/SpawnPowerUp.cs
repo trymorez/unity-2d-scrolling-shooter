@@ -24,10 +24,10 @@ public class SpawnPowerUp : MonoBehaviour
     }
 
     /// <summary>
-    /// Spawn power up items.
+    ///     Spawn power up items
     /// </summary>
     /// <returns>
-    /// Index of spawned power up's index. -1 means no power up spawned.
+    ///     Index of spawned power up's index. -1 means no power up spawned.
     /// </returns>
     public int ChoosePowerUp()
     {
