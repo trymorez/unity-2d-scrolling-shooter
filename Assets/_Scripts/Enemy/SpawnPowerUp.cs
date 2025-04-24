@@ -4,7 +4,7 @@ using UnityEngine;
 public class SpawnPowerUp : MonoBehaviour
 {
     [SerializeField] float totalChance = 1.0f;
-    [SerializeField] float noLootChance = 0.4f;
+    float emptyChance;
     [SerializeField] List<PowerUp> powerUps = new();
     [SerializeField] List<float> chances = new();
 
@@ -18,8 +18,8 @@ public class SpawnPowerUp : MonoBehaviour
             chances.Add(addedChance);
         }
 
-        totalChance = addedChance + noLootChance;
-
+        emptyChance = totalChance - addedChance;
+        Debug.Log("empty chance: " + emptyChance);
         chances.Add(totalChance);
     }
 
