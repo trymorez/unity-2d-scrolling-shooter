@@ -9,7 +9,6 @@ public class PlayerGun : MonoBehaviour
     [SerializeField] float fireRate = 0.3f;
     float nextFireTime;
     bool isNextFireTime { get => Time.time >= nextFireTime; }
-    bool isShooting;
     bool isFirePressed;
 
     public int currentUpgrade = 0;
@@ -27,10 +26,8 @@ public class PlayerGun : MonoBehaviour
     void Start()
     {
         GameManager.OnPlaying += OnPlayingGame;
-        GameManager.OnEnterGameState += OnEnterGameState;
-        GameManager.OnExitGameState += OnExitGameState;
 
-        //initialize fire timing
+        //initialize shoot timing
         CalculateNextFireTime();
         //initialize gun placement
         SetGun();
@@ -39,26 +36,6 @@ public class PlayerGun : MonoBehaviour
     void OnDestroy()
     {
         GameManager.OnPlaying -= OnPlayingGame;
-        GameManager.OnEnterGameState -= OnEnterGameState;
-        GameManager.OnExitGameState -= OnExitGameState;
-    }
-
-    void OnEnterGameState(GameManager.GameState state)
-    {
-        //reset attack key pressing state
-        if (state == Playing && isFirePressed)
-        {
-            isShooting = true;
-        }
-    }
-
-    void OnExitGameState(GameManager.GameState state)
-    {
-        //reset attack key pressing state
-        if (state == Exploding)
-        {
-            isShooting = false;
-        }
     }
 
     void CalculateNextFireTime()
@@ -103,12 +80,10 @@ public class PlayerGun : MonoBehaviour
     {
         if (context.started)
         {
-            isShooting = true;
             isFirePressed = true;
         }
         else if (context.canceled)
         {
-            isShooting = false;
             isFirePressed = false;
         }
     }

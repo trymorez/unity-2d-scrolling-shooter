@@ -4,11 +4,17 @@ using UnityEngine;
 public class SpawnPowerUp : MonoBehaviour
 {
     [SerializeField] float totalChance = 1.0f;
+    //probability of no spawn
     float emptyChance;
     [SerializeField] List<PowerUp> powerUps = new();
     [SerializeField] List<float> chances = new();
 
     void Start()
+    {
+        InitializeChance();
+    }
+
+    private void InitializeChance()
     {
         float addedChance = 0;
 
